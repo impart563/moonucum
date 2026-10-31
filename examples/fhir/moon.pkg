@@ -1,5 +1,6 @@
 import {
   "impart563/moonucum" @ucum,
+  "impart563/moonucum/fhir" @adapter,
 }
 
 pkgtype(kind: "executable")

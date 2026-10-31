@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Extract a reusable FHIR R4 Quantity adapter with explicit UCUM coding,
+  comparator handling, metadata preservation and typed input/unit failures.
+
 - Convert finite intervals with open/closed boundaries, monotonic direction and
   domain checks, including reversed pH endpoints.
 

@@ -1,0 +1,24 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "impart563/moonucum/fhir"
+
+import {
+  "impart563/moonucum",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn convert_quantity(@moonucum.Engine, Json, String) -> Json raise QuantityError
+
+// Errors
+pub suberror QuantityError {
+  Input(String)
+  UnitConversion(@moonucum.UcumError)
+} derive(@debug.Debug)
+pub fn QuantityError::message(Self) -> String
+pub fn QuantityError::to_repr(Self) -> @debug.Repr
+
+// Types and methods
+
+// Type aliases
+
+// Traits

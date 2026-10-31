@@ -5,26 +5,18 @@ fn normalize_quantity(
   quantity : Json,
   target : String,
 ) -> Json {
-  match quantity {
-    {
-      "system": "http://unitsofmeasure.org",
-      "code": String(code),
-      "value": Number(value, ..),
-      ..
-    } =>
+  let result = @adapter.convert_quantity(engine, quantity, target) catch {
+    error => return { "status": "rejected", "reason": error.message() }
+  }
+  match result {
+    { "value": Number(value, ..), "code": String(code), .. } =>
       {
         "status": "converted",
-        "value": engine.convert(value, code, target),
-        "code": target,
+        "value": value,
+        "code": code,
         "system": "http://unitsofmeasure.org",
-      } catch {
-        error => { "status": "rejected", "reason": error.message() }
       }
-    _ =>
-      {
-        "status": "rejected",
-        "reason": "A numeric value and an explicit UCUM system/code are required.",
-      }
+    _ => abort("Unexpected adapter output")
   }
 }
 

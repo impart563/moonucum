@@ -1,5 +1,13 @@
 # 数据接入接口
 
+## FHIR Quantity
+
+导入 `impart563/moonucum/fhir` 后，`convert_quantity(engine, quantity_json, target)` 可换算带数值及显式 UCUM system/code 的 FHIR R4 Quantity。输入使用大小写敏感编码，`unit` 只作为显示文本。成功后更新 `value`、`code`、`unit`，保留 `id`、一般 `extension` 等无关成员，原对象保持不变。
+
+比例与温标映射保留 `<`、`<=`、`>`、`>=` 比较符。非线性映射支持点值；带比较符时返回 `Input`，因为有限阈值不能单独表达其定义域。转换字段上的 `_value` 等原始扩展也返回 `Input`，由调用方处理。结构问题和单位错误分别表示为 `QuantityError::Input` 与 `UnitConversion(UcumError)`。数值仍采用核心库的 binary64 精度，未实施 FHIR 全资源或 profile 校验。
+
+依据：[FHIR R4 Quantity](https://hl7.org/fhir/R4/datatypes.html#Quantity) 对编码、显示文本、比较符及隐含精度的定义。示例数据全部为合成值。
+
 ## 有限区间
 
 `Interval::new(lower, upper, lower_closed?, upper_closed?)` 建立非空、端点有限的区间，默认包含两端。`Converter::apply_interval(interval)` 转换两端，并通过映射方向安排结果。例如 pH `[6, 8]` 转为 `mol/L` 后是约 `[10^-8, 10^-6]`，端点的开闭属性随对应端点交换。
