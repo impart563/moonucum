@@ -40,7 +40,7 @@ jobs:
       - name: Install reference implementation
         run: npm ci --ignore-scripts
       - name: Run acceptance
-        run: python scripts/acceptance.py --with-reference --record _build/platform-acceptance.json
+        run: python scripts/acceptance.py --with-reference --with-integrations --record _build/platform-acceptance.json
       - uses: actions/upload-artifact@v4
         with:
           name: validation-${{ matrix.os }}

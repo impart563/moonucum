@@ -1,0 +1,31 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "impart563/moonucum-lunarunits"
+
+import {
+  "FrozenLemonTee/LunarUnits/core/quantity",
+  "FrozenLemonTee/LunarUnits/core/unit",
+  "impart563/moonucum",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn from_quantity(@moonucum.Engine, @quantity.Quantity, String) -> Double raise BridgeError
+
+pub fn to_quantity(@moonucum.Engine, Double, String) -> @quantity.Quantity raise BridgeError
+
+pub fn to_unit(@moonucum.Engine, String) -> @unit.Un raise BridgeError
+
+// Errors
+pub suberror BridgeError {
+  UnitConversion(@moonucum.UcumError)
+  Unsupported(String)
+  NonFinite
+  Incompatible(String)
+} derive(@debug.Debug)
+pub fn BridgeError::to_repr(Self) -> @debug.Repr
+
+// Types and methods
+
+// Type aliases
+
+// Traits

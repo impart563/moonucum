@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add an optional independent LunarUnits 0.1.9 adapter for quantity arithmetic,
+  preserving UCUM charge, angle and count semantics.
+
 - Extract a reusable FHIR R4 Quantity adapter with explicit UCUM coding,
   comparator handling, metadata preservation and typed input/unit failures.
 

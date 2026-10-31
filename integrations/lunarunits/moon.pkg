@@ -1,0 +1,13 @@
+import {
+  "impart563/moonucum" @ucum,
+  "FrozenLemonTee/LunarUnits/core/dimension",
+  "FrozenLemonTee/LunarUnits/core/unit",
+  "FrozenLemonTee/LunarUnits/core/quantity",
+  "moonbitlang/core/math",
+  "moonbitlang/core/debug",
+}
+
+import {
+  "impart563/moonucum-lunarunits" @bridge,
+  "FrozenLemonTee/LunarUnits/units/si",
+} for "test"

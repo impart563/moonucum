@@ -193,7 +193,7 @@ def verify_target(target):
     return {"tests": int(match[1]), "passed": int(match[2]), "upstream_validation_cases": 529, "code_column_pairs": 312, "case_insensitive_prefix_cases": 24, "case_insensitive_special_cases": 21, "cli_checks": 28, "fhir_rows": 5, "sensor_rows": 7}
 
 
-def verify_packaged_consumer():
+def verify_packaged_consumer(with_integrations=False):
     run([MOON, "package"])
     version = re.search(r'^version\s*=\s*"([^"]+)"', (ROOT / "moon.mod").read_text(encoding="utf-8"), re.M).group(1)
     archives = list((ROOT / "_build/publish").glob("impart563-moonucum-" + version + ".zip"))
@@ -221,12 +221,27 @@ def verify_packaged_consumer():
             require("Logarithmic batch passed" in output, "independent logarithmic consumer failed")
             require("Special functions passed" in output, "independent special consumer failed")
             require("Code modes passed" in output, "independent code mode consumer failed")
-    return {"source": "extracted package archive", "targets": list(TARGETS), "registry_install": "not performed", "archive_sha256": hashlib.sha256(archive.read_bytes()).hexdigest()}
+        integration = {"executed": False}
+        if with_integrations:
+            workspace.write_text('members = ["module", "consumer", "module/integrations/lunarunits"]\n', encoding="utf-8")
+            adapter = module / "integrations/lunarunits"
+            run([MOON, "update"], cwd=adapter, env=env)
+            run([MOON, "fmt", "--check"], cwd=adapter, env=env)
+            run([MOON, "check", "--deny-warn"], cwd=adapter, env=env)
+            adapter_targets = {}
+            for target in TARGETS:
+                output = run([MOON, "test", ".", "--target", target, "--deny-warn"], cwd=adapter, env=env)
+                summary = re.search(r"Total tests: (\d+), passed: (\d+), failed: (\d+)", output)
+                require(summary and summary[1] == summary[2] and summary[3] == "0", "LunarUnits integration failed")
+                adapter_targets[target] = int(summary[1])
+            integration = {"executed": True, "dependency": "FrozenLemonTee/LunarUnits@0.1.9", "source": "adapter in extracted package archive", "tests": adapter_targets}
+    return {"source": "extracted package archive", "targets": list(TARGETS), "registry_install": "not performed", "archive_sha256": hashlib.sha256(archive.read_bytes()).hexdigest(), "lunarunits": integration}
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--with-reference", action="store_true")
+    parser.add_argument("--with-integrations", action="store_true")
     parser.add_argument("--record", default="validation/acceptance-results.json")
     args = parser.parse_args()
     require(MOON is not None, "moon executable is required")
@@ -238,7 +253,7 @@ def main():
     require(all((ROOT / name).read_bytes() == content for name, content in interfaces.items()), "generated interfaces were stale")
     catalog = verify_catalog()
     targets = {target: verify_target(target) for target in TARGETS}
-    consumer = verify_packaged_consumer()
+    consumer = verify_packaged_consumer(args.with_integrations)
     reference = {"executed": False, "command": "npm ci --ignore-scripts && python scripts/acceptance.py --with-reference"}
     if args.with_reference:
         npm = shutil.which("npm.cmd") or shutil.which("npm")
@@ -247,7 +262,7 @@ def main():
         report = json.loads((ROOT / "validation/differential-results.json").read_text(encoding="utf-8"))
         require(not report["failures"], "unexpected reference differences")
         reference = {"executed": True, "implementation": report["reference"], "cases": report["cases"], "matched": report["matched"], "reviewed_standard_differences": report["reviewed_standard_differences"], "unexpected_differences": len(report["failures"])}
-    report = {"status": "passed", "command": "python scripts/acceptance.py" + (" --with-reference" if args.with_reference else ""), "platform": {"system": platform.system(), "machine": platform.machine()}, "toolchain": run([MOON, "version"]).strip(), "source": source_digest(), "catalog": catalog, "backends": targets, "packaged_consumer": consumer, "reference_comparison": reference, "commands": COMMANDS}
+    report = {"status": "passed", "command": "python scripts/acceptance.py" + (" --with-reference" if args.with_reference else "") + (" --with-integrations" if args.with_integrations else ""), "platform": {"system": platform.system(), "machine": platform.machine()}, "toolchain": run([MOON, "version"]).strip(), "source": source_digest(), "catalog": catalog, "backends": targets, "packaged_consumer": consumer, "reference_comparison": reference, "commands": COMMANDS}
     destination = ROOT / args.record
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
