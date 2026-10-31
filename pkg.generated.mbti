@@ -36,6 +36,7 @@ pub struct Converter {
   // private fields
 }
 pub fn Converter::apply(Self, Double) -> Double raise UcumError
+pub fn Converter::apply_all(Self, Array[Double]) -> Array[Result[Double, UcumError]]
 
 pub struct Engine {
   // private fields
@@ -45,6 +46,7 @@ pub fn Engine::code_mode(Self) -> CodeMode
 pub fn Engine::codes(Self) -> Array[String]
 pub fn Engine::compatible(Self, String, String) -> Bool raise UcumError
 pub fn Engine::convert(Self, Double, String, String) -> Double raise UcumError
+pub fn Engine::convert_many(Self, Array[(Double, String, String)]) -> Array[Result[Double, UcumError]]
 pub fn Engine::converter(Self, String, String) -> Converter raise UcumError
 pub fn Engine::describe(Self, String) -> UnitInfo raise UcumError
 pub fn Engine::equivalent(Self, String, String) -> Bool raise UcumError

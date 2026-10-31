@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add homogeneous and heterogeneous batch APIs with per-row typed results and
+  per-call conversion-pair caching.
+
 - Translate expressions between UCUM code systems using atom and prefix tables,
   preserving original grouping, exponents and annotation text.
 
