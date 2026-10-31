@@ -1,5 +1,11 @@
 # 数据接入接口
 
+## 有限区间
+
+`Interval::new(lower, upper, lower_closed?, upper_closed?)` 建立非空、端点有限的区间，默认包含两端。`Converter::apply_interval(interval)` 转换两端，并通过映射方向安排结果。例如 pH `[6, 8]` 转为 `mol/L` 后是约 `[10^-8, 10^-6]`，端点的开闭属性随对应端点交换。
+
+所有已支持映射在其定义域内连续且单调。两端均须可转换，包括标为开区间的端点；`(0, 1] W` 转为对数单位需要无穷端点，因此返回 `Domain`。接口处理数值区间，不把区间解释为统计置信区间或测量不确定度。`is_increasing` 公开方向；`is_affine` 标识比例或温标之间的映射。
+
 ## 批量换算
 
 `Converter::apply_all(values)` 在同一转换器上处理数值数组。`Engine::convert_many(rows)` 接受 `(数值, 源代码, 目标代码)` 数组，在一次调用内缓存每组单位关系的转换器。两者返回与输入等长的 `Array[Result[Double, UcumError]]`，保留原始行号；一行出现未知代码、量纲冲突或定义域错误时，其余行继续处理。输入数组保持原值，空数组返回空结果。

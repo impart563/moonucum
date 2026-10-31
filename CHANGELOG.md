@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Convert finite intervals with open/closed boundaries, monotonic direction and
+  domain checks, including reversed pH endpoints.
+
 - Add homogeneous and heterogeneous batch APIs with per-row typed results and
   per-call conversion-pair caching.
 

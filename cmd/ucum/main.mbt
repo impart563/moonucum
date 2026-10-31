@@ -43,6 +43,24 @@ fn execute(engine : @lib.Engine, input : Json) -> Json {
       }
       { "op": "normalize", "unit": String(unit), .. } =>
         normal_json(engine.normalize(unit))
+      {
+        "op": "interval",
+        "lower": Number(lower, ..),
+        "upper": Number(upper, ..),
+        "source": String(source),
+        "target": String(target),
+        ..
+      } => {
+        let result = engine
+          .converter(source, target)
+          .apply_interval(@lib.Interval::new(lower, upper))
+        {
+          "ok": true,
+          "lower": result.lower,
+          "upper": result.upper,
+          "unit": target,
+        }
+      }
       { "op": "translate", "unit": String(unit), "mode": String(mode), .. } => {
         let target = match mode {
           "case-sensitive" => @lib.CaseSensitive

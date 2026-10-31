@@ -37,6 +37,9 @@ pub struct Converter {
 }
 pub fn Converter::apply(Self, Double) -> Double raise UcumError
 pub fn Converter::apply_all(Self, Array[Double]) -> Array[Result[Double, UcumError]]
+pub fn Converter::apply_interval(Self, Interval) -> Interval raise UcumError
+pub fn Converter::is_affine(Self) -> Bool
+pub fn Converter::is_increasing(Self) -> Bool
 
 pub struct Engine {
   // private fields
@@ -68,6 +71,14 @@ pub(all) enum Expr {
 pub fn Expr::equal(Self, Self) -> Bool
 pub fn Expr::not_equal(Self, Self) -> Bool
 pub fn Expr::to_repr(Self) -> @debug.Repr
+
+pub struct Interval {
+  lower : Double
+  upper : Double
+  lower_closed : Bool
+  upper_closed : Bool
+}
+pub fn Interval::new(Double, Double, lower_closed? : Bool, upper_closed? : Bool) -> Self raise UcumError
 
 pub struct NormalForm {
   // private fields
