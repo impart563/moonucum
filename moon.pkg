@@ -1,0 +1,8 @@
+import {
+  "moonbitlang/core/string",
+  "moonbitlang/core/debug",
+}
+
+import {
+  "impart563/moonucum" @ucum,
+} for "test"

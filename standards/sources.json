@@ -1,0 +1,22 @@
+[
+  {
+    "file": "ucum-essence.xml",
+    "url": "https://raw.githubusercontent.com/ucum-org/ucum/ef4c31cd7d3bc81de1a1bf2cc8414bf502b6304f/ucum-essence.xml",
+    "sha256": "dfccea1b5dc284245ebae97edd1dc03c45864da4e87df55bc9851797b4fd0b61"
+  },
+  {
+    "file": "UCUM-LICENSE.md",
+    "url": "https://raw.githubusercontent.com/ucum-org/ucum/ef4c31cd7d3bc81de1a1bf2cc8414bf502b6304f/LICENSE.md",
+    "sha256": "b7989c84c68b7a80d42aad28cfdd824d756c2f70f26eaf1347d2e49f7838bbdf"
+  },
+  {
+    "file": "FHIR-LICENSE.txt",
+    "url": "https://raw.githubusercontent.com/FHIR/Ucum-java/10089515484cdfd291fa6d2b74b989f60d12fcb3/LICENSE",
+    "sha256": "6947260a8bcbf24e7b55cfdc8f35ffa086f063ba3a7582dfae50de2f9e950135"
+  },
+  {
+    "file": "UcumFunctionalTests.xml",
+    "url": "https://raw.githubusercontent.com/FHIR/Ucum-java/10089515484cdfd291fa6d2b74b989f60d12fcb3/src/test/resources/UcumFunctionalTests.xml",
+    "sha256": "3b3feb9d8ecfe8958da69b1afcd25572e3f8d80a36bfcbcda4834a10a0eeef0d"
+  }
+]
