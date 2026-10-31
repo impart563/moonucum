@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Translate expressions between UCUM code systems using atom and prefix tables,
+  preserving original grouping, exponents and annotation text.
+
 - Expose catalog metadata and deterministic code/name/property search, including
   decoded names, prefixed atom resolution and isolated result arrays.
 

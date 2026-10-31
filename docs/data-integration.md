@@ -11,3 +11,9 @@ let engine = Engine::new()
 let pressure_units = engine.search("pressure")
 let pascal = engine.describe("kPa")
 ```
+
+## 代码模式转换
+
+`engine.translate(expression, target_mode)` 根据源引擎选择的代码表解析单位，再替换为目标代码表的原子和前缀。括号、乘除、指数与注释原文保留；注释中的大小写不变。任意单位也可进行代码转换，其数值语义仍保持原有边界。
+
+例如默认模式的 `MPa` 转为 `MAPAL`，`KiBy/s` 转为 `KIBBY/S`。大小写不敏感模式的 `PA` 转回 `pA`；默认模式的 `PA` 则转为 `PTA`。合并别名返回目标表的规范原子，例如升的 `l` 经大小写不敏感表往返可成为 `L`，数值语义一致。

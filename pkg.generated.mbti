@@ -52,6 +52,7 @@ pub fn Engine::new(mode? : CodeMode) -> Self
 pub fn Engine::normalize(Self, String) -> NormalForm raise UcumError
 pub fn Engine::prefix_count(Self) -> Int
 pub fn Engine::search(Self, String) -> Array[UnitInfo]
+pub fn Engine::translate(Self, String, CodeMode) -> String raise UcumError
 pub fn Engine::validate(Self, String) -> Unit raise UcumError
 
 pub(all) enum Expr {

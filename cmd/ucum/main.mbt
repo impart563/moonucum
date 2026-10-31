@@ -43,6 +43,19 @@ fn execute(engine : @lib.Engine, input : Json) -> Json {
       }
       { "op": "normalize", "unit": String(unit), .. } =>
         normal_json(engine.normalize(unit))
+      { "op": "translate", "unit": String(unit), "mode": String(mode), .. } => {
+        let target = match mode {
+          "case-sensitive" => @lib.CaseSensitive
+          "case-insensitive" => @lib.CaseInsensitive
+          _ =>
+            return {
+              "ok": false,
+              "error": "request",
+              "message": "Unknown target code mode.",
+            }
+        }
+        { "ok": true, "unit": engine.translate(unit, target), "mode": mode }
+      }
       {
         "op": "convert",
         "value": Number(value, ..),
@@ -124,6 +137,8 @@ fn main {
     [_, "validate", unit] => execute(engine, { "op": "validate", "unit": unit })
     [_, "normalize", unit] =>
       execute(engine, { "op": "normalize", "unit": unit })
+    [_, "translate", unit, mode] =>
+      execute(engine, { "op": "translate", "unit": unit, "mode": mode })
     [_, "convert", value, source, target] => {
       let number = @string.parse_double(value[:]) catch {
         _ => {
