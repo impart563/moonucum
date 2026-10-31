@@ -46,10 +46,12 @@ pub fn Engine::codes(Self) -> Array[String]
 pub fn Engine::compatible(Self, String, String) -> Bool raise UcumError
 pub fn Engine::convert(Self, Double, String, String) -> Double raise UcumError
 pub fn Engine::converter(Self, String, String) -> Converter raise UcumError
+pub fn Engine::describe(Self, String) -> UnitInfo raise UcumError
 pub fn Engine::equivalent(Self, String, String) -> Bool raise UcumError
 pub fn Engine::new(mode? : CodeMode) -> Self
 pub fn Engine::normalize(Self, String) -> NormalForm raise UcumError
 pub fn Engine::prefix_count(Self) -> Int
+pub fn Engine::search(Self, String) -> Array[UnitInfo]
 pub fn Engine::validate(Self, String) -> Unit raise UcumError
 
 pub(all) enum Expr {
@@ -73,6 +75,16 @@ pub fn NormalForm::factor(Self) -> Double
 pub fn NormalForm::is_affine(Self) -> Bool
 pub fn NormalForm::origin(Self) -> Double
 pub fn NormalForm::to_repr(Self) -> @debug.Repr
+
+pub struct UnitInfo {
+  code : String
+  insensitive_code : String
+  names : Array[String]
+  property : String
+  metric : Bool
+  arbitrary : Bool
+  special : Bool
+}
 
 // Type aliases
 

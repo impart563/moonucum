@@ -24,6 +24,7 @@ pub struct Engine {
   priv insensitive_prefixes : Array[Prefix]
   priv mode : CodeMode
   priv cache : Map[String, NormalForm]
+  priv metadata : Map[String, UnitInfo]
 }
 
 ///|
@@ -120,6 +121,7 @@ pub fn Engine::new(mode? : CodeMode = CaseSensitive) -> Engine {
     insensitive_prefixes,
     mode,
     cache: Map([]),
+    metadata: Map::from_array(metadata_rows().map(row => (row.code, row))),
   }
 }
 

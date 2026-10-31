@@ -74,6 +74,7 @@ def verify_sources():
     run([sys.executable, "scripts/embed_catalog.py", "--check"])
     run([sys.executable, "scripts/generate_upstream_tests.py", "--check"])
     run([sys.executable, "scripts/generate_case_tests.py", "--check"])
+    run([sys.executable, "scripts/generate_metadata.py", "--check"])
     require((ROOT / "README.md").read_bytes() == (ROOT / "README.mbt.md").read_bytes(), "README copies differ")
     require((ROOT / "LICENSE").is_file(), "project license is missing")
     return manifest

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Expose catalog metadata and deterministic code/name/property search, including
+  decoded names, prefixed atom resolution and isolated result arrays.
+
 ## 0.4.0
 
 - Add an explicit `CodeMode` option with separate UCUM atom and prefix tables.
