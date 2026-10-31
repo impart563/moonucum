@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.5.0
+
+- Extend the portable CLI and extracted-package consumer to the new data APIs.
+- Add 5000 seeded proportional expressions, 1000 malformed inputs and a
+  reproducible JavaScript release benchmark with raw measurements.
 
 - Add an optional independent LunarUnits 0.1.9 adapter for quantity arithmetic,
   preserving UCUM charge, angle and count semantics.

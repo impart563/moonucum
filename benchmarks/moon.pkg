@@ -1,0 +1,8 @@
+import {
+  "impart563/moonucum" @ucum,
+  "moonbitlang/core/bench",
+  "moonbitlang/core/env",
+  "moonbitlang/core/string",
+}
+
+pkgtype(kind: "executable")

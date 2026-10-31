@@ -1,14 +1,14 @@
 {
   "status": "passed",
-  "command": "python scripts/acceptance.py --with-reference",
+  "command": "python scripts/acceptance.py --with-reference --with-integrations",
   "platform": {
     "system": "Windows",
     "machine": "AMD64"
   },
   "toolchain": "moon 0.1.20260920 (914d7da 2026-09-20)\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg",
   "source": {
-    "sha256": "3a4609909c738568a2e2a121b0b626c1c981ce0e45eff86a9c7995c883022c86",
-    "files": 56,
+    "sha256": "65b72d99cee9d554fce1b0ffd437a72ce3a21e314f0ac43a83937c2f61b55202",
+    "files": 85,
     "excludes": [
       ".git",
       ".mooncakes",
@@ -38,46 +38,66 @@
   },
   "backends": {
     "wasm": {
-      "tests": 42,
-      "passed": 42,
+      "tests": 58,
+      "passed": 58,
       "upstream_validation_cases": 529,
       "code_column_pairs": 312,
       "case_insensitive_prefix_cases": 24,
       "case_insensitive_special_cases": 21,
-      "cli_checks": 28,
+      "cli_checks": 37,
+      "seeded_corpus": {
+        "seed": 563,
+        "proportional_expressions": 5000,
+        "malformed_expressions": 1000
+      },
       "fhir_rows": 5,
       "sensor_rows": 7
     },
     "wasm-gc": {
-      "tests": 42,
-      "passed": 42,
+      "tests": 58,
+      "passed": 58,
       "upstream_validation_cases": 529,
       "code_column_pairs": 312,
       "case_insensitive_prefix_cases": 24,
       "case_insensitive_special_cases": 21,
-      "cli_checks": 28,
+      "cli_checks": 37,
+      "seeded_corpus": {
+        "seed": 563,
+        "proportional_expressions": 5000,
+        "malformed_expressions": 1000
+      },
       "fhir_rows": 5,
       "sensor_rows": 7
     },
     "js": {
-      "tests": 42,
-      "passed": 42,
+      "tests": 58,
+      "passed": 58,
       "upstream_validation_cases": 529,
       "code_column_pairs": 312,
       "case_insensitive_prefix_cases": 24,
       "case_insensitive_special_cases": 21,
-      "cli_checks": 28,
+      "cli_checks": 37,
+      "seeded_corpus": {
+        "seed": 563,
+        "proportional_expressions": 5000,
+        "malformed_expressions": 1000
+      },
       "fhir_rows": 5,
       "sensor_rows": 7
     },
     "native": {
-      "tests": 42,
-      "passed": 42,
+      "tests": 58,
+      "passed": 58,
       "upstream_validation_cases": 529,
       "code_column_pairs": 312,
       "case_insensitive_prefix_cases": 24,
       "case_insensitive_special_cases": 21,
-      "cli_checks": 28,
+      "cli_checks": 37,
+      "seeded_corpus": {
+        "seed": 563,
+        "proportional_expressions": 5000,
+        "malformed_expressions": 1000
+      },
       "fhir_rows": 5,
       "sensor_rows": 7
     }
@@ -91,7 +111,18 @@
       "native"
     ],
     "registry_install": "not performed",
-    "archive_sha256": "b401b721e0da0b1f67cbe8c5e92af3c6e128af0110f9884574fad0263901b0a9"
+    "archive_sha256": "f215c04da31cdc69269bd0e89560c92f467e2579d8c40d75c1804d8ddcadcb32",
+    "lunarunits": {
+      "executed": true,
+      "dependency": "FrozenLemonTee/LunarUnits@0.1.9",
+      "source": "adapter in extracted package archive",
+      "tests": {
+        "wasm": 3,
+        "wasm-gc": 3,
+        "js": 3,
+        "native": 3
+      }
+    }
   },
   "reference_comparison": {
     "executed": true,
@@ -124,6 +155,15 @@
       "command": [
         "python.exe",
         "scripts/generate_case_tests.py",
+        "--check"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python.exe",
+        "scripts/generate_metadata.py",
         "--check"
       ],
       "directory": "project",
@@ -293,6 +333,28 @@
         "run",
         "--target",
         "wasm",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\": \"info\", \"unit\": \"kPa\"}",
+        "{\"op\": \"search\", \"query\": \"PRESSURE\"}",
+        "{\"op\": \"translate\", \"unit\": \"MPa{Reading}/s\", \"mode\": \"case-insensitive\"}",
+        "{\"op\": \"translate\", \"unit\": \"m\", \"mode\": \"unknown\"}",
+        "{\"op\": \"interval\", \"lower\": 6, \"upper\": 8, \"source\": \"[pH]\", \"target\": \"mol/L\"}",
+        "{\"op\": \"values\", \"values\": [1, 0, 100, \"bad\"], \"source\": \"W\", \"target\": \"dB[W]\"}",
+        "{\"op\": \"translate\", \"unit\": \"m/unknown\", \"mode\": \"case-insensitive\"}",
+        "{\"op\": \"info\", \"unit\": \"m/s\"}",
+        "{\"op\": \"interval\", \"lower\": 8, \"upper\": 6, \"source\": \"[pH]\", \"target\": \"mol/L\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm",
         "examples/fhir"
       ],
       "directory": "project",
@@ -420,6 +482,28 @@
         "run",
         "--target",
         "wasm-gc",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\": \"info\", \"unit\": \"kPa\"}",
+        "{\"op\": \"search\", \"query\": \"PRESSURE\"}",
+        "{\"op\": \"translate\", \"unit\": \"MPa{Reading}/s\", \"mode\": \"case-insensitive\"}",
+        "{\"op\": \"translate\", \"unit\": \"m\", \"mode\": \"unknown\"}",
+        "{\"op\": \"interval\", \"lower\": 6, \"upper\": 8, \"source\": \"[pH]\", \"target\": \"mol/L\"}",
+        "{\"op\": \"values\", \"values\": [1, 0, 100, \"bad\"], \"source\": \"W\", \"target\": \"dB[W]\"}",
+        "{\"op\": \"translate\", \"unit\": \"m/unknown\", \"mode\": \"case-insensitive\"}",
+        "{\"op\": \"info\", \"unit\": \"m/s\"}",
+        "{\"op\": \"interval\", \"lower\": 8, \"upper\": 6, \"source\": \"[pH]\", \"target\": \"mol/L\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm-gc",
         "examples/fhir"
       ],
       "directory": "project",
@@ -547,6 +631,28 @@
         "run",
         "--target",
         "js",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\": \"info\", \"unit\": \"kPa\"}",
+        "{\"op\": \"search\", \"query\": \"PRESSURE\"}",
+        "{\"op\": \"translate\", \"unit\": \"MPa{Reading}/s\", \"mode\": \"case-insensitive\"}",
+        "{\"op\": \"translate\", \"unit\": \"m\", \"mode\": \"unknown\"}",
+        "{\"op\": \"interval\", \"lower\": 6, \"upper\": 8, \"source\": \"[pH]\", \"target\": \"mol/L\"}",
+        "{\"op\": \"values\", \"values\": [1, 0, 100, \"bad\"], \"source\": \"W\", \"target\": \"dB[W]\"}",
+        "{\"op\": \"translate\", \"unit\": \"m/unknown\", \"mode\": \"case-insensitive\"}",
+        "{\"op\": \"info\", \"unit\": \"m/s\"}",
+        "{\"op\": \"interval\", \"lower\": 8, \"upper\": 6, \"source\": \"[pH]\", \"target\": \"mol/L\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "js",
         "examples/fhir"
       ],
       "directory": "project",
@@ -664,6 +770,28 @@
         "{\"op\": \"validate\", \"unit\": \"M/UnKnOwN\"}",
         "{\"op\": \"convert\", \"value\": 3, \"source\": \"[M/S2/HZ^(1/2)]\", \"target\": \"M2/S3\"}",
         "{\"op\": \"convert\", \"value\": 100, \"source\": \"[P'DIOP]\", \"target\": \"DEG\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "native",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\": \"info\", \"unit\": \"kPa\"}",
+        "{\"op\": \"search\", \"query\": \"PRESSURE\"}",
+        "{\"op\": \"translate\", \"unit\": \"MPa{Reading}/s\", \"mode\": \"case-insensitive\"}",
+        "{\"op\": \"translate\", \"unit\": \"m\", \"mode\": \"unknown\"}",
+        "{\"op\": \"interval\", \"lower\": 6, \"upper\": 8, \"source\": \"[pH]\", \"target\": \"mol/L\"}",
+        "{\"op\": \"values\", \"values\": [1, 0, 100, \"bad\"], \"source\": \"W\", \"target\": \"dB[W]\"}",
+        "{\"op\": \"translate\", \"unit\": \"m/unknown\", \"mode\": \"case-insensitive\"}",
+        "{\"op\": \"info\", \"unit\": \"m/s\"}",
+        "{\"op\": \"interval\", \"lower\": 8, \"upper\": 6, \"source\": \"[pH]\", \"target\": \"mol/L\"}"
       ],
       "directory": "project",
       "exit_code": 0
@@ -738,6 +866,80 @@
         "--target",
         "native",
         "."
+      ],
+      "directory": "independent-consumer",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "update"
+      ],
+      "directory": "independent-consumer",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "fmt",
+        "--check"
+      ],
+      "directory": "independent-consumer",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "check",
+        "--deny-warn"
+      ],
+      "directory": "independent-consumer",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "test",
+        ".",
+        "--target",
+        "wasm",
+        "--deny-warn"
+      ],
+      "directory": "independent-consumer",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "test",
+        ".",
+        "--target",
+        "wasm-gc",
+        "--deny-warn"
+      ],
+      "directory": "independent-consumer",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "test",
+        ".",
+        "--target",
+        "js",
+        "--deny-warn"
+      ],
+      "directory": "independent-consumer",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "test",
+        ".",
+        "--target",
+        "native",
+        "--deny-warn"
       ],
       "directory": "independent-consumer",
       "exit_code": 0

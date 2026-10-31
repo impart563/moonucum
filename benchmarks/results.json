@@ -1,0 +1,217 @@
+{
+  "command": "python benchmarks/run.py --iterations 20000 --repeats 5",
+  "environment": {
+    "os": "Windows",
+    "architecture": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "python": "3.8.7",
+    "node": "v26.2.0",
+    "moon": "moon 0.1.20260920 (914d7da 2026-09-20)\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg"
+  },
+  "method": "JavaScript release; compilation excluded; one discarded process; fresh process per sample; internal monotonic microsecond timer; no performance pass threshold",
+  "corpus": {
+    "seed": 563,
+    "proportional_expressions": 5000,
+    "malformed_expressions": 1000,
+    "test_command": "moon test --target all --filter '*corpus*'"
+  },
+  "samples": [
+    [
+      {
+        "name": "parse",
+        "operations": 20000,
+        "elapsed_us": 5240.8,
+        "checksum": 20000
+      },
+      {
+        "name": "normalize_warm",
+        "operations": 20000,
+        "elapsed_us": 22133.500000000004,
+        "checksum": 2525507500.0024137
+      },
+      {
+        "name": "convert_reparse",
+        "operations": 20000,
+        "elapsed_us": 22588.800000000007,
+        "checksum": 9999.01
+      },
+      {
+        "name": "converter_apply",
+        "operations": 20000,
+        "elapsed_us": 293.7000000000012,
+        "checksum": 9999.01
+      },
+      {
+        "name": "engine_create",
+        "operations": 100,
+        "elapsed_us": 173492.89999999997,
+        "checksum": 31200
+      }
+    ],
+    [
+      {
+        "name": "parse",
+        "operations": 20000,
+        "elapsed_us": 5172.199999999996,
+        "checksum": 20000
+      },
+      {
+        "name": "normalize_warm",
+        "operations": 20000,
+        "elapsed_us": 24172.4,
+        "checksum": 2525507500.0024137
+      },
+      {
+        "name": "convert_reparse",
+        "operations": 20000,
+        "elapsed_us": 23261.300000000007,
+        "checksum": 9999.01
+      },
+      {
+        "name": "converter_apply",
+        "operations": 20000,
+        "elapsed_us": 345.7000000000079,
+        "checksum": 9999.01
+      },
+      {
+        "name": "engine_create",
+        "operations": 100,
+        "elapsed_us": 178640.90000000002,
+        "checksum": 31200
+      }
+    ],
+    [
+      {
+        "name": "parse",
+        "operations": 20000,
+        "elapsed_us": 5155.000000000001,
+        "checksum": 20000
+      },
+      {
+        "name": "normalize_warm",
+        "operations": 20000,
+        "elapsed_us": 22070.6,
+        "checksum": 2525507500.0024137
+      },
+      {
+        "name": "convert_reparse",
+        "operations": 20000,
+        "elapsed_us": 23151.399999999994,
+        "checksum": 9999.01
+      },
+      {
+        "name": "converter_apply",
+        "operations": 20000,
+        "elapsed_us": 289.2999999999972,
+        "checksum": 9999.01
+      },
+      {
+        "name": "engine_create",
+        "operations": 100,
+        "elapsed_us": 173389.90000000002,
+        "checksum": 31200
+      }
+    ],
+    [
+      {
+        "name": "parse",
+        "operations": 20000,
+        "elapsed_us": 5197.5000000000055,
+        "checksum": 20000
+      },
+      {
+        "name": "normalize_warm",
+        "operations": 20000,
+        "elapsed_us": 22811.800000000007,
+        "checksum": 2525507500.0024137
+      },
+      {
+        "name": "convert_reparse",
+        "operations": 20000,
+        "elapsed_us": 21915.90000000001,
+        "checksum": 9999.01
+      },
+      {
+        "name": "converter_apply",
+        "operations": 20000,
+        "elapsed_us": 326.70000000000243,
+        "checksum": 9999.01
+      },
+      {
+        "name": "engine_create",
+        "operations": 100,
+        "elapsed_us": 175567.10000000003,
+        "checksum": 31200
+      }
+    ],
+    [
+      {
+        "name": "parse",
+        "operations": 20000,
+        "elapsed_us": 5300.199999999997,
+        "checksum": 20000
+      },
+      {
+        "name": "normalize_warm",
+        "operations": 20000,
+        "elapsed_us": 22763.399999999998,
+        "checksum": 2525507500.0024137
+      },
+      {
+        "name": "convert_reparse",
+        "operations": 20000,
+        "elapsed_us": 22639.899999999998,
+        "checksum": 9999.01
+      },
+      {
+        "name": "converter_apply",
+        "operations": 20000,
+        "elapsed_us": 286.60000000000707,
+        "checksum": 9999.01
+      },
+      {
+        "name": "engine_create",
+        "operations": 100,
+        "elapsed_us": 178558.09999999998,
+        "checksum": 31200
+      }
+    ]
+  ],
+  "summary": [
+    {
+      "name": "parse",
+      "operations": 20000,
+      "median_us": 5197.5000000000055,
+      "operations_per_second": 3848003.848003844,
+      "checksum": 20000
+    },
+    {
+      "name": "normalize_warm",
+      "operations": 20000,
+      "median_us": 22763.399999999998,
+      "operations_per_second": 878603.3720797421,
+      "checksum": 2525507500.0024137
+    },
+    {
+      "name": "convert_reparse",
+      "operations": 20000,
+      "median_us": 22639.899999999998,
+      "operations_per_second": 883396.1280747707,
+      "checksum": 9999.01
+    },
+    {
+      "name": "converter_apply",
+      "operations": 20000,
+      "median_us": 293.7000000000012,
+      "operations_per_second": 68096697.31018019,
+      "checksum": 9999.01
+    },
+    {
+      "name": "engine_create",
+      "operations": 100,
+      "median_us": 175567.10000000003,
+      "operations_per_second": 569.5827976881773,
+      "checksum": 31200
+    }
+  ]
+}

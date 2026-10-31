@@ -14,6 +14,8 @@ moon run cmd/ucum -- validate 'mg/dL'
 moon run cmd/ucum -- normalize 'kg.m/s2'
 moon run cmd/ucum -- convert 12 'mg/dL' 'g/L'
 moon run cmd/ucum -- equivalent 'N' 'kg.m/s2'
+moon run cmd/ucum -- search pressure
+moon run cmd/ucum -- translate MPa case-insensitive
 moon run examples/fhir
 moon run examples/sensor
 python scripts/acceptance.py
@@ -98,9 +100,49 @@ test "select the UCUM code system explicitly" {
 
 默认模式保持大小写敏感。大小写不敏感模式使用 UCUM 独立的代码和前缀表，例如帕斯卡为 `PAL`，兆米为 `MAM`；不能直接把默认代码改成大写来替代。命令行可在操作前添加 `--case-insensitive`。两种模式的映射、别名和边界见[代码模式说明](docs/code-modes.md)。
 
+## 数据接入与生态互操作
+
+```mbt check
+///|
+test "discover translate and convert independent rows" {
+  let engine = @ucum.Engine::new()
+  assert_eq(engine.describe("kPa").property, "pressure")
+  assert_eq(
+    engine.translate("MPa{Reading}", @ucum.CaseInsensitive),
+    "MAPAL{Reading}",
+  )
+  let rows = engine.convert_many([(12.0, "mg/dL", "g/L"), (1.0, "m", "s")])
+  assert_true(rows[0].unwrap().is_close(0.12))
+  assert_true(rows[1] is Err(@ucum.Incompatible(_, _)))
+}
+```
+
+```mbt check
+///|
+test "convert a decreasing interval with endpoint flags" {
+  let converter = @ucum.Engine::new().converter("[pH]", "mol/L")
+  let result = converter.apply_interval(
+    @ucum.Interval::new(6.0, 8.0, lower_closed=false),
+  )
+  assert_true(
+    result.lower.is_close(
+      1.0e-8,
+      relative_tolerance=1.0e-12,
+      absolute_tolerance=0.0,
+    ),
+  )
+  assert_true(result.lower_closed)
+  assert_false(result.upper_closed)
+}
+```
+
+单位检索、代码模式转换、逐行批量结果和有限区间均通过根包调用。`impart563/moonucum/fhir` 提供可复用的 FHIR R4 Quantity JSON 适配器，处理显式编码、比较符和元数据；用法和边界见[数据接入说明](docs/data-integration.md)。命令行的 `batch` 支持 `info`、`search`、`translate`、`values` 和 `interval` 请求。
+
+[LunarUnits 适配模块](integrations/lunarunits/README.md) 可将 UCUM 比例单位接入现有物理量运算，明确映射质量、电荷、角度和计数。它作为独立模块引用 LunarUnits 0.1.9，核心库保持标准库依赖。所有输入示例使用合成数据。
+
 ## 标准支持范围
 
-| 能力 | 0.4.0 状态 |
+| 能力 | 0.5.0 状态 |
 |---|---|
 | UCUM 2.2 大小写敏感代码 | 312 个单位原子、24 个前缀全部载入 |
 | 语法解析 | 乘除、括号、整数指数、前导除号、方括号原子、注释和十进制因子 |
@@ -108,7 +150,9 @@ test "select the UCUM code system explicitly" {
 | 温标转换 | `Cel`、`[degF]`、`[degRe]`，包含允许的前缀和标量缩放 |
 | 对数与 pH 转换 | 11 个现行单位及 4 个退休编码的历史对数函数 |
 | 正切与平方根转换 | 棱镜度、坡度百分比和幅度谱密度，包含定义域检查 |
-| 批量转换 | `Engine::converter` 预解析表达式，`Converter::apply` 重复处理数值 |
+| 批量转换 | 预解析转换器、同构数值数组和异构数量行，保留逐行结果及错误 |
+| 目录与代码转换 | 按代码、名称、属性检索；在两种标准代码表之间转换表达式 |
+| 区间与数据适配 | 单调有限区间转换、FHIR R4 Quantity、独立 LunarUnits 适配模块 |
 | 关系判断 | 区分语义等价与量纲兼容，支持对数单位 |
 | 任意单位 | 41 个代码可识别，数值语义返回 `Unsupported` |
 | 特殊函数覆盖 | 单位表中的 21 个特殊单位原子均有转换路径；任意单位保持独立 |
@@ -125,6 +169,7 @@ test "select the UCUM code system explicitly" {
 - FHIR 上游 529 条校验用例保留原始期望，生成黑盒测试。
 - 独立测试覆盖比例与全部特殊函数、定义域、前缀、连续除法、任意单位、错误位置及资源限制。
 - 根据原始 XML 生成测试，检查 312 对代码映射、24 个前缀和 21 个特殊单位函数在两种代码模式下的行为。
+- 固定种子 563 的 5000 个比例表达式检查独立系数公式、往返与双模式结果；另有 1000 个不完整操作符输入。
 - NLM 实现的 741 个数值对照案例分别记录一致项和已核对的标准差异，见[差异说明](docs/reference-differences.md)和[结果数据](validation/differential-results.json)。
 - 验收脚本复制发布所需文件到临时目录，再以独立模块消费该副本，验证公开 API。
 
@@ -133,9 +178,13 @@ test "select the UCUM code system explicitly" {
 ```sh
 npm ci --ignore-scripts
 python scripts/acceptance.py --with-reference
+python scripts/acceptance.py --with-reference --with-integrations
+python benchmarks/run.py --iterations 20000 --repeats 5
 ```
 
 Node.js 及 NLM 包仅用于开发阶段的独立对照，核心库和普通验收不依赖它们。具体支持矩阵见 [docs/standard-support.md](docs/standard-support.md)，架构和生态分工见 [docs/design.md](docs/design.md)。
+
+`--with-integrations` 会安装固定版本的 LunarUnits，并对归档中的适配器执行四后端测试。性能基准记录编译配置、运行环境、原始采样和校验和，见 [benchmarks/README.md](benchmarks/README.md) 与 [结果数据](benchmarks/results.json)。基准反映记录环境中的运行结果，不设跨机器性能门槛。
 
 ## 来源与许可
 

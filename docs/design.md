@@ -43,10 +43,16 @@ base system, annotation semantics, standard catalog provenance, and reproducible
 compatibility evidence. It does not expose a new general-purpose physical
 quantity arithmetic framework.
 
-Future integration can translate supported normalized expressions through an
-adapter. The base systems must be mapped explicitly: UCUM treats mole as a count
-and radian as an independent coordinate, which matters when adapting SI-based
-quantity representations.
+The independent `integrations/lunarunits` module adapts proportional units to
+LunarUnits 0.1.9 without adding a dependency to the core. It maps grams to
+kilograms and charge to ampere-seconds, retaining radian as a custom dimension
+and mole as UCUM's count. Affine points and nonlinear mappings first require
+an explicit conversion to a proper unit. Integration tests consume the adapter
+from the extracted release archive on all four backends.
+
+Catalog discovery, code-system translation, row-preserving batch conversion
+and finite intervals are root APIs. The `fhir` package owns Quantity JSON
+adaptation and separates structural input failures from core unit errors.
 
 ## Consumers
 

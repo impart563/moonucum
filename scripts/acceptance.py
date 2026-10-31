@@ -185,12 +185,32 @@ def verify_target(target):
     for index, expected in [(1, 1e-12), (2, 0.001), (3, 0.12), (4, 0.039810717055349734), (7, 9), (8, 45)]:
         require(insensitive[index]["ok"] and math.isclose(insensitive[index]["value"], expected, rel_tol=1e-12, abs_tol=0.0), "case-insensitive conversion failed")
     require(insensitive[5].get("error") == "unsupported" and insensitive[6].get("error") == "unknown_unit" and insensitive[6]["code"] == "UnKnOwN" and insensitive[6]["offset"] == 2, "case-insensitive diagnostics failed")
+    integration_requests = [
+        {"op": "info", "unit": "kPa"},
+        {"op": "search", "query": "PRESSURE"},
+        {"op": "translate", "unit": "MPa{Reading}/s", "mode": "case-insensitive"},
+        {"op": "translate", "unit": "m", "mode": "unknown"},
+        {"op": "interval", "lower": 6, "upper": 8, "source": "[pH]", "target": "mol/L"},
+        {"op": "values", "values": [1, 0, 100, "bad"], "source": "W", "target": "dB[W]"},
+        {"op": "translate", "unit": "m/unknown", "mode": "case-insensitive"},
+        {"op": "info", "unit": "m/s"},
+        {"op": "interval", "lower": 8, "upper": 6, "source": "[pH]", "target": "mol/L"},
+    ]
+    integrated = cli(target, "batch", *[json.dumps(item) for item in integration_requests])
+    require(len(integrated) == len(integration_requests), "missing data integration rows")
+    require(integrated[0]["ok"] and integrated[0]["unit"]["code"] == "Pa" and integrated[0]["unit"]["property"] == "pressure", "catalog metadata CLI failed")
+    require(any(row["code"] == "Pa" for row in integrated[1]["units"]), "catalog search CLI failed")
+    require(integrated[2]["unit"] == "MAPAL{Reading}/S" and integrated[3].get("error") == "request", "code translation CLI failed")
+    require(integrated[4]["ok"] and math.isclose(integrated[4]["lower"], 1e-8, rel_tol=1e-12) and math.isclose(integrated[4]["upper"], 1e-6, rel_tol=1e-12), "interval CLI failed")
+    values = integrated[5]["results"]
+    require([row["ok"] for row in values] == [True, False, True, False] and values[1]["error"] == "domain" and math.isclose(values[2]["value"], 20, rel_tol=1e-12) and values[3]["error"] == "request", "bulk CLI failed")
+    require(integrated[6].get("error") == "unknown_unit" and integrated[6]["offset"] == 2 and integrated[7].get("error") == "unknown_unit" and integrated[8].get("error") == "domain", "integration error contract failed")
     fhir = [json.loads(line) for line in run([MOON, "run", "--target", target, "examples/fhir"]).splitlines()]
     require([item["result"]["status"] for item in fhir] == ["converted", "converted", "rejected", "converted", "rejected"], "FHIR example failed")
     require(abs(fhir[3]["result"]["value"] - 1e-7) < 1e-18, "FHIR acidity conversion failed")
     sensors = [json.loads(line) for line in run([MOON, "run", "--target", target, "examples/sensor"]).splitlines()]
     require([item["value"] for item in sensors[:4]] == [20, 20, 101.325, 65536] and len(sensors) == 7 and abs(sensors[4]["value"] - 1000) < 1e-8 and abs(sensors[5]["value"] - 45) < 1e-10 and abs(sensors[6]["value"] - 9) < 1e-10, "sensor example failed")
-    return {"tests": int(match[1]), "passed": int(match[2]), "upstream_validation_cases": 529, "code_column_pairs": 312, "case_insensitive_prefix_cases": 24, "case_insensitive_special_cases": 21, "cli_checks": 28, "fhir_rows": 5, "sensor_rows": 7}
+    return {"tests": int(match[1]), "passed": int(match[2]), "upstream_validation_cases": 529, "code_column_pairs": 312, "case_insensitive_prefix_cases": 24, "case_insensitive_special_cases": 21, "cli_checks": 28 + len(integration_requests), "seeded_corpus": {"seed": 563, "proportional_expressions": 5000, "malformed_expressions": 1000}, "fhir_rows": 5, "sensor_rows": 7}
 
 
 def verify_packaged_consumer(with_integrations=False):
@@ -221,9 +241,10 @@ def verify_packaged_consumer(with_integrations=False):
             require("Logarithmic batch passed" in output, "independent logarithmic consumer failed")
             require("Special functions passed" in output, "independent special consumer failed")
             require("Code modes passed" in output, "independent code mode consumer failed")
+            require("Data integration passed" in output, "independent data integration consumer failed")
         integration = {"executed": False}
         if with_integrations:
-            workspace.write_text('members = ["module", "consumer", "module/integrations/lunarunits"]\n', encoding="utf-8")
+            workspace.write_text('members = [\n  "module",\n  "consumer",\n  "module/integrations/lunarunits",\n]\n', encoding="utf-8")
             adapter = module / "integrations/lunarunits"
             run([MOON, "update"], cwd=adapter, env=env)
             run([MOON, "fmt", "--check"], cwd=adapter, env=env)

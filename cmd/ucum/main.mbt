@@ -34,6 +34,19 @@ fn normal_json(form : @lib.NormalForm) -> Json {
 }
 
 ///|
+fn unit_json(info : @lib.UnitInfo) -> Json {
+  {
+    "code": info.code,
+    "insensitive_code": info.insensitive_code,
+    "names": info.names,
+    "property": info.property,
+    "metric": info.metric,
+    "arbitrary": info.arbitrary,
+    "special": info.special,
+  }
+}
+
+///|
 fn execute(engine : @lib.Engine, input : Json) -> Json {
   try {
     match input {
@@ -43,6 +56,34 @@ fn execute(engine : @lib.Engine, input : Json) -> Json {
       }
       { "op": "normalize", "unit": String(unit), .. } =>
         normal_json(engine.normalize(unit))
+      { "op": "info", "unit": String(unit), .. } =>
+        { "ok": true, "unit": unit_json(engine.describe(unit)) }
+      { "op": "search", "query": String(query), .. } =>
+        { "ok": true, "units": engine.search(query).map(unit_json) }
+      {
+        "op": "values",
+        "values": Array(values),
+        "source": String(source),
+        "target": String(target),
+        ..
+      } => {
+        let converter = engine.converter(source, target)
+        let rows : Array[Json] = values.map(value => {
+          match value {
+            Number(value, ..) =>
+              { "ok": true, "value": converter.apply(value), "unit": target } catch {
+                error => diagnostic(error)
+              }
+            _ =>
+              {
+                "ok": false,
+                "error": "request",
+                "message": "Expected a numeric value.",
+              }
+          }
+        })
+        { "ok": true, "results": rows }
+      }
       {
         "op": "interval",
         "lower": Number(lower, ..),
@@ -99,7 +140,7 @@ fn execute(engine : @lib.Engine, input : Json) -> Json {
         {
           "ok": false,
           "error": "request",
-          "message": "Expected validate/normalize with unit, or convert/equivalent with source and target.",
+          "message": "Expected validate, normalize, info, search, translate, convert, values, interval or equivalent with the corresponding fields.",
         }
     }
   } catch {
@@ -155,6 +196,8 @@ fn main {
     [_, "validate", unit] => execute(engine, { "op": "validate", "unit": unit })
     [_, "normalize", unit] =>
       execute(engine, { "op": "normalize", "unit": unit })
+    [_, "info", unit] => execute(engine, { "op": "info", "unit": unit })
+    [_, "search", query] => execute(engine, { "op": "search", "query": query })
     [_, "translate", unit, mode] =>
       execute(engine, { "op": "translate", "unit": unit, "mode": mode })
     [_, "convert", value, source, target] => {
@@ -220,7 +263,7 @@ fn main {
     }
     _ => {
       println(
-        "MoonUCUM 0.4.0 — UCUM 2.2\nOptional leading flag: --case-insensitive\nvalidate UNIT\nnormalize UNIT\nconvert VALUE SOURCE TARGET\nequivalent SOURCE TARGET\ncatalog\nbatch JSON_REQUEST ...\nResults are JSON; inspect the ok field for each operation.",
+        "MoonUCUM 0.5.0 — UCUM 2.2\nOptional leading flag: --case-insensitive\nvalidate UNIT\nnormalize UNIT\nconvert VALUE SOURCE TARGET\nequivalent SOURCE TARGET\ninfo UNIT\nsearch QUERY\ntranslate UNIT case-sensitive|case-insensitive\ncatalog\nbatch JSON_REQUEST ...\nResults are JSON; inspect the ok field for each operation.",
       )
       return
     }
