@@ -109,8 +109,17 @@ fn cli_args() -> Array[String] {
 
 ///|
 fn main {
-  let engine = @lib.Engine::new()
-  let args = cli_args()
+  let (mode, args) = match cli_args() {
+    [program, "--case-insensitive", .. rest] => {
+      let arguments = [program]
+      for argument in rest {
+        arguments.push(argument)
+      }
+      (@lib.CaseInsensitive, arguments)
+    }
+    arguments => (@lib.CaseSensitive, arguments)
+  }
+  let engine = @lib.Engine::new(mode~)
   let output : Json = match args {
     [_, "validate", unit] => execute(engine, { "op": "validate", "unit": unit })
     [_, "normalize", unit] =>
@@ -166,6 +175,11 @@ fn main {
         })
       {
         "ucum_version": "2.2",
+        "code_mode": if mode == @lib.CaseSensitive {
+          "case-sensitive"
+        } else {
+          "case-insensitive"
+        },
         "atoms": engine.atom_count(),
         "prefixes": engine.prefix_count(),
         "units": rows,
@@ -173,7 +187,7 @@ fn main {
     }
     _ => {
       println(
-        "MoonUCUM 0.3.0 — UCUM 2.2\nvalidate UNIT\nnormalize UNIT\nconvert VALUE SOURCE TARGET\nequivalent SOURCE TARGET\ncatalog\nbatch JSON_REQUEST ...\nResults are JSON; inspect the ok field for each operation.",
+        "MoonUCUM 0.4.0 — UCUM 2.2\nOptional leading flag: --case-insensitive\nvalidate UNIT\nnormalize UNIT\nconvert VALUE SOURCE TARGET\nequivalent SOURCE TARGET\ncatalog\nbatch JSON_REQUEST ...\nResults are JSON; inspect the ok field for each operation.",
       )
       return
     }

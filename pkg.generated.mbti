@@ -24,6 +24,14 @@ pub fn UcumError::not_equal(Self, Self) -> Bool
 pub fn UcumError::to_repr(Self) -> @debug.Repr
 
 // Types and methods
+pub(all) enum CodeMode {
+  CaseSensitive
+  CaseInsensitive
+} derive(Eq, @debug.Debug)
+pub fn CodeMode::equal(Self, Self) -> Bool
+pub fn CodeMode::not_equal(Self, Self) -> Bool
+pub fn CodeMode::to_repr(Self) -> @debug.Repr
+
 pub struct Converter {
   // private fields
 }
@@ -33,12 +41,13 @@ pub struct Engine {
   // private fields
 }
 pub fn Engine::atom_count(Self) -> Int
+pub fn Engine::code_mode(Self) -> CodeMode
 pub fn Engine::codes(Self) -> Array[String]
 pub fn Engine::compatible(Self, String, String) -> Bool raise UcumError
 pub fn Engine::convert(Self, Double, String, String) -> Double raise UcumError
 pub fn Engine::converter(Self, String, String) -> Converter raise UcumError
 pub fn Engine::equivalent(Self, String, String) -> Bool raise UcumError
-pub fn Engine::new() -> Self
+pub fn Engine::new(mode? : CodeMode) -> Self
 pub fn Engine::normalize(Self, String) -> NormalForm raise UcumError
 pub fn Engine::prefix_count(Self) -> Int
 pub fn Engine::validate(Self, String) -> Unit raise UcumError

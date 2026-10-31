@@ -31,4 +31,11 @@ fn main {
   let spectral = e.convert(3.0, "[m/s2/Hz^(1/2)]", "m2/s3") catch { error => abort(error.message()) }
   if !angle.is_close(45.0) || !spectral.is_close(9.0) { abort("Consumer special conversion failed") }
   println("Special functions passed: principal angle and spectral density")
+  let ci = @ucum.Engine::new(mode=@ucum.CaseInsensitive)
+  let pressure = ci.convert(1.0, "PaL", "KPAL") catch { error => abort(error.message()) }
+  let current = ci.convert(1.0, "PA", "A") catch { error => abort(error.message()) }
+  if !pressure.is_close(0.001) || !current.is_close(1.0e-12, relative_tolerance=1.0e-12, absolute_tolerance=0.0) {
+    abort("Consumer code mode check failed")
+  }
+  println("Code modes passed: isolated tables and canonical definition expansion")
 }

@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import platform
@@ -72,6 +73,7 @@ def verify_sources():
         require(hashlib.sha256(data).hexdigest() == entry["sha256"], "upstream file changed: " + entry["file"])
     run([sys.executable, "scripts/embed_catalog.py", "--check"])
     run([sys.executable, "scripts/generate_upstream_tests.py", "--check"])
+    run([sys.executable, "scripts/generate_case_tests.py", "--check"])
     require((ROOT / "README.md").read_bytes() == (ROOT / "README.mbt.md").read_bytes(), "README copies differ")
     require((ROOT / "LICENSE").is_file(), "project license is missing")
     return manifest
@@ -113,7 +115,19 @@ def verify_catalog():
             numeric += 1
             require(convertible[atom.get("Code")], "linear converter missing")
     require((len(atoms), numeric, logarithmic, tangent, square_root, arbitrary, special) == (312, 253, 15, 2, 1, 41, 0), "support counts changed")
-    return {"version": xml.get("version"), "atoms": len(atoms), "prefixes": len(xml.findall("{*}prefix")), "numeric_atoms": numeric + logarithmic + tangent + square_root, "linear_normalization_atoms": numeric, "logarithmic_atoms": logarithmic, "tangent_atoms": tangent, "square_root_atoms": square_root, "arbitrary_atoms": arbitrary, "unimplemented_special_atoms": special}
+    single = cli("wasm", "--case-insensitive", "catalog")[0]
+    aliases = {atom.get("CODE").upper(): atom.get("Code") for atom in atoms}
+    require(single["code_mode"] == "case-insensitive" and single["atoms"] == 310 and sorted(aliases) == sorted(row["code"] for row in single["units"]), "case-insensitive catalog mismatch")
+    for row in single["units"]:
+        canonical = aliases[row["code"]]
+        require(row["conversion_supported"] == convertible[canonical], "code mode changed convertibility")
+        actual = row["normalization"]
+        expected = by_code[canonical]
+        require(actual["ok"] == expected["ok"], "code mode changed normalization support")
+        if expected["ok"]:
+            require(actual["dimensions"] == expected["dimensions"] and actual["offset"] == expected["offset"] and math.isclose(actual["factor"], expected["factor"], rel_tol=1e-12, abs_tol=0.0), "case-insensitive definition expansion changed")
+    require(sum(row["conversion_supported"] for row in single["units"]) == 270, "case-insensitive numeric count changed")
+    return {"version": xml.get("version"), "atoms": len(atoms), "prefixes": len(xml.findall("{*}prefix")), "numeric_atoms": numeric + logarithmic + tangent + square_root, "linear_normalization_atoms": numeric, "logarithmic_atoms": logarithmic, "tangent_atoms": tangent, "square_root_atoms": square_root, "arbitrary_atoms": arbitrary, "unimplemented_special_atoms": special, "case_insensitive_aliases": 310, "case_insensitive_numeric_aliases": 270, "code_column_pairs_tested": len(atoms), "prefix_pairs_tested": 24, "special_code_pairs_tested": 21}
 
 
 def verify_target(target):
@@ -155,12 +169,27 @@ def verify_target(target):
     require(len(special) == 6 and special[0]["ok"] and abs(special[0]["value"] - 45) < 1e-10, "tangent CLI failed")
     require(special[1].get("error") == "domain" and special[2]["ok"] and abs(special[2]["value"] - 9) < 1e-10, "spectral CLI failed")
     require(special[3].get("error") == "domain" and special[4]["ok"] and abs(special[4]["value"] - 0.01) < 1e-14 and special[5].get("error") == "unsupported", "special domain/arbitrary CLI contract failed")
+    insensitive = cli(target, "--case-insensitive", "batch", *[json.dumps(item) for item in [
+        {"op": "normalize", "unit": "PaL"},
+        {"op": "convert", "value": 1, "source": "PA", "target": "A"},
+        {"op": "convert", "value": 1, "source": "MM", "target": "M"},
+        {"op": "convert", "value": 12, "source": "MG/DL", "target": "G/L"},
+        {"op": "convert", "value": 7.4, "source": "[pH]", "target": "UMOL/L"},
+        {"op": "convert", "value": 1, "source": "[iU]", "target": "[iU]"},
+        {"op": "validate", "unit": "M/UnKnOwN"},
+        {"op": "convert", "value": 3, "source": "[M/S2/HZ^(1/2)]", "target": "M2/S3"},
+        {"op": "convert", "value": 100, "source": "[P'DIOP]", "target": "DEG"},
+    ]])
+    require(len(insensitive) == 9 and insensitive[0]["ok"] and insensitive[0]["basis"] == "m-1.s-2.g", "case-insensitive pressure definition failed")
+    for index, expected in [(1, 1e-12), (2, 0.001), (3, 0.12), (4, 0.039810717055349734), (7, 9), (8, 45)]:
+        require(insensitive[index]["ok"] and math.isclose(insensitive[index]["value"], expected, rel_tol=1e-12, abs_tol=0.0), "case-insensitive conversion failed")
+    require(insensitive[5].get("error") == "unsupported" and insensitive[6].get("error") == "unknown_unit" and insensitive[6]["code"] == "UnKnOwN" and insensitive[6]["offset"] == 2, "case-insensitive diagnostics failed")
     fhir = [json.loads(line) for line in run([MOON, "run", "--target", target, "examples/fhir"]).splitlines()]
     require([item["result"]["status"] for item in fhir] == ["converted", "converted", "rejected", "converted", "rejected"], "FHIR example failed")
     require(abs(fhir[3]["result"]["value"] - 1e-7) < 1e-18, "FHIR acidity conversion failed")
     sensors = [json.loads(line) for line in run([MOON, "run", "--target", target, "examples/sensor"]).splitlines()]
     require([item["value"] for item in sensors[:4]] == [20, 20, 101.325, 65536] and len(sensors) == 7 and abs(sensors[4]["value"] - 1000) < 1e-8 and abs(sensors[5]["value"] - 45) < 1e-10 and abs(sensors[6]["value"] - 9) < 1e-10, "sensor example failed")
-    return {"tests": int(match[1]), "passed": int(match[2]), "upstream_validation_cases": 529, "cli_checks": 19, "fhir_rows": 5, "sensor_rows": 7}
+    return {"tests": int(match[1]), "passed": int(match[2]), "upstream_validation_cases": 529, "code_column_pairs": 312, "case_insensitive_prefix_cases": 24, "case_insensitive_special_cases": 21, "cli_checks": 28, "fhir_rows": 5, "sensor_rows": 7}
 
 
 def verify_packaged_consumer():
@@ -190,6 +219,7 @@ def verify_packaged_consumer():
             require("Independent consumer passed" in output, "independent consumer failed")
             require("Logarithmic batch passed" in output, "independent logarithmic consumer failed")
             require("Special functions passed" in output, "independent special consumer failed")
+            require("Code modes passed" in output, "independent code mode consumer failed")
     return {"source": "extracted package archive", "targets": list(TARGETS), "registry_install": "not performed", "archive_sha256": hashlib.sha256(archive.read_bytes()).hexdigest()}
 
 

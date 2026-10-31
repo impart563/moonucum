@@ -142,7 +142,8 @@ fn Engine::evaluate(
   expression : Expr,
   depth : Int,
 ) -> NormalForm raise UcumError {
-  match self.map_expression(expression, depth) {
+  // Catalog definition expressions always use the canonical case-sensitive codes.
+  match self.map_expression(expression, depth, CaseSensitive) {
     Linear(form) => form
     _ =>
       raise Unsupported(
@@ -157,9 +158,13 @@ pub fn Engine::normalize(
   self : Engine,
   input : String,
 ) -> NormalForm raise UcumError {
-  let expression = parse_expression(input)
-  self.validate_tree(expression)
-  self.evaluate(expression, 0)
+  match self.mapping(input) {
+    Linear(form) => form
+    _ =>
+      raise Unsupported(
+        "Nonlinear units have no linear NormalForm; use converter or convert.",
+      )
+  }
 }
 
 ///|

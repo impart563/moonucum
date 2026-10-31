@@ -99,6 +99,7 @@ fn Engine::map_expression(
   self : Engine,
   expression : Expr,
   depth : Int,
+  mode : CodeMode,
 ) -> Mapping raise UcumError {
   if depth > 64 {
     raise Limit("unit definition recursion exceeds 64")
@@ -106,7 +107,7 @@ fn Engine::map_expression(
   match expression {
     Number(n) => Linear({ ..unity(), scale: n.to_double(), })
     Symbol(code, position) => {
-      let (atom, prefix) = self.resolve(code, position)
+      let (atom, prefix) = self.resolve(code, position, mode)
       if atom.special {
         let (name, factor, proper) = special_definition(atom.definition)
         if logarithmic_coefficient(name) is Some(coefficient) {
@@ -135,25 +136,25 @@ fn Engine::map_expression(
     }
     Product(a, b) =>
       combine_mappings(
-        self.map_expression(a, depth),
-        self.map_expression(b, depth),
+        self.map_expression(a, depth, mode),
+        self.map_expression(b, depth, mode),
         false,
       )
     Quotient(a, b) =>
       combine_mappings(
-        self.map_expression(a, depth),
-        self.map_expression(b, depth),
+        self.map_expression(a, depth, mode),
+        self.map_expression(b, depth, mode),
         true,
       )
     Power(a, n) => {
-      let mapping = self.map_expression(a, depth)
+      let mapping = self.map_expression(a, depth, mode)
       match mapping {
         Linear(form) => Linear(power(form, n))
         _ if n == 1 => mapping
         _ => raise Unsupported("exponentiation of a special unit")
       }
     }
-    Annotation(a, _) => self.map_expression(a, depth)
+    Annotation(a, _) => self.map_expression(a, depth, mode)
   }
 }
 
@@ -161,7 +162,7 @@ fn Engine::map_expression(
 fn Engine::mapping(self : Engine, input : String) -> Mapping raise UcumError {
   let expression = parse_expression(input)
   self.validate_tree(expression)
-  self.map_expression(expression, 0)
+  self.map_expression(expression, 0, self.mode)
 }
 
 ///|

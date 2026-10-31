@@ -1,7 +1,8 @@
 # UCUM 2.2 support
 
-The implementation targets the case-sensitive UCUM code system. Atom recognition,
-syntax acceptance and numeric semantics are tested separately.
+The implementation supports explicit case-sensitive and case-insensitive UCUM
+code systems. Atom recognition, syntax acceptance and numeric semantics are
+tested separately.
 
 | Standard area | Implementation | Evidence |
 |---|---|---|
@@ -10,6 +11,7 @@ syntax acceptance and numeric semantics are tested separately.
 | §§16–20 proper units | Definition expansion, seven-coordinate normalization | 250 proper atom codes; NLM comparison |
 | §§21–23 special units | All 21 catalog special atoms: affine, logarithmic, tangent and square-root mappings | Temperature cases and independent formula assertions |
 | §§24–26 arbitrary units | Recognized but rejected by numeric operations | All 41 arbitrary atom codes checked during acceptance |
+| Code modes | Separate Code/CODE atom and prefix tables; sensitive by default | All 312 code-column pairs, 24 prefixes and 21 special functions |
 | Tables 1–22 | Unmodified UCUM 2.2 essence document | 312 atom codes, 24 prefixes and recorded SHA-256 |
 
 The parser follows the current §10 rule excluding exponents after a closing
@@ -39,3 +41,7 @@ tests use independent conversion comparisons and direct specification formulas.
 The published validation report records supported and unsupported atom counts,
 upstream case count, backend results, example results, and independent consumer
 results. It does not claim full UCUM conformance or clinical validation.
+
+The case-insensitive column has 310 distinct aliases. Numeric semantics cover
+271 case-sensitive atom codes or 270 insensitive aliases; 41 arbitrary codes
+collapse to 40 insensitive aliases. See [code-modes.md](code-modes.md).

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0
+
+- Add an explicit `CodeMode` option with separate UCUM atom and prefix tables.
+- Preserve case-sensitive defaults and canonical definition expansion.
+- Add `--case-insensitive` to the portable CLI and include code mode in catalog output.
+- Check all 312 code-column pairs, 24 prefix factors and 21 special functions
+  across both code systems, including alias counts and preserved diagnostics.
+
 ## 0.3.0
 
 - Implement tangent mappings for prism diopter and percent slope, with an

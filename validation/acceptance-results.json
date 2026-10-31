@@ -7,8 +7,8 @@
   },
   "toolchain": "moon 0.1.20260920 (914d7da 2026-09-20)\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg",
   "source": {
-    "sha256": "ffe57de7a35119c433846f61b157637ca1b18b900ac0c8b9785704e2383aef38",
-    "files": 52,
+    "sha256": "3a4609909c738568a2e2a121b0b626c1c981ce0e45eff86a9c7995c883022c86",
+    "files": 56,
     "excludes": [
       ".git",
       ".mooncakes",
@@ -29,38 +29,55 @@
     "tangent_atoms": 2,
     "square_root_atoms": 1,
     "arbitrary_atoms": 41,
-    "unimplemented_special_atoms": 0
+    "unimplemented_special_atoms": 0,
+    "case_insensitive_aliases": 310,
+    "case_insensitive_numeric_aliases": 270,
+    "code_column_pairs_tested": 312,
+    "prefix_pairs_tested": 24,
+    "special_code_pairs_tested": 21
   },
   "backends": {
     "wasm": {
-      "tests": 35,
-      "passed": 35,
+      "tests": 42,
+      "passed": 42,
       "upstream_validation_cases": 529,
-      "cli_checks": 19,
+      "code_column_pairs": 312,
+      "case_insensitive_prefix_cases": 24,
+      "case_insensitive_special_cases": 21,
+      "cli_checks": 28,
       "fhir_rows": 5,
       "sensor_rows": 7
     },
     "wasm-gc": {
-      "tests": 35,
-      "passed": 35,
+      "tests": 42,
+      "passed": 42,
       "upstream_validation_cases": 529,
-      "cli_checks": 19,
+      "code_column_pairs": 312,
+      "case_insensitive_prefix_cases": 24,
+      "case_insensitive_special_cases": 21,
+      "cli_checks": 28,
       "fhir_rows": 5,
       "sensor_rows": 7
     },
     "js": {
-      "tests": 35,
-      "passed": 35,
+      "tests": 42,
+      "passed": 42,
       "upstream_validation_cases": 529,
-      "cli_checks": 19,
+      "code_column_pairs": 312,
+      "case_insensitive_prefix_cases": 24,
+      "case_insensitive_special_cases": 21,
+      "cli_checks": 28,
       "fhir_rows": 5,
       "sensor_rows": 7
     },
     "native": {
-      "tests": 35,
-      "passed": 35,
+      "tests": 42,
+      "passed": 42,
       "upstream_validation_cases": 529,
-      "cli_checks": 19,
+      "code_column_pairs": 312,
+      "case_insensitive_prefix_cases": 24,
+      "case_insensitive_special_cases": 21,
+      "cli_checks": 28,
       "fhir_rows": 5,
       "sensor_rows": 7
     }
@@ -74,7 +91,7 @@
       "native"
     ],
     "registry_install": "not performed",
-    "archive_sha256": "0517d9fc2c451b374d5c461048d02a34049cea79e5f627303f45be78bbe74787"
+    "archive_sha256": "b401b721e0da0b1f67cbe8c5e92af3c6e128af0110f9884574fad0263901b0a9"
   },
   "reference_comparison": {
     "executed": true,
@@ -98,6 +115,15 @@
       "command": [
         "python.exe",
         "scripts/generate_upstream_tests.py",
+        "--check"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python.exe",
+        "scripts/generate_case_tests.py",
         "--check"
       ],
       "directory": "project",
@@ -137,6 +163,20 @@
         "wasm",
         "cmd/ucum",
         "--",
+        "catalog"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm",
+        "cmd/ucum",
+        "--",
+        "--case-insensitive",
         "catalog"
       ],
       "directory": "project",
@@ -230,6 +270,29 @@
         "run",
         "--target",
         "wasm",
+        "cmd/ucum",
+        "--",
+        "--case-insensitive",
+        "batch",
+        "{\"op\": \"normalize\", \"unit\": \"PaL\"}",
+        "{\"op\": \"convert\", \"value\": 1, \"source\": \"PA\", \"target\": \"A\"}",
+        "{\"op\": \"convert\", \"value\": 1, \"source\": \"MM\", \"target\": \"M\"}",
+        "{\"op\": \"convert\", \"value\": 12, \"source\": \"MG/DL\", \"target\": \"G/L\"}",
+        "{\"op\": \"convert\", \"value\": 7.4, \"source\": \"[pH]\", \"target\": \"UMOL/L\"}",
+        "{\"op\": \"convert\", \"value\": 1, \"source\": \"[iU]\", \"target\": \"[iU]\"}",
+        "{\"op\": \"validate\", \"unit\": \"M/UnKnOwN\"}",
+        "{\"op\": \"convert\", \"value\": 3, \"source\": \"[M/S2/HZ^(1/2)]\", \"target\": \"M2/S3\"}",
+        "{\"op\": \"convert\", \"value\": 100, \"source\": \"[P'DIOP]\", \"target\": \"DEG\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm",
         "examples/fhir"
       ],
       "directory": "project",
@@ -334,6 +397,29 @@
         "run",
         "--target",
         "wasm-gc",
+        "cmd/ucum",
+        "--",
+        "--case-insensitive",
+        "batch",
+        "{\"op\": \"normalize\", \"unit\": \"PaL\"}",
+        "{\"op\": \"convert\", \"value\": 1, \"source\": \"PA\", \"target\": \"A\"}",
+        "{\"op\": \"convert\", \"value\": 1, \"source\": \"MM\", \"target\": \"M\"}",
+        "{\"op\": \"convert\", \"value\": 12, \"source\": \"MG/DL\", \"target\": \"G/L\"}",
+        "{\"op\": \"convert\", \"value\": 7.4, \"source\": \"[pH]\", \"target\": \"UMOL/L\"}",
+        "{\"op\": \"convert\", \"value\": 1, \"source\": \"[iU]\", \"target\": \"[iU]\"}",
+        "{\"op\": \"validate\", \"unit\": \"M/UnKnOwN\"}",
+        "{\"op\": \"convert\", \"value\": 3, \"source\": \"[M/S2/HZ^(1/2)]\", \"target\": \"M2/S3\"}",
+        "{\"op\": \"convert\", \"value\": 100, \"source\": \"[P'DIOP]\", \"target\": \"DEG\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm-gc",
         "examples/fhir"
       ],
       "directory": "project",
@@ -438,6 +524,29 @@
         "run",
         "--target",
         "js",
+        "cmd/ucum",
+        "--",
+        "--case-insensitive",
+        "batch",
+        "{\"op\": \"normalize\", \"unit\": \"PaL\"}",
+        "{\"op\": \"convert\", \"value\": 1, \"source\": \"PA\", \"target\": \"A\"}",
+        "{\"op\": \"convert\", \"value\": 1, \"source\": \"MM\", \"target\": \"M\"}",
+        "{\"op\": \"convert\", \"value\": 12, \"source\": \"MG/DL\", \"target\": \"G/L\"}",
+        "{\"op\": \"convert\", \"value\": 7.4, \"source\": \"[pH]\", \"target\": \"UMOL/L\"}",
+        "{\"op\": \"convert\", \"value\": 1, \"source\": \"[iU]\", \"target\": \"[iU]\"}",
+        "{\"op\": \"validate\", \"unit\": \"M/UnKnOwN\"}",
+        "{\"op\": \"convert\", \"value\": 3, \"source\": \"[M/S2/HZ^(1/2)]\", \"target\": \"M2/S3\"}",
+        "{\"op\": \"convert\", \"value\": 100, \"source\": \"[P'DIOP]\", \"target\": \"DEG\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "js",
         "examples/fhir"
       ],
       "directory": "project",
@@ -532,6 +641,29 @@
         "{\"op\": \"convert\", \"value\": -1, \"source\": \"[m/s2/Hz^(1/2)]\", \"target\": \"[m/s2/Hz^(1/2)]\"}",
         "{\"op\": \"convert\", \"value\": 2, \"source\": \"[hp'_X]\", \"target\": \"1\"}",
         "{\"op\": \"convert\", \"value\": 1, \"source\": \"[hp_X]\", \"target\": \"[hp_X]\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "native",
+        "cmd/ucum",
+        "--",
+        "--case-insensitive",
+        "batch",
+        "{\"op\": \"normalize\", \"unit\": \"PaL\"}",
+        "{\"op\": \"convert\", \"value\": 1, \"source\": \"PA\", \"target\": \"A\"}",
+        "{\"op\": \"convert\", \"value\": 1, \"source\": \"MM\", \"target\": \"M\"}",
+        "{\"op\": \"convert\", \"value\": 12, \"source\": \"MG/DL\", \"target\": \"G/L\"}",
+        "{\"op\": \"convert\", \"value\": 7.4, \"source\": \"[pH]\", \"target\": \"UMOL/L\"}",
+        "{\"op\": \"convert\", \"value\": 1, \"source\": \"[iU]\", \"target\": \"[iU]\"}",
+        "{\"op\": \"validate\", \"unit\": \"M/UnKnOwN\"}",
+        "{\"op\": \"convert\", \"value\": 3, \"source\": \"[M/S2/HZ^(1/2)]\", \"target\": \"M2/S3\"}",
+        "{\"op\": \"convert\", \"value\": 100, \"source\": \"[P'DIOP]\", \"target\": \"DEG\"}"
       ],
       "directory": "project",
       "exit_code": 0

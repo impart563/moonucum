@@ -85,9 +85,22 @@ test "logarithmic targets require positive quantities" {
 
 对数目标要求正的对应数量，零或负值返回 `Domain`。表达式解析、量纲核对在转换器创建时完成，数值定义域在 `apply` 时检查。函数、参考量和数值边界见[对数转换说明](docs/logarithmic-conversion.md)。
 
+## 选择代码模式
+
+```mbt check
+///|
+test "select the UCUM code system explicitly" {
+  let engine = @ucum.Engine::new(mode=@ucum.CaseInsensitive)
+  assert_true(engine.convert(1.0, "PaL", "KPAL").is_close(0.001))
+  assert_true(engine.convert(12.0, "MG/DL", "G/L").is_close(0.12))
+}
+```
+
+默认模式保持大小写敏感。大小写不敏感模式使用 UCUM 独立的代码和前缀表，例如帕斯卡为 `PAL`，兆米为 `MAM`；不能直接把默认代码改成大写来替代。命令行可在操作前添加 `--case-insensitive`。两种模式的映射、别名和边界见[代码模式说明](docs/code-modes.md)。
+
 ## 标准支持范围
 
-| 能力 | 0.3.0 状态 |
+| 能力 | 0.4.0 状态 |
 |---|---|
 | UCUM 2.2 大小写敏感代码 | 312 个单位原子、24 个前缀全部载入 |
 | 语法解析 | 乘除、括号、整数指数、前导除号、方括号原子、注释和十进制因子 |
@@ -99,7 +112,7 @@ test "logarithmic targets require positive quantities" {
 | 关系判断 | 区分语义等价与量纲兼容，支持对数单位 |
 | 任意单位 | 41 个代码可识别，数值语义返回 `Unsupported` |
 | 特殊函数覆盖 | 单位表中的 21 个特殊单位原子均有转换路径；任意单位保持独立 |
-| 大小写不敏感代码模式 | 后续版本 |
+| 大小写不敏感代码模式 | 独立 CODE 表及前缀，310 个不同代码；显式选择模式 |
 
 `parse_expression` 返回保留注释及符号位置的语法树。`Engine::validate` 检查语法和标准代码；`normalize` 返回比例与温标的线性表示；`compatible`、`equivalent` 和 `convert` 同时支持已实现的对数单位。对数、正切和平方根单位没有线性 `NormalForm`，应通过转换器或 `convert` 处理。特殊单位参与维度乘除时返回明确错误。正切、平方根和退休编码的公式与边界见[特殊转换说明](docs/special-conversion.md)。
 
@@ -110,7 +123,8 @@ test "logarithmic targets require positive quantities" {
 ## 验证与复用
 
 - FHIR 上游 529 条校验用例保留原始期望，生成黑盒测试。
-- 独立测试覆盖比例转换、温标、前缀、连续除法、任意单位、错误位置及资源限制。
+- 独立测试覆盖比例与全部特殊函数、定义域、前缀、连续除法、任意单位、错误位置及资源限制。
+- 根据原始 XML 生成测试，检查 312 对代码映射、24 个前缀和 21 个特殊单位函数在两种代码模式下的行为。
 - NLM 实现的 741 个数值对照案例分别记录一致项和已核对的标准差异，见[差异说明](docs/reference-differences.md)和[结果数据](validation/differential-results.json)。
 - 验收脚本复制发布所需文件到临时目录，再以独立模块消费该副本，验证公开 API。
 

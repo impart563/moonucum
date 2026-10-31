@@ -1,7 +1,7 @@
 {
   "name": "moonucum-conformance",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Development-only differential tests against the NLM UCUM implementation",
   "scripts": { "test": "node scripts/differential.mjs" },
   "devDependencies": { "@lhncbc/ucum-lhc": "8.0.1" }

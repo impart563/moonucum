@@ -7,7 +7,9 @@ library performs no network or file operations.
 ## Processing
 
 1. A bounded recursive-descent parser produces an `Expr` with source offsets.
-2. Symbol resolution uses the pinned UCUM atom and prefix tables.
+2. Symbol resolution uses the selected UCUM code system, with separate atom and
+   prefix tables. Catalog definition expansion always uses canonical
+   case-sensitive codes.
 3. Definitions expand recursively into a seven-coordinate base representation.
 4. Semantic operations compare dimensions, linear factors, temperature origins
    and supported logarithmic mappings. A compiled `Converter` reuses these mappings

@@ -1,4 +1,17 @@
 ///|
+/// UCUM's two code systems use distinct atom and prefix tables.
+pub(all) enum CodeMode {
+  CaseSensitive
+  CaseInsensitive
+} derive(Debug, Eq)
+
+///|
+pub extend CodeMode with @debug.Debug::{to_repr}
+
+///|
+pub extend CodeMode with Eq::{equal, not_equal}
+
+///|
 /// Errors preserve the input offset for syntax and symbol lookup failures.
 pub suberror UcumError {
   Syntax(Int, String)
