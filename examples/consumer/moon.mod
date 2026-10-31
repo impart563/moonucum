@@ -1,5 +1,5 @@
 name = "moonucum-example/consumer"
-version = "0.1.0"
+version = "0.2.0"
 import {
-  "impart563/moonucum@0.1.0",
+  "impart563/moonucum@0.2.0",
 }

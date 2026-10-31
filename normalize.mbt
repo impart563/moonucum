@@ -142,19 +142,12 @@ fn Engine::evaluate(
   expression : Expr,
   depth : Int,
 ) -> NormalForm raise UcumError {
-  match expression {
-    Number(n) => { ..unity(), scale: n.to_double(), }
-    Symbol(code, position) => {
-      let (atom, prefix) = self.resolve(code, position)
-      let form = self.atom_form(atom, depth)
-      checked_form({ ..form, scale: form.scale * prefix, })
-    }
-    Product(a, b) =>
-      multiply(self.evaluate(a, depth), self.evaluate(b, depth), false)
-    Quotient(a, b) =>
-      multiply(self.evaluate(a, depth), self.evaluate(b, depth), true)
-    Power(a, n) => power(self.evaluate(a, depth), n)
-    Annotation(a, _) => self.evaluate(a, depth)
+  match self.map_expression(expression, depth) {
+    Linear(form) => form
+    Logarithmic(_, _) =>
+      raise Unsupported(
+        "Logarithmic units have no linear NormalForm; use converter or convert.",
+      )
   }
 }
 
@@ -176,7 +169,8 @@ pub fn Engine::compatible(
   first : String,
   second : String,
 ) -> Bool raise UcumError {
-  self.normalize(first).dimensions == self.normalize(second).dimensions
+  self.mapping(first).reference().dimensions ==
+  self.mapping(second).reference().dimensions
 }
 
 ///|
@@ -186,15 +180,13 @@ pub fn Engine::equivalent(
   first : String,
   second : String,
 ) -> Bool raise UcumError {
-  let a = self.normalize(first)
-  let b = self.normalize(second)
-  a.dimensions == b.dimensions &&
-  a.scale.is_close(b.scale, relative_tolerance=1.0e-12, absolute_tolerance=0.0) &&
-  a.offset.is_close(
-    b.offset,
-    relative_tolerance=1.0e-12,
-    absolute_tolerance=0.0,
-  )
+  match (self.mapping(first), self.mapping(second)) {
+    (Linear(a), Linear(b)) => forms_equivalent(a, b)
+    (Logarithmic(a, first), Logarithmic(b, second)) =>
+      forms_equivalent(a, b) &&
+      first.is_close(second, relative_tolerance=1.0e-12, absolute_tolerance=0.0)
+    _ => false
+  }
 }
 
 ///|
@@ -204,17 +196,5 @@ pub fn Engine::convert(
   source : String,
   target : String,
 ) -> Double raise UcumError {
-  if !finite(value) {
-    raise NonFinite
-  }
-  let a = self.normalize(source)
-  let b = self.normalize(target)
-  if a.dimensions != b.dimensions {
-    raise Incompatible(source, target)
-  }
-  let result = (value * a.scale + a.offset - b.offset) / b.scale
-  if !finite(result) {
-    raise NonFinite
-  }
-  result
+  self.converter(source, target).apply(value)
 }

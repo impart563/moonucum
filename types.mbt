@@ -7,6 +7,7 @@ pub suberror UcumError {
   Incompatible(String, String)
   Limit(String)
   NonFinite
+  Domain(String)
 } derive(Debug, Eq)
 
 ///|
@@ -22,6 +23,7 @@ pub fn UcumError::message(self : UcumError) -> String {
     Limit(reason) => "Resource limit: " + reason
     NonFinite =>
       "Input or result is outside the supported finite numeric range."
+    Domain(reason) => reason
   }
 }
 

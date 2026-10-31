@@ -15,5 +15,16 @@ fn main {
     _ => false
   }
   if !rejected { abort("Consumer dimensional check failed") }
+  let logarithmic = e.converter("dB[W]", "W") catch { error => abort(error.message()) }
+  for (value, expected) in [(0.0, 1.0), (10.0, 10.0), (20.0, 100.0)] {
+    let actual = logarithmic.apply(value) catch { error => abort(error.message()) }
+    if !actual.is_close(expected) { abort("Consumer logarithmic batch failed") }
+  }
+  let domain = try { ignore(e.convert(0.0, "mol/L", "[pH]")); false } catch {
+    @ucum.Domain(_) => true
+    _ => false
+  }
+  if !domain { abort("Consumer logarithmic domain check failed") }
   println("Independent consumer passed: clinical and sensor quantities")
+  println("Logarithmic batch passed: reusable converter and domain error")
 }

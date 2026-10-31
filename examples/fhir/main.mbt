@@ -57,6 +57,11 @@ fn main {
       { "value": 90.0, "system": "http://unitsofmeasure.org", "code": "mg/dL" },
       "mmol/L",
     ),
+    (
+      "encoded acidity",
+      { "value": 7.0, "system": "http://unitsofmeasure.org", "code": "[pH]" },
+      "mol/L",
+    ),
     ("display label without code", { "value": 12.0, "unit": "mg/dL" }, "g/L"),
   ]
   for (name, quantity, target) in examples {

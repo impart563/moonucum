@@ -8,7 +8,7 @@ syntax acceptance and numeric semantics are tested separately.
 | §§3–6 lexical rules | ASCII codes, metric prefixes, bracketed atoms, annotations | Upstream validation corpus and local boundary cases |
 | §§7–10 syntax | Left-associative `.` and `/`, integer exponents, parentheses | AST and numeric equivalence tests |
 | §§16–20 proper units | Definition expansion, seven-coordinate normalization | 250 proper atom codes; NLM comparison |
-| §§21–23 special units | Affine temperature subset with scalar scaling | Temperature cases and independent formula assertions |
+| §§21–23 special units | Affine temperatures and 11 logarithmic/pH codes with scalar scaling | Temperature cases and independent formula assertions |
 | §§24–26 arbitrary units | Recognized but rejected by numeric operations | All 41 arbitrary atom codes checked during acceptance |
 | Tables 1–22 | Unmodified UCUM 2.2 essence document | 312 atom codes, 24 prefixes and recorded SHA-256 |
 
@@ -18,12 +18,15 @@ Explicit exponents on pure numeric factors, such as `2+10`, are not supported;
 this follows the corpus and BNF factor production, while the prose in §9 gives
 such a numeric example. This remains an explicit compatibility boundary.
 
-The following 18 special atom codes have recognized syntax but no implemented
+The following seven special atom codes have recognized syntax but no implemented
 conversion function:
 
-`[p'diop]`, `%[slope]`, `[hp'_X]`, `[hp'_C]`, `[hp'_M]`, `[hp'_Q]`, `[pH]`,
-`Np`, `B`, `B[SPL]`, `B[V]`, `B[mV]`, `B[uV]`, `B[10.nV]`, `B[W]`, `B[kW]`,
-`[m/s2/Hz^(1/2)]`, `bit_s`.
+`[p'diop]`, `%[slope]`, `[hp'_X]`, `[hp'_C]`, `[hp'_M]`, `[hp'_Q]`,
+`[m/s2/Hz^(1/2)]`.
+
+The 11 logarithmic and pH codes are numerically convertible but have no linear
+`NormalForm`. They are counted separately from the 253 linearly normalizable
+atom codes. See [logarithmic-conversion.md](logarithmic-conversion.md).
 
 Other expressions involving recognized special codes can also be unsupported.
 For example, `Cel/s` passes grammar and code lookup but has no supported numeric

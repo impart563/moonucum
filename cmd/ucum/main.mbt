@@ -15,6 +15,8 @@ fn diagnostic(error : @lib.UcumError) -> Json {
         "target": target,
       }
     @lib.Limit(message) => { "ok": false, "error": "limit", "message": message }
+    @lib.Domain(message) =>
+      { "ok": false, "error": "domain", "message": message }
     @lib.NonFinite => { "ok": false, "error": "non_finite" }
   }
 }
@@ -149,7 +151,18 @@ fn main {
           let normalization = normal_json(engine.normalize(code)) catch {
             error => diagnostic(error)
           }
-          ({ "code": code, "normalization": normalization } : Json)
+          let conversion_supported = try {
+            ignore(engine.converter(code, code))
+            true
+          } catch {
+            _ => false
+          }
+          (
+            {
+              "code": code,
+              "normalization": normalization,
+              "conversion_supported": conversion_supported,
+            } : Json)
         })
       {
         "ucum_version": "2.2",
@@ -160,7 +173,7 @@ fn main {
     }
     _ => {
       println(
-        "MoonUCUM 0.1.0 — UCUM 2.2\nvalidate UNIT\nnormalize UNIT\nconvert VALUE SOURCE TARGET\nequivalent SOURCE TARGET\ncatalog\nbatch JSON_REQUEST ...\nResults are JSON; inspect the ok field for each operation.",
+        "MoonUCUM 0.2.0 — UCUM 2.2\nvalidate UNIT\nnormalize UNIT\nconvert VALUE SOURCE TARGET\nequivalent SOURCE TARGET\ncatalog\nbatch JSON_REQUEST ...\nResults are JSON; inspect the ok field for each operation.",
       )
       return
     }

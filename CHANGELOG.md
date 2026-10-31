@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.2.0
+
+- Add conversion for 11 logarithmic and pH atom codes, including metric prefixes
+  and dimensionless scalar scaling.
+- Add reusable `Converter` values through `Engine::converter` and value-domain
+  failures through the new `Domain` error variant.
+- Extend commensurability and equivalence checks to supported logarithmic units;
+  retain the linear-only meaning of `NormalForm`.
+- Expand numerical comparisons to 669 cases and use relative tolerance for
+  nonzero results, exposing and documenting older reference-catalog constants.
+- Extend the CLI, FHIR/sensor examples and extracted-package consumer checks.
+
+Consumers with exhaustive `UcumError` matches must handle `Domain` in this version.
+
 ## 0.1.0
 
 - Add bounded UCUM expression parsing with ASTs and source offsets.

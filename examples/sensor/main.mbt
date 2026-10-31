@@ -6,6 +6,7 @@ fn main {
     ("vehicle-speed", 72.0, "km/h", "m/s"),
     ("air-pressure", 1013.25, "hPa", "kPa"),
     ("payload-size", 64.0, "KiBy", "By"),
+    ("power-level", 30.0, "dB[W]", "W"),
   ]
   for (sensor, value, source, target) in readings {
     try {

@@ -83,21 +83,30 @@ def verify_catalog():
     atoms = xml.findall("{*}base-unit") + xml.findall("{*}unit")
     require(catalog["ucum_version"] == xml.get("version"), "catalog version mismatch")
     require(sorted(item.get("Code") for item in atoms) == sorted(item["code"] for item in catalog["units"]), "catalog symbols differ from XML")
-    numeric = arbitrary = special = 0
+    numeric = arbitrary = special = logarithmic = 0
     by_code = {item["code"]: item["normalization"] for item in catalog["units"]}
+    convertible = {item["code"]: item["conversion_supported"] for item in catalog["units"]}
+    logarithmic_codes = {"Np", "B", "B[SPL]", "B[V]", "B[mV]", "B[uV]", "B[10.nV]", "B[W]", "B[kW]", "bit_s", "[pH]"}
     for atom in atoms:
         result = by_code[atom.get("Code")]
         if atom.get("isArbitrary") == "yes":
             require(not result["ok"] and result["error"] == "unsupported", "arbitrary atom was numerically interpreted")
             arbitrary += 1
+            require(not convertible[atom.get("Code")], "arbitrary atom has a converter")
+        elif atom.get("Code") in logarithmic_codes:
+            require(not result["ok"] and result["error"] == "unsupported", "logarithmic atom has a linear normalization")
+            require(convertible[atom.get("Code")], "logarithmic converter missing")
+            logarithmic += 1
         elif atom.get("isSpecial") == "yes" and atom.get("Code") not in ("Cel", "[degF]", "[degRe]"):
             require(not result["ok"] and result["error"] == "unsupported", "unimplemented special atom was interpreted")
             special += 1
+            require(not convertible[atom.get("Code")], "unimplemented special atom has a converter")
         else:
             require(result["ok"], "numeric atom failed: " + atom.get("Code"))
             numeric += 1
-    require((len(atoms), numeric, arbitrary, special) == (312, 253, 41, 18), "support counts changed")
-    return {"version": xml.get("version"), "atoms": len(atoms), "prefixes": len(xml.findall("{*}prefix")), "numeric_atoms": numeric, "arbitrary_atoms": arbitrary, "unimplemented_special_atoms": special}
+            require(convertible[atom.get("Code")], "linear converter missing")
+    require((len(atoms), numeric, logarithmic, arbitrary, special) == (312, 253, 11, 41, 7), "support counts changed")
+    return {"version": xml.get("version"), "atoms": len(atoms), "prefixes": len(xml.findall("{*}prefix")), "numeric_atoms": numeric + logarithmic, "linear_normalization_atoms": numeric, "logarithmic_atoms": logarithmic, "arbitrary_atoms": arbitrary, "unimplemented_special_atoms": special}
 
 
 def verify_target(target):
@@ -118,16 +127,28 @@ def verify_target(target):
     require(rows[3]["offset"] == 2 and rows[4]["offset"] == 2 and rows[5]["equivalent"], "CLI diagnostics failed")
     malformed = cli(target, "batch", "{", json.dumps({"op": "other"}))
     require([item["error"] for item in malformed] == ["json", "request"], "request error handling failed")
+    nonlinear = cli(target, "batch", *[json.dumps(item) for item in [
+        {"op": "convert", "value": 7, "source": "[pH]", "target": "mol/L"},
+        {"op": "convert", "value": 30, "source": "dB[W]", "target": "W"},
+        {"op": "convert", "value": 0, "source": "W", "target": "dB[W]"},
+        {"op": "convert", "value": 10000, "source": "dB", "target": "B"},
+        {"op": "normalize", "unit": "B"},
+    ]])
+    require(len(nonlinear) == 5 and nonlinear[0]["ok"] and abs(nonlinear[0]["value"] - 1e-7) < 1e-18, "pH conversion failed")
+    require(nonlinear[1]["ok"] and abs(nonlinear[1]["value"] - 1000) < 1e-8, "level conversion failed")
+    require(nonlinear[2].get("error") == "domain" and nonlinear[3]["ok"] and abs(nonlinear[3]["value"] - 1000) < 1e-8 and nonlinear[4].get("error") == "unsupported", "nonlinear range/domain contract failed")
     fhir = [json.loads(line) for line in run([MOON, "run", "--target", target, "examples/fhir"]).splitlines()]
-    require([item["result"]["status"] for item in fhir] == ["converted", "converted", "rejected", "rejected"], "FHIR example failed")
+    require([item["result"]["status"] for item in fhir] == ["converted", "converted", "rejected", "converted", "rejected"], "FHIR example failed")
+    require(abs(fhir[3]["result"]["value"] - 1e-7) < 1e-18, "FHIR acidity conversion failed")
     sensors = [json.loads(line) for line in run([MOON, "run", "--target", target, "examples/sensor"]).splitlines()]
-    require([item["value"] for item in sensors] == [20, 20, 101.325, 65536], "sensor example failed")
-    return {"tests": int(match[1]), "passed": int(match[2]), "upstream_validation_cases": 529, "cli_checks": 8, "fhir_rows": 4, "sensor_rows": 4}
+    require([item["value"] for item in sensors[:4]] == [20, 20, 101.325, 65536] and len(sensors) == 5 and abs(sensors[4]["value"] - 1000) < 1e-8, "sensor example failed")
+    return {"tests": int(match[1]), "passed": int(match[2]), "upstream_validation_cases": 529, "cli_checks": 13, "fhir_rows": 5, "sensor_rows": 5}
 
 
 def verify_packaged_consumer():
     run([MOON, "package"])
-    archives = list((ROOT / "_build/publish").glob("*.zip"))
+    version = re.search(r'^version\s*=\s*"([^"]+)"', (ROOT / "moon.mod").read_text(encoding="utf-8"), re.M).group(1)
+    archives = list((ROOT / "_build/publish").glob("impart563-moonucum-" + version + ".zip"))
     require(len(archives) == 1, "expected one package archive")
     archive = archives[0]
     with tempfile.TemporaryDirectory(prefix="moonucum consumer ") as temporary:
@@ -149,6 +170,7 @@ def verify_packaged_consumer():
         for target in TARGETS:
             output = run([MOON, "run", "--target", target, "."], cwd=consumer, env=env)
             require("Independent consumer passed" in output, "independent consumer failed")
+            require("Logarithmic batch passed" in output, "independent logarithmic consumer failed")
     return {"source": "extracted package archive", "targets": list(TARGETS), "registry_install": "not performed", "archive_sha256": hashlib.sha256(archive.read_bytes()).hexdigest()}
 
 

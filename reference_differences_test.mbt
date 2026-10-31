@@ -52,3 +52,29 @@ test "resource bounds and cache encapsulation" {
     assert_true(invalid)
   }
 }
+
+///|
+/// UCUM 2.2 table 5 updates these definitions. Use relative comparisons so
+/// very small factors cannot pass through a large absolute tolerance.
+test "updated UCUM constants retain relative precision" {
+  let e = @ucum.Engine::new()
+  for
+    (code, expected) in [
+      ("u", 1.6605390666e-24),
+      ("eV", 1.602176634e-16),
+      ("[G]", 6.67430e-14),
+      ("[e]", 1.602176634e-19),
+      ("[h]", 6.62607015e-31),
+      ("[k]", 1.380649e-20),
+      ("[m_e]", 9.1093837139e-28),
+      ("[m_p]", 1.67262192595e-24),
+    ] {
+    assert_true(
+      e
+      .normalize(code)
+      .factor()
+      .is_close(expected, relative_tolerance=1.0e-14, absolute_tolerance=0.0),
+      msg=code,
+    )
+  }
+}

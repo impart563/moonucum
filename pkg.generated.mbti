@@ -16,6 +16,7 @@ pub suberror UcumError {
   Incompatible(String, String)
   Limit(String)
   NonFinite
+  Domain(String)
 } derive(Eq, @debug.Debug)
 pub fn UcumError::equal(Self, Self) -> Bool
 pub fn UcumError::message(Self) -> String
@@ -23,6 +24,11 @@ pub fn UcumError::not_equal(Self, Self) -> Bool
 pub fn UcumError::to_repr(Self) -> @debug.Repr
 
 // Types and methods
+pub struct Converter {
+  // private fields
+}
+pub fn Converter::apply(Self, Double) -> Double raise UcumError
+
 pub struct Engine {
   // private fields
 }
@@ -30,6 +36,7 @@ pub fn Engine::atom_count(Self) -> Int
 pub fn Engine::codes(Self) -> Array[String]
 pub fn Engine::compatible(Self, String, String) -> Bool raise UcumError
 pub fn Engine::convert(Self, Double, String, String) -> Double raise UcumError
+pub fn Engine::converter(Self, String, String) -> Converter raise UcumError
 pub fn Engine::equivalent(Self, String, String) -> Bool raise UcumError
 pub fn Engine::new() -> Self
 pub fn Engine::normalize(Self, String) -> NormalForm raise UcumError

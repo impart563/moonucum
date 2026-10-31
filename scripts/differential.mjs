@@ -32,6 +32,19 @@ for (const [source, target] of [
   for (const value of [-40, 0, 1, 12.5, 1000]) cases.push({ value, source, target });
 }
 
+const logarithmicCases = [
+  ['Np', '1'], ['B', '1'], ['bit_s', '1'], ['B[SPL]', 'Pa'],
+  ['B[V]', 'V'], ['B[mV]', 'V'], ['B[uV]', 'V'], ['B[10.nV]', 'V'],
+  ['B[W]', 'W'], ['B[kW]', 'W'], ['[pH]', 'mol/L'],
+];
+for (const [source, target] of logarithmicCases) {
+  for (const value of [-10, 0, 1, 7.4, 20]) cases.push({ value, source, target });
+  for (const value of [0.1, 1, 100]) cases.push({ value, source: target, target: source });
+}
+for (const [source, target] of [['dB[W]', 'W'], ['dB[V]', 'V'], ['dB[SPL]', 'Pa'], ['2.B', '1'], ['B/2', '1']]) {
+  for (const value of [0, 1, 10, 30]) cases.push({ value, source, target });
+}
+
 const failures = [];
 const differences = [];
 const results = [];
@@ -53,9 +66,37 @@ const policies = new Map([
 ]);
 function close(a, b) {
   return Number.isFinite(a) && Number.isFinite(b)
-    && Math.abs(a - b) <= Math.max(1e-10, Math.abs(b) * 1e-10);
+    && Math.abs(a - b) <= (b === 0 ? 1e-10 : Math.max(Number.MIN_VALUE, Math.abs(b) * 1e-10));
 }
 function reviewedDifference(item, output, expected) {
+  const constants = new Map([
+    ['u', ['g', 1.6605390666e-24, 1.6605402e-24]],
+    ['eV', ['m2.s-2.g', 1.602176634e-16, 1.60217733e-16]],
+    ['[G]', ['m3.s-2.g-1', 6.67430e-14, 6.67259e-14]],
+    ['[e]', ['C', 1.602176634e-19, 1.60217733e-19]],
+    ['[h]', ['m2.s-1.g', 6.62607015e-31, 6.6260755e-31]],
+    ['[k]', ['m2.s-2.g.K-1', 1.380649e-20, 1.380658e-20]],
+    ['[m_e]', ['g', 9.1093837139e-28, 9.1093897e-28]],
+    ['[m_p]', ['g', 1.67262192595e-24, 1.6726231e-24]],
+  ]);
+  const constant = constants.get(item.source);
+  if (constant && item.target === constant[0] && output.ok && expected.status === 'succeeded'
+      && close(output.value, item.value * constant[1]) && close(expected.toVal, item.value * constant[2])) {
+    return 'UCUM 2.2 table 5 updated constant; the pinned NLM catalog retains an older value';
+  }
+  if (output.ok && expected.status === 'failed' && expected.code === 'incommensurable') {
+    if (item.source === '[pH]' && item.target === 'mol/L' && close(output.value, 10 ** -item.value)) {
+      return 'UCUM §45: concentration in mol/L = 10^(-pH); NLM rejects commensurability';
+    }
+    if (item.source === 'mol/L' && item.target === '[pH]' && close(output.value, -Math.log10(item.value))) {
+      return 'UCUM §45: pH = -log10(concentration in mol/L); NLM rejects commensurability';
+    }
+  }
+  if (item.source === 'B/2' && item.target === '1' && output.ok
+      && expected.status === 'failed' && expected.code === 'unknown-unit'
+      && close(output.value, 10 ** (item.value / 2))) {
+    return 'UCUM §22: dimensionless scalar scaling of a special unit; NLM rejects B/2';
+  }
   const policy = policies.get(item.source);
   if (!policy || item.target !== policy[0] || !output.ok
       || !close(output.value, item.value * policy[1] + policy[2])) return null;
@@ -87,7 +128,7 @@ for (let start = 0; start < cases.length; start += 48) {
 const report = {
   reference: '@lhncbc/ucum-lhc@8.0.1',
   command: 'npm ci && npm test',
-  relative_tolerance: 1e-10, absolute_tolerance: 1e-10,
+  relative_tolerance: 1e-10, absolute_tolerance_at_zero: 1e-10,
   cases: results.length, matched: results.filter(item => item.classification === 'matched').length,
   reviewed_standard_differences: differences.length,
   failures, differences, results,

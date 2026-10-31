@@ -7,8 +7,8 @@
   },
   "toolchain": "moon 0.1.20260920 (914d7da 2026-09-20)\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg",
   "source": {
-    "sha256": "3116600bb92246dd79a52b5d931d79cfffc1876e649ae9cd24a91ccc2c91e945",
-    "files": 46,
+    "sha256": "1c74453db83203e7baf3a0133065f15e440fd1882fa8eeca822c392dd210a577",
+    "files": 49,
     "excludes": [
       ".git",
       ".mooncakes",
@@ -23,42 +23,44 @@
     "version": "2.2",
     "atoms": 312,
     "prefixes": 24,
-    "numeric_atoms": 253,
+    "numeric_atoms": 264,
+    "linear_normalization_atoms": 253,
+    "logarithmic_atoms": 11,
     "arbitrary_atoms": 41,
-    "unimplemented_special_atoms": 18
+    "unimplemented_special_atoms": 7
   },
   "backends": {
     "wasm": {
-      "tests": 17,
-      "passed": 17,
+      "tests": 28,
+      "passed": 28,
       "upstream_validation_cases": 529,
-      "cli_checks": 8,
-      "fhir_rows": 4,
-      "sensor_rows": 4
+      "cli_checks": 13,
+      "fhir_rows": 5,
+      "sensor_rows": 5
     },
     "wasm-gc": {
-      "tests": 17,
-      "passed": 17,
+      "tests": 28,
+      "passed": 28,
       "upstream_validation_cases": 529,
-      "cli_checks": 8,
-      "fhir_rows": 4,
-      "sensor_rows": 4
+      "cli_checks": 13,
+      "fhir_rows": 5,
+      "sensor_rows": 5
     },
     "js": {
-      "tests": 17,
-      "passed": 17,
+      "tests": 28,
+      "passed": 28,
       "upstream_validation_cases": 529,
-      "cli_checks": 8,
-      "fhir_rows": 4,
-      "sensor_rows": 4
+      "cli_checks": 13,
+      "fhir_rows": 5,
+      "sensor_rows": 5
     },
     "native": {
-      "tests": 17,
-      "passed": 17,
+      "tests": 28,
+      "passed": 28,
       "upstream_validation_cases": 529,
-      "cli_checks": 8,
-      "fhir_rows": 4,
-      "sensor_rows": 4
+      "cli_checks": 13,
+      "fhir_rows": 5,
+      "sensor_rows": 5
     }
   },
   "packaged_consumer": {
@@ -70,14 +72,14 @@
       "native"
     ],
     "registry_install": "not performed",
-    "archive_sha256": "44c87140f240338c5302177e93e14c99567f48cf4fcba0cd6151997fd6239316"
+    "archive_sha256": "173d38554a1e151e8d0c00f933ad4404040b42626790083281f7c7d3525ae1c0"
   },
   "reference_comparison": {
     "executed": true,
     "implementation": "@lhncbc/ucum-lhc@8.0.1",
-    "cases": 561,
-    "matched": 532,
-    "reviewed_standard_differences": 29,
+    "cases": 669,
+    "matched": 612,
+    "reviewed_standard_differences": 57,
     "unexpected_differences": 0
   },
   "commands": [
@@ -189,6 +191,24 @@
         "run",
         "--target",
         "wasm",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\": \"convert\", \"value\": 7, \"source\": \"[pH]\", \"target\": \"mol/L\"}",
+        "{\"op\": \"convert\", \"value\": 30, \"source\": \"dB[W]\", \"target\": \"W\"}",
+        "{\"op\": \"convert\", \"value\": 0, \"source\": \"W\", \"target\": \"dB[W]\"}",
+        "{\"op\": \"convert\", \"value\": 10000, \"source\": \"dB\", \"target\": \"B\"}",
+        "{\"op\": \"normalize\", \"unit\": \"B\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm",
         "examples/fhir"
       ],
       "directory": "project",
@@ -256,6 +276,24 @@
         "run",
         "--target",
         "wasm-gc",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\": \"convert\", \"value\": 7, \"source\": \"[pH]\", \"target\": \"mol/L\"}",
+        "{\"op\": \"convert\", \"value\": 30, \"source\": \"dB[W]\", \"target\": \"W\"}",
+        "{\"op\": \"convert\", \"value\": 0, \"source\": \"W\", \"target\": \"dB[W]\"}",
+        "{\"op\": \"convert\", \"value\": 10000, \"source\": \"dB\", \"target\": \"B\"}",
+        "{\"op\": \"normalize\", \"unit\": \"B\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm-gc",
         "examples/fhir"
       ],
       "directory": "project",
@@ -323,6 +361,24 @@
         "run",
         "--target",
         "js",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\": \"convert\", \"value\": 7, \"source\": \"[pH]\", \"target\": \"mol/L\"}",
+        "{\"op\": \"convert\", \"value\": 30, \"source\": \"dB[W]\", \"target\": \"W\"}",
+        "{\"op\": \"convert\", \"value\": 0, \"source\": \"W\", \"target\": \"dB[W]\"}",
+        "{\"op\": \"convert\", \"value\": 10000, \"source\": \"dB\", \"target\": \"B\"}",
+        "{\"op\": \"normalize\", \"unit\": \"B\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "js",
         "examples/fhir"
       ],
       "directory": "project",
@@ -380,6 +436,24 @@
         "batch",
         "{",
         "{\"op\": \"other\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "native",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\": \"convert\", \"value\": 7, \"source\": \"[pH]\", \"target\": \"mol/L\"}",
+        "{\"op\": \"convert\", \"value\": 30, \"source\": \"dB[W]\", \"target\": \"W\"}",
+        "{\"op\": \"convert\", \"value\": 0, \"source\": \"W\", \"target\": \"dB[W]\"}",
+        "{\"op\": \"convert\", \"value\": 10000, \"source\": \"dB\", \"target\": \"B\"}",
+        "{\"op\": \"normalize\", \"unit\": \"B\"}"
       ],
       "directory": "project",
       "exit_code": 0

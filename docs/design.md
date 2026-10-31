@@ -9,7 +9,9 @@ library performs no network or file operations.
 1. A bounded recursive-descent parser produces an `Expr` with source offsets.
 2. Symbol resolution uses the pinned UCUM atom and prefix tables.
 3. Definitions expand recursively into a seven-coordinate base representation.
-4. Semantic operations compare dimensions, factors and temperature origins.
+4. Semantic operations compare dimensions, linear factors, temperature origins
+   and supported logarithmic mappings. A compiled `Converter` reuses these mappings
+   for each batch value.
 5. Consumers retain responsibility for identifying the measured substance or
    phenomenon and deciding which measurement records can be compared.
 
@@ -27,7 +29,8 @@ The embedding and test generators are checked during acceptance.
 `Syntax` and `UnknownUnit` contain zero-based offsets into the ASCII input.
 `Unsupported` reports recognized codes or constructions without implemented
 numeric semantics. `Incompatible` separates dimensional mismatch from invalid
-input. `Limit` and `NonFinite` report bounded resource and binary64 limitations.
+input. `Domain` distinguishes nonpositive quantities for logarithmic targets.
+`Limit` and `NonFinite` report bounded resource and binary64 limitations.
 
 ## Existing MoonBit libraries
 
