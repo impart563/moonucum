@@ -1,0 +1,12 @@
+MoonUCUM
+Copyright 2026 impart563
+
+Project implementation: Apache License, Version 2.0.
+
+UCUM 2.2 specification and essence data:
+Copyright 1999-2024 Regenstrief Institute, Inc.
+The unchanged files and embedded document retain the separate UCUM license.
+See standards/UCUM-LICENSE.md and standards/sources.json.
+
+FHIR UCUM validation test fixture:
+See standards/FHIR-LICENSE.txt for the upstream BSD copyright and license.

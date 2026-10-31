@@ -95,7 +95,7 @@ fn cli_args() -> Array[String] {
   if args.is_empty() {
     []
   } else {
-    args[1:].to_array()
+    args[1:].to_owned()
   }
 }
 

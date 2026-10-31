@@ -1,0 +1,63 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "impart563/moonucum"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn parse_expression(String) -> Expr raise UcumError
+
+// Errors
+pub suberror UcumError {
+  Syntax(Int, String)
+  UnknownUnit(Int, String)
+  Unsupported(String)
+  Incompatible(String, String)
+  Limit(String)
+  NonFinite
+} derive(Eq, @debug.Debug)
+pub fn UcumError::equal(Self, Self) -> Bool
+pub fn UcumError::message(Self) -> String
+pub fn UcumError::not_equal(Self, Self) -> Bool
+pub fn UcumError::to_repr(Self) -> @debug.Repr
+
+// Types and methods
+pub struct Engine {
+  // private fields
+}
+pub fn Engine::atom_count(Self) -> Int
+pub fn Engine::codes(Self) -> Array[String]
+pub fn Engine::compatible(Self, String, String) -> Bool raise UcumError
+pub fn Engine::convert(Self, Double, String, String) -> Double raise UcumError
+pub fn Engine::equivalent(Self, String, String) -> Bool raise UcumError
+pub fn Engine::new() -> Self
+pub fn Engine::normalize(Self, String) -> NormalForm raise UcumError
+pub fn Engine::prefix_count(Self) -> Int
+pub fn Engine::validate(Self, String) -> Unit raise UcumError
+
+pub(all) enum Expr {
+  Number(Int)
+  Symbol(String, Int)
+  Product(Expr, Expr)
+  Quotient(Expr, Expr)
+  Power(Expr, Int)
+  Annotation(Expr, String)
+} derive(Eq, @debug.Debug)
+pub fn Expr::equal(Self, Self) -> Bool
+pub fn Expr::not_equal(Self, Self) -> Bool
+pub fn Expr::to_repr(Self) -> @debug.Repr
+
+pub struct NormalForm {
+  // private fields
+} derive(@debug.Debug)
+pub fn NormalForm::basis(Self) -> String
+pub fn NormalForm::exponents(Self) -> Array[Int]
+pub fn NormalForm::factor(Self) -> Double
+pub fn NormalForm::is_affine(Self) -> Bool
+pub fn NormalForm::origin(Self) -> Double
+pub fn NormalForm::to_repr(Self) -> @debug.Repr
+
+// Type aliases
+
+// Traits

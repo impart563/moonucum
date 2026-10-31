@@ -1,0 +1,4 @@
+import {
+  "impart563/moonucum" @ucum,
+}
+pkgtype(kind: "executable")

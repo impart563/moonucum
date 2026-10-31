@@ -29,14 +29,26 @@ test "resource bounds and cache encapsulation" {
   let long = "m.".repeat(256) + "m"
   let deep = "(".repeat(33) + "m" + ")".repeat(33)
   for input in [long, deep, "m".repeat(4097)] {
-    let limited = try { e.validate(input); false } catch { @ucum.Limit(_) => true; _ => false }
+    let limited = try {
+      e.validate(input)
+      false
+    } catch {
+      @ucum.Limit(_) => true
+      _ => false
+    }
     assert_true(limited)
   }
   let copy = e.normalize("m").exponents()
   copy[0] = 99
   assert_eq(e.normalize("m").basis(), "m")
   for input in ["(m.s)2", "(m){x}"] {
-    let invalid = try { e.validate(input); false } catch { @ucum.Syntax(_, _) => true; _ => false }
+    let invalid = try {
+      e.validate(input)
+      false
+    } catch {
+      @ucum.Syntax(_, _) => true
+      _ => false
+    }
     assert_true(invalid)
   }
 }

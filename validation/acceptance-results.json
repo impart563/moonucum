@@ -1,0 +1,478 @@
+{
+  "status": "passed",
+  "command": "python scripts/acceptance.py --with-reference",
+  "platform": {
+    "system": "Windows",
+    "machine": "AMD64"
+  },
+  "toolchain": "moon 0.1.20260920 (914d7da 2026-09-20)\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg",
+  "source": {
+    "sha256": "3116600bb92246dd79a52b5d931d79cfffc1876e649ae9cd24a91ccc2c91e945",
+    "files": 46,
+    "excludes": [
+      ".git",
+      ".mooncakes",
+      "__pycache__",
+      "_build",
+      "node_modules",
+      "target",
+      "validation"
+    ]
+  },
+  "catalog": {
+    "version": "2.2",
+    "atoms": 312,
+    "prefixes": 24,
+    "numeric_atoms": 253,
+    "arbitrary_atoms": 41,
+    "unimplemented_special_atoms": 18
+  },
+  "backends": {
+    "wasm": {
+      "tests": 17,
+      "passed": 17,
+      "upstream_validation_cases": 529,
+      "cli_checks": 8,
+      "fhir_rows": 4,
+      "sensor_rows": 4
+    },
+    "wasm-gc": {
+      "tests": 17,
+      "passed": 17,
+      "upstream_validation_cases": 529,
+      "cli_checks": 8,
+      "fhir_rows": 4,
+      "sensor_rows": 4
+    },
+    "js": {
+      "tests": 17,
+      "passed": 17,
+      "upstream_validation_cases": 529,
+      "cli_checks": 8,
+      "fhir_rows": 4,
+      "sensor_rows": 4
+    },
+    "native": {
+      "tests": 17,
+      "passed": 17,
+      "upstream_validation_cases": 529,
+      "cli_checks": 8,
+      "fhir_rows": 4,
+      "sensor_rows": 4
+    }
+  },
+  "packaged_consumer": {
+    "source": "extracted package archive",
+    "targets": [
+      "wasm",
+      "wasm-gc",
+      "js",
+      "native"
+    ],
+    "registry_install": "not performed",
+    "archive_sha256": "44c87140f240338c5302177e93e14c99567f48cf4fcba0cd6151997fd6239316"
+  },
+  "reference_comparison": {
+    "executed": true,
+    "implementation": "@lhncbc/ucum-lhc@8.0.1",
+    "cases": 561,
+    "matched": 532,
+    "reviewed_standard_differences": 29,
+    "unexpected_differences": 0
+  },
+  "commands": [
+    {
+      "command": [
+        "python.exe",
+        "scripts/embed_catalog.py",
+        "--check"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "python.exe",
+        "scripts/generate_upstream_tests.py",
+        "--check"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "fmt",
+        "--check"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "check",
+        "--deny-warn"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "info"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm",
+        "cmd/ucum",
+        "--",
+        "catalog"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "test",
+        "--target",
+        "wasm",
+        "--deny-warn"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\":\"convert\",\"value\":12,\"source\":\"mg/dL\",\"target\":\"g/L\"}",
+        "{\"op\":\"convert\",\"value\":90,\"source\":\"mg/dL\",\"target\":\"mmol/L\"}",
+        "{\"op\":\"normalize\",\"unit\":\"[IU]\"}",
+        "{\"op\":\"validate\",\"unit\":\"m/\"}",
+        "{\"op\":\"validate\",\"unit\":\"m/unknown\"}",
+        "{\"op\":\"equivalent\",\"source\":\"N\",\"target\":\"kg.m/s2\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{",
+        "{\"op\": \"other\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm",
+        "examples/fhir"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm",
+        "examples/sensor"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "test",
+        "--target",
+        "wasm-gc",
+        "--deny-warn"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm-gc",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\":\"convert\",\"value\":12,\"source\":\"mg/dL\",\"target\":\"g/L\"}",
+        "{\"op\":\"convert\",\"value\":90,\"source\":\"mg/dL\",\"target\":\"mmol/L\"}",
+        "{\"op\":\"normalize\",\"unit\":\"[IU]\"}",
+        "{\"op\":\"validate\",\"unit\":\"m/\"}",
+        "{\"op\":\"validate\",\"unit\":\"m/unknown\"}",
+        "{\"op\":\"equivalent\",\"source\":\"N\",\"target\":\"kg.m/s2\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm-gc",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{",
+        "{\"op\": \"other\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm-gc",
+        "examples/fhir"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm-gc",
+        "examples/sensor"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "test",
+        "--target",
+        "js",
+        "--deny-warn"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "js",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\":\"convert\",\"value\":12,\"source\":\"mg/dL\",\"target\":\"g/L\"}",
+        "{\"op\":\"convert\",\"value\":90,\"source\":\"mg/dL\",\"target\":\"mmol/L\"}",
+        "{\"op\":\"normalize\",\"unit\":\"[IU]\"}",
+        "{\"op\":\"validate\",\"unit\":\"m/\"}",
+        "{\"op\":\"validate\",\"unit\":\"m/unknown\"}",
+        "{\"op\":\"equivalent\",\"source\":\"N\",\"target\":\"kg.m/s2\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "js",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{",
+        "{\"op\": \"other\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "js",
+        "examples/fhir"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "js",
+        "examples/sensor"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "test",
+        "--target",
+        "native",
+        "--deny-warn"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "native",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\":\"convert\",\"value\":12,\"source\":\"mg/dL\",\"target\":\"g/L\"}",
+        "{\"op\":\"convert\",\"value\":90,\"source\":\"mg/dL\",\"target\":\"mmol/L\"}",
+        "{\"op\":\"normalize\",\"unit\":\"[IU]\"}",
+        "{\"op\":\"validate\",\"unit\":\"m/\"}",
+        "{\"op\":\"validate\",\"unit\":\"m/unknown\"}",
+        "{\"op\":\"equivalent\",\"source\":\"N\",\"target\":\"kg.m/s2\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "native",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{",
+        "{\"op\": \"other\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "native",
+        "examples/fhir"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "native",
+        "examples/sensor"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "package"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm",
+        "."
+      ],
+      "directory": "independent-consumer",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm-gc",
+        "."
+      ],
+      "directory": "independent-consumer",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "js",
+        "."
+      ],
+      "directory": "independent-consumer",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "native",
+        "."
+      ],
+      "directory": "independent-consumer",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "npm.cmd",
+        "test"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "version"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    }
+  ]
+}

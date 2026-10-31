@@ -1,0 +1,4792 @@
+{
+  "reference": "@lhncbc/ucum-lhc@8.0.1",
+  "command": "npm ci && npm test",
+  "relative_tolerance": 1e-10,
+  "absolute_tolerance": 1e-10,
+  "cases": 561,
+  "matched": 532,
+  "reviewed_standard_differences": 29,
+  "failures": [],
+  "differences": [
+    {
+      "value": 1,
+      "source": "U",
+      "target": "s-1",
+      "expected": null,
+      "actual": 10036901266666666,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: U = umol/min"
+    },
+    {
+      "value": 123.45,
+      "source": "U",
+      "target": "s-1",
+      "expected": null,
+      "actual": 1239055461370000000,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: U = umol/min"
+    },
+    {
+      "value": 1,
+      "source": "Bd",
+      "target": "s-1",
+      "expected": null,
+      "actual": 1,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 22: Bd = /s"
+    },
+    {
+      "value": 123.45,
+      "source": "Bd",
+      "target": "s-1",
+      "expected": null,
+      "actual": 123.45,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 22: Bd = /s"
+    },
+    {
+      "value": 1,
+      "source": "eq",
+      "target": "1",
+      "expected": null,
+      "actual": 6.02214076e+23,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: eq = mol"
+    },
+    {
+      "value": 123.45,
+      "source": "eq",
+      "target": "1",
+      "expected": null,
+      "actual": 7.43433276822e+25,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: eq = mol"
+    },
+    {
+      "value": 1,
+      "source": "kat",
+      "target": "s-1",
+      "expected": null,
+      "actual": 6.02214076e+23,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 4: kat = mol/s"
+    },
+    {
+      "value": 123.45,
+      "source": "kat",
+      "target": "s-1",
+      "expected": null,
+      "actual": 7.43433276822e+25,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 4: kat = mol/s"
+    },
+    {
+      "value": 1,
+      "source": "mol",
+      "target": "1",
+      "expected": null,
+      "actual": 6.02214076e+23,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §28: mole is not a base dimension"
+    },
+    {
+      "value": 123.45,
+      "source": "mol",
+      "target": "1",
+      "expected": null,
+      "actual": 7.43433276822e+25,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §28: mole is not a base dimension"
+    },
+    {
+      "value": 1,
+      "source": "osm",
+      "target": "1",
+      "expected": null,
+      "actual": 6.02214076e+23,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: osm = mol"
+    },
+    {
+      "value": 123.45,
+      "source": "osm",
+      "target": "1",
+      "expected": null,
+      "actual": 7.43433276822e+25,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: osm = mol"
+    },
+    {
+      "value": 1,
+      "source": "[FNU]",
+      "target": "1",
+      "expected": null,
+      "actual": 1,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM 2.2 table 21: newly defined code"
+    },
+    {
+      "value": 123.45,
+      "source": "[FNU]",
+      "target": "1",
+      "expected": null,
+      "actual": 123.45,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM 2.2 table 21: newly defined code"
+    },
+    {
+      "value": 1,
+      "source": "[LPF]",
+      "target": "1",
+      "expected": 1,
+      "actual": 100,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: [LPF] = 100"
+    },
+    {
+      "value": 123.45,
+      "source": "[LPF]",
+      "target": "1",
+      "expected": 123.45,
+      "actual": 12345,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: [LPF] = 100"
+    },
+    {
+      "value": 1,
+      "source": "[NTU]",
+      "target": "1",
+      "expected": null,
+      "actual": 1,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM 2.2 table 21: newly defined code"
+    },
+    {
+      "value": 123.45,
+      "source": "[NTU]",
+      "target": "1",
+      "expected": null,
+      "actual": 123.45,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM 2.2 table 21: newly defined code"
+    },
+    {
+      "value": 1,
+      "source": "[diop]",
+      "target": "m-1",
+      "expected": null,
+      "actual": 1,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: [diop] = /m"
+    },
+    {
+      "value": 123.45,
+      "source": "[diop]",
+      "target": "m-1",
+      "expected": null,
+      "actual": 123.45,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: [diop] = /m"
+    },
+    {
+      "value": 1,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 342.6875,
+      "actual": 274.4,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    },
+    {
+      "value": 123.45,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 495.74999999999994,
+      "actual": 427.4625,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    },
+    {
+      "value": 1,
+      "source": "[mesh_i]",
+      "target": "m-1",
+      "expected": null,
+      "actual": 39.370078740157474,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 21: [mesh_i] = /[in_i]"
+    },
+    {
+      "value": 123.45,
+      "source": "[mesh_i]",
+      "target": "m-1",
+      "expected": null,
+      "actual": 4860.23622047244,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 21: [mesh_i] = /[in_i]"
+    },
+    {
+      "value": -40,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 291.4375,
+      "actual": 223.14999999999998,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    },
+    {
+      "value": 0,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 341.4375,
+      "actual": 273.15,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    },
+    {
+      "value": 1,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 342.6875,
+      "actual": 274.4,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    },
+    {
+      "value": 12.5,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 357.0625,
+      "actual": 288.775,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    },
+    {
+      "value": 1000,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 1591.4375,
+      "actual": 1523.15,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    }
+  ],
+  "results": [
+    {
+      "value": 1,
+      "source": "%",
+      "target": "1",
+      "expected": 0.01,
+      "actual": 0.01,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "%",
+      "target": "1",
+      "expected": 1.2345000000000002,
+      "actual": 1.2345000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "'",
+      "target": "rad",
+      "expected": 0.0002908882086657216,
+      "actual": 0.0002908882086657216,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "'",
+      "target": "rad",
+      "expected": 0.03591014935978333,
+      "actual": 0.03591014935978333,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "A",
+      "target": "s-1.C",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "A",
+      "target": "s-1.C",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "C",
+      "target": "C",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "C",
+      "target": "C",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "F",
+      "target": "m-2.s2.g-1.C2",
+      "expected": 0.001,
+      "actual": 0.001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "F",
+      "target": "m-2.s2.g-1.C2",
+      "expected": 0.12345,
+      "actual": 0.12345,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "G",
+      "target": "s-1.g.C-1",
+      "expected": 0.1,
+      "actual": 0.1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "G",
+      "target": "s-1.g.C-1",
+      "expected": 12.345,
+      "actual": 12.345,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "H",
+      "target": "m2.g.C-2",
+      "expected": 1000,
+      "actual": 1000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "H",
+      "target": "m2.g.C-2",
+      "expected": 123450,
+      "actual": 123450,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "J",
+      "target": "m2.s-2.g",
+      "expected": 1000,
+      "actual": 1000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "J",
+      "target": "m2.s-2.g",
+      "expected": 123450,
+      "actual": 123450,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "K",
+      "target": "K",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "K",
+      "target": "K",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "L",
+      "target": "m3",
+      "expected": 0.001,
+      "actual": 0.0010000000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "L",
+      "target": "m3",
+      "expected": 0.12345,
+      "actual": 0.12345000000000003,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "N",
+      "target": "m.s-2.g",
+      "expected": 1000,
+      "actual": 1000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "N",
+      "target": "m.s-2.g",
+      "expected": 123450,
+      "actual": 123450,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "P",
+      "target": "m-1.s-1.g",
+      "expected": 100.00000000000001,
+      "actual": 100,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "P",
+      "target": "m-1.s-1.g",
+      "expected": 12345.000000000002,
+      "actual": 12345,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "R",
+      "target": "g-1.C",
+      "expected": 2.58e-7,
+      "actual": 2.58e-7,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "R",
+      "target": "g-1.C",
+      "expected": 0.0000318501,
+      "actual": 0.0000318501,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "S",
+      "target": "m-2.s.g-1.C2",
+      "expected": 0.001,
+      "actual": 0.001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "S",
+      "target": "m-2.s.g-1.C2",
+      "expected": 0.12345,
+      "actual": 0.12345,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "T",
+      "target": "s-1.g.C-1",
+      "expected": 1000,
+      "actual": 1000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "T",
+      "target": "s-1.g.C-1",
+      "expected": 123450,
+      "actual": 123450,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "U",
+      "target": "s-1",
+      "expected": null,
+      "actual": 10036901266666666,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: U = umol/min"
+    },
+    {
+      "value": 123.45,
+      "source": "U",
+      "target": "s-1",
+      "expected": null,
+      "actual": 1239055461370000000,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: U = umol/min"
+    },
+    {
+      "value": 1,
+      "source": "V",
+      "target": "m2.s-2.g.C-1",
+      "expected": 1000,
+      "actual": 1000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "V",
+      "target": "m2.s-2.g.C-1",
+      "expected": 123450,
+      "actual": 123450,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "W",
+      "target": "m2.s-3.g",
+      "expected": 1000,
+      "actual": 1000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "W",
+      "target": "m2.s-3.g",
+      "expected": 123450,
+      "actual": 123450,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "a",
+      "target": "s",
+      "expected": 31557600,
+      "actual": 31557600,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "a",
+      "target": "s",
+      "expected": 3895785720,
+      "actual": 3895785720,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "b",
+      "target": "m2",
+      "expected": 1.0000000000000001e-28,
+      "actual": 1.0000000000000001e-28,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "b",
+      "target": "m2",
+      "expected": 1.2345000000000001e-26,
+      "actual": 1.2345000000000001e-26,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "d",
+      "target": "s",
+      "expected": 86400,
+      "actual": 86400,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "d",
+      "target": "s",
+      "expected": 10666080,
+      "actual": 10666080,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "g",
+      "target": "g",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "g",
+      "target": "g",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "h",
+      "target": "s",
+      "expected": 3600,
+      "actual": 3600,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "h",
+      "target": "s",
+      "expected": 444420,
+      "actual": 444420,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "l",
+      "target": "m3",
+      "expected": 0.001,
+      "actual": 0.0010000000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "l",
+      "target": "m3",
+      "expected": 0.12345,
+      "actual": 0.12345000000000003,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "m",
+      "target": "m",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "m",
+      "target": "m",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "s",
+      "target": "s",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "s",
+      "target": "s",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "t",
+      "target": "g",
+      "expected": 1000000,
+      "actual": 1000000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "t",
+      "target": "g",
+      "expected": 123450000,
+      "actual": 123450000,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "u",
+      "target": "g",
+      "expected": 1.6605402e-24,
+      "actual": 1.6605390666e-24,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "u",
+      "target": "g",
+      "expected": 2.0499368768999998e-22,
+      "actual": 2.0499354777177e-22,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "''",
+      "target": "rad",
+      "expected": 0.00000484813681109536,
+      "actual": 0.00000484813681109536,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "''",
+      "target": "rad",
+      "expected": 0.0005985024893297221,
+      "actual": 0.0005985024893297221,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "AU",
+      "target": "m",
+      "expected": 149597870691,
+      "actual": 149597870691,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "AU",
+      "target": "m",
+      "expected": 18467857136803.95,
+      "actual": 18467857136803.95,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Ao",
+      "target": "m",
+      "expected": 1.0000000000000002e-10,
+      "actual": 1.0000000000000002e-10,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Ao",
+      "target": "m",
+      "expected": 1.2345000000000002e-8,
+      "actual": 1.2345000000000002e-8,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Bd",
+      "target": "s-1",
+      "expected": null,
+      "actual": 1,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 22: Bd = /s"
+    },
+    {
+      "value": 123.45,
+      "source": "Bd",
+      "target": "s-1",
+      "expected": null,
+      "actual": 123.45,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 22: Bd = /s"
+    },
+    {
+      "value": 1,
+      "source": "Bi",
+      "target": "s-1.C",
+      "expected": 10,
+      "actual": 10,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Bi",
+      "target": "s-1.C",
+      "expected": 1234.5,
+      "actual": 1234.5,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Bq",
+      "target": "s-1",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Bq",
+      "target": "s-1",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "By",
+      "target": "1",
+      "expected": 8,
+      "actual": 8,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "By",
+      "target": "1",
+      "expected": 987.6,
+      "actual": 987.6,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Ci",
+      "target": "s-1",
+      "expected": 37000000000,
+      "actual": 37000000000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Ci",
+      "target": "s-1",
+      "expected": 4567650000000,
+      "actual": 4567650000000,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Gb",
+      "target": "s-1.C",
+      "expected": 0.7957747154594768,
+      "actual": 0.7957747154594768,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Gb",
+      "target": "s-1.C",
+      "expected": 98.2383886234724,
+      "actual": 98.2383886234724,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Gy",
+      "target": "m2.s-2",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Gy",
+      "target": "m2.s-2",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Hz",
+      "target": "s-1",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Hz",
+      "target": "s-1",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Ky",
+      "target": "m-1",
+      "expected": 100,
+      "actual": 100,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Ky",
+      "target": "m-1",
+      "expected": 12345,
+      "actual": 12345,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Mx",
+      "target": "m2.s-1.g.C-1",
+      "expected": 0.00001,
+      "actual": 0.00001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Mx",
+      "target": "m2.s-1.g.C-1",
+      "expected": 0.0012345000000000001,
+      "actual": 0.0012345000000000001,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Oe",
+      "target": "m-1.s-1.C",
+      "expected": 79.57747154594767,
+      "actual": 79.57747154594767,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Oe",
+      "target": "m-1.s-1.C",
+      "expected": 9823.83886234724,
+      "actual": 9823.83886234724,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Pa",
+      "target": "m-1.s-2.g",
+      "expected": 1000,
+      "actual": 1000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Pa",
+      "target": "m-1.s-2.g",
+      "expected": 123450,
+      "actual": 123450,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "St",
+      "target": "m2.s-1",
+      "expected": 0.00009999999999999999,
+      "actual": 0.0001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "St",
+      "target": "m2.s-1",
+      "expected": 0.012344999999999998,
+      "actual": 0.012345,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Sv",
+      "target": "m2.s-2",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Sv",
+      "target": "m2.s-2",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Wb",
+      "target": "m2.s-1.g.C-1",
+      "expected": 1000,
+      "actual": 1000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Wb",
+      "target": "m2.s-1.g.C-1",
+      "expected": 123450,
+      "actual": 123450,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "ar",
+      "target": "m2",
+      "expected": 100,
+      "actual": 100,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "ar",
+      "target": "m2",
+      "expected": 12345,
+      "actual": 12345,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "cd",
+      "target": "cd",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "cd",
+      "target": "cd",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "eV",
+      "target": "m2.s-2.g",
+      "expected": 1.60217733e-16,
+      "actual": 1.602176634e-16,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "eV",
+      "target": "m2.s-2.g",
+      "expected": 1.977887913885e-14,
+      "actual": 1.977887054673e-14,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "eq",
+      "target": "1",
+      "expected": null,
+      "actual": 6.02214076e+23,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: eq = mol"
+    },
+    {
+      "value": 123.45,
+      "source": "eq",
+      "target": "1",
+      "expected": null,
+      "actual": 7.43433276822e+25,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: eq = mol"
+    },
+    {
+      "value": 1,
+      "source": "g%",
+      "target": "m-3.g",
+      "expected": 10000,
+      "actual": 9999.999999999996,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "g%",
+      "target": "m-3.g",
+      "expected": 1234500,
+      "actual": 1234499.9999999995,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "gf",
+      "target": "m.s-2.g",
+      "expected": 9.80665,
+      "actual": 9.80665,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "gf",
+      "target": "m.s-2.g",
+      "expected": 1210.6309425,
+      "actual": 1210.6309425,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "lm",
+      "target": "rad2.cd",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "lm",
+      "target": "rad2.cd",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "lx",
+      "target": "m-2.rad2.cd",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "lx",
+      "target": "m-2.rad2.cd",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "mo",
+      "target": "s",
+      "expected": 2629800,
+      "actual": 2629800,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "mo",
+      "target": "s",
+      "expected": 324648810,
+      "actual": 324648810,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "pc",
+      "target": "m",
+      "expected": 30856780000000000,
+      "actual": 30856780000000000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "pc",
+      "target": "m",
+      "expected": 3809269491000000000,
+      "actual": 3809269491000000000,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "ph",
+      "target": "m-2.rad2.cd",
+      "expected": 0.0001,
+      "actual": 0.0001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "ph",
+      "target": "m-2.rad2.cd",
+      "expected": 0.012345,
+      "actual": 0.012345,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "sb",
+      "target": "m-2.cd",
+      "expected": 10000,
+      "actual": 10000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "sb",
+      "target": "m-2.cd",
+      "expected": 1234500,
+      "actual": 1234500,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "sr",
+      "target": "rad2",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "sr",
+      "target": "rad2",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "st",
+      "target": "m3",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "st",
+      "target": "m3",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "wk",
+      "target": "s",
+      "expected": 604800,
+      "actual": 604800,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "wk",
+      "target": "s",
+      "expected": 74662560,
+      "actual": 74662560,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "10*",
+      "target": "1",
+      "expected": 10,
+      "actual": 10,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "10*",
+      "target": "1",
+      "expected": 1234.5,
+      "actual": 1234.5,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "10^",
+      "target": "1",
+      "expected": 10,
+      "actual": 10,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "10^",
+      "target": "1",
+      "expected": 1234.5,
+      "actual": 1234.5,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Cel",
+      "target": "K",
+      "expected": 274.15,
+      "actual": 274.15,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Cel",
+      "target": "K",
+      "expected": 396.59999999999997,
+      "actual": 396.59999999999997,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Gal",
+      "target": "m.s-2",
+      "expected": 0.01,
+      "actual": 0.01,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Gal",
+      "target": "m.s-2",
+      "expected": 1.2345000000000002,
+      "actual": 1.2345000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Lmb",
+      "target": "m-2.cd",
+      "expected": 3183.098861837907,
+      "actual": 3183.098861837907,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Lmb",
+      "target": "m-2.cd",
+      "expected": 392953.5544938896,
+      "actual": 392953.5544938896,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Ohm",
+      "target": "m2.s-1.g.C-2",
+      "expected": 1000,
+      "actual": 1000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "Ohm",
+      "target": "m2.s-1.g.C-2",
+      "expected": 123450,
+      "actual": 123450,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "RAD",
+      "target": "m2.s-2",
+      "expected": 0.01,
+      "actual": 0.01,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "RAD",
+      "target": "m2.s-2",
+      "expected": 1.2345000000000002,
+      "actual": 1.2345000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "REM",
+      "target": "m2.s-2",
+      "expected": 0.01,
+      "actual": 0.01,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "REM",
+      "target": "m2.s-2",
+      "expected": 1.2345000000000002,
+      "actual": 1.2345000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[G]",
+      "target": "m3.s-2.g-1",
+      "expected": 6.67259e-14,
+      "actual": 6.674299999999999e-14,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[G]",
+      "target": "m3.s-2.g-1",
+      "expected": 8.237312355e-12,
+      "actual": 8.239423349999999e-12,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[S]",
+      "target": "s",
+      "expected": 1e-13,
+      "actual": 1e-13,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[S]",
+      "target": "s",
+      "expected": 1.2345e-11,
+      "actual": 1.2345e-11,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[c]",
+      "target": "m.s-1",
+      "expected": 299792458,
+      "actual": 299792458,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[c]",
+      "target": "m.s-1",
+      "expected": 37009378940.1,
+      "actual": 37009378940.1,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[e]",
+      "target": "C",
+      "expected": 1.60217733e-19,
+      "actual": 1.602176634e-19,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[e]",
+      "target": "C",
+      "expected": 1.977887913885e-17,
+      "actual": 1.977887054673e-17,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[g]",
+      "target": "m.s-2",
+      "expected": 9.80665,
+      "actual": 9.80665,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[g]",
+      "target": "m.s-2",
+      "expected": 1210.6309425,
+      "actual": 1210.6309425,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[h]",
+      "target": "m2.s-1.g",
+      "expected": 6.6260755e-31,
+      "actual": 6.62607015e-31,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[h]",
+      "target": "m2.s-1.g",
+      "expected": 8.17989020475e-29,
+      "actual": 8.179883600175e-29,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[k]",
+      "target": "m2.s-2.g.K-1",
+      "expected": 1.380658e-20,
+      "actual": 1.380649e-20,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[k]",
+      "target": "m2.s-2.g.K-1",
+      "expected": 1.7044223010000001e-18,
+      "actual": 1.7044111905e-18,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "a_g",
+      "target": "s",
+      "expected": 31556952,
+      "actual": 31556952,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "a_g",
+      "target": "s",
+      "expected": 3895705724.4,
+      "actual": 3895705724.4,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "a_j",
+      "target": "s",
+      "expected": 31557600,
+      "actual": 31557600,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "a_j",
+      "target": "s",
+      "expected": 3895785720,
+      "actual": 3895785720,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "a_t",
+      "target": "s",
+      "expected": 31556925.216,
+      "actual": 31556925.216,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "a_t",
+      "target": "s",
+      "expected": 3895702417.9151998,
+      "actual": 3895702417.9151998,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "atm",
+      "target": "m-1.s-2.g",
+      "expected": 101325000,
+      "actual": 101325000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "atm",
+      "target": "m-1.s-2.g",
+      "expected": 12508571250,
+      "actual": 12508571250,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "att",
+      "target": "m-1.s-2.g",
+      "expected": 98066500,
+      "actual": 98066499.99999999,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "att",
+      "target": "m-1.s-2.g",
+      "expected": 12106309425,
+      "actual": 12106309424.999998,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "bar",
+      "target": "m-1.s-2.g",
+      "expected": 100000000,
+      "actual": 100000000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "bar",
+      "target": "m-1.s-2.g",
+      "expected": 12345000000,
+      "actual": 12345000000,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "bit",
+      "target": "1",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "bit",
+      "target": "1",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "cal",
+      "target": "m2.s-2.g",
+      "expected": 4184,
+      "actual": 4184,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "cal",
+      "target": "m2.s-2.g",
+      "expected": 516514.8,
+      "actual": 516514.8,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "deg",
+      "target": "rad",
+      "expected": 0.017453292519943295,
+      "actual": 0.017453292519943295,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "deg",
+      "target": "rad",
+      "expected": 2.154608961587,
+      "actual": 2.154608961587,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "dyn",
+      "target": "m.s-2.g",
+      "expected": 0.01,
+      "actual": 0.01,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "dyn",
+      "target": "m.s-2.g",
+      "expected": 1.2345000000000002,
+      "actual": 1.2345000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "erg",
+      "target": "m2.s-2.g",
+      "expected": 0.0001,
+      "actual": 0.0001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "erg",
+      "target": "m2.s-2.g",
+      "expected": 0.012345,
+      "actual": 0.012345,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "gon",
+      "target": "rad",
+      "expected": 0.015707963267948967,
+      "actual": 0.015707963267948967,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "gon",
+      "target": "rad",
+      "expected": 1.9391480654283,
+      "actual": 1.9391480654283,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "kat",
+      "target": "s-1",
+      "expected": null,
+      "actual": 6.02214076e+23,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 4: kat = mol/s"
+    },
+    {
+      "value": 123.45,
+      "source": "kat",
+      "target": "s-1",
+      "expected": null,
+      "actual": 7.43433276822e+25,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 4: kat = mol/s"
+    },
+    {
+      "value": 1,
+      "source": "mho",
+      "target": "m-2.s.g-1.C2",
+      "expected": 0.001,
+      "actual": 0.001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "mho",
+      "target": "m-2.s.g-1.C2",
+      "expected": 0.12345,
+      "actual": 0.12345,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "min",
+      "target": "s",
+      "expected": 60,
+      "actual": 60,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "min",
+      "target": "s",
+      "expected": 7407,
+      "actual": 7407,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "mol",
+      "target": "1",
+      "expected": null,
+      "actual": 6.02214076e+23,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §28: mole is not a base dimension"
+    },
+    {
+      "value": 123.45,
+      "source": "mol",
+      "target": "1",
+      "expected": null,
+      "actual": 7.43433276822e+25,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §28: mole is not a base dimension"
+    },
+    {
+      "value": 1,
+      "source": "osm",
+      "target": "1",
+      "expected": null,
+      "actual": 6.02214076e+23,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: osm = mol"
+    },
+    {
+      "value": 123.45,
+      "source": "osm",
+      "target": "1",
+      "expected": null,
+      "actual": 7.43433276822e+25,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: osm = mol"
+    },
+    {
+      "value": 1,
+      "source": "rad",
+      "target": "rad",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "rad",
+      "target": "rad",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "sph",
+      "target": "rad2",
+      "expected": 12.566370614359172,
+      "actual": 12.566370614359172,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "sph",
+      "target": "rad2",
+      "expected": 1551.3184523426398,
+      "actual": 1551.3184523426398,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "tex",
+      "target": "m-1.g",
+      "expected": 0.001,
+      "actual": 0.001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "tex",
+      "target": "m-1.g",
+      "expected": 0.12345,
+      "actual": 0.12345,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[Ch]",
+      "target": "m",
+      "expected": 0.0003333333333333333,
+      "actual": 0.0003333333333333333,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[Ch]",
+      "target": "m",
+      "expected": 0.04115,
+      "actual": 0.04115,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[HP]",
+      "target": "m2.s-3.g",
+      "expected": 745699.8715822703,
+      "actual": 745699.8715822703,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[HP]",
+      "target": "m2.s-3.g",
+      "expected": 92056649.14683126,
+      "actual": 92056649.14683126,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[gr]",
+      "target": "g",
+      "expected": 0.06479891,
+      "actual": 0.06479891,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[gr]",
+      "target": "g",
+      "expected": 7.9994254395,
+      "actual": 7.9994254395,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[ly]",
+      "target": "m",
+      "expected": 9460730472580800,
+      "actual": 9460730472580800,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[ly]",
+      "target": "m",
+      "expected": 1167927176840099800,
+      "actual": 1167927176840099800,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pi]",
+      "target": "1",
+      "expected": 3.141592653589793,
+      "actual": 3.141592653589793,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pi]",
+      "target": "1",
+      "expected": 387.82961308565996,
+      "actual": 387.82961308565996,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "circ",
+      "target": "rad",
+      "expected": 6.283185307179586,
+      "actual": 6.283185307179586,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "circ",
+      "target": "rad",
+      "expected": 775.6592261713199,
+      "actual": 775.6592261713199,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "mo_g",
+      "target": "s",
+      "expected": 2629746,
+      "actual": 2629746,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "mo_g",
+      "target": "s",
+      "expected": 324642143.7,
+      "actual": 324642143.7,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "mo_j",
+      "target": "s",
+      "expected": 2629800,
+      "actual": 2629800,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "mo_j",
+      "target": "s",
+      "expected": 324648810,
+      "actual": 324648810,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "mo_s",
+      "target": "s",
+      "expected": 2551442.976,
+      "actual": 2551442.976,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "mo_s",
+      "target": "s",
+      "expected": 314975635.3872,
+      "actual": 314975635.3872,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[Btu]",
+      "target": "m2.s-2.g",
+      "expected": 1054350,
+      "actual": 1054350,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[Btu]",
+      "target": "m2.s-2.g",
+      "expected": 130159507.5,
+      "actual": 130159507.5,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[Cal]",
+      "target": "m2.s-2.g",
+      "expected": 4184000,
+      "actual": 4184000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[Cal]",
+      "target": "m2.s-2.g",
+      "expected": 516514800,
+      "actual": 516514800,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[FNU]",
+      "target": "1",
+      "expected": null,
+      "actual": 1,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM 2.2 table 21: newly defined code"
+    },
+    {
+      "value": 123.45,
+      "source": "[FNU]",
+      "target": "1",
+      "expected": null,
+      "actual": 123.45,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM 2.2 table 21: newly defined code"
+    },
+    {
+      "value": 1,
+      "source": "[HPF]",
+      "target": "1",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[HPF]",
+      "target": "1",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[LPF]",
+      "target": "1",
+      "expected": 1,
+      "actual": 100,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: [LPF] = 100"
+    },
+    {
+      "value": 123.45,
+      "source": "[LPF]",
+      "target": "1",
+      "expected": 123.45,
+      "actual": 12345,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: [LPF] = 100"
+    },
+    {
+      "value": 1,
+      "source": "[MET]",
+      "target": "m3.s-1.g-1",
+      "expected": 5.833333333333334e-11,
+      "actual": 5.833333333333335e-11,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[MET]",
+      "target": "m3.s-1.g-1",
+      "expected": 7.2012500000000005e-9,
+      "actual": 7.201250000000002e-9,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[NTU]",
+      "target": "1",
+      "expected": null,
+      "actual": 1,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM 2.2 table 21: newly defined code"
+    },
+    {
+      "value": 123.45,
+      "source": "[NTU]",
+      "target": "1",
+      "expected": null,
+      "actual": 123.45,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM 2.2 table 21: newly defined code"
+    },
+    {
+      "value": 1,
+      "source": "[PRU]",
+      "target": "m-4.s-1.g",
+      "expected": 133322000000,
+      "actual": 133321999999.99998,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[PRU]",
+      "target": "m-4.s-1.g",
+      "expected": 16458600900000,
+      "actual": 16458600899999.998,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[den]",
+      "target": "m-1.g",
+      "expected": 0.0001111111111111111,
+      "actual": 0.0001111111111111111,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[den]",
+      "target": "m-1.g",
+      "expected": 0.013716666666666665,
+      "actual": 0.013716666666666665,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[drp]",
+      "target": "m3",
+      "expected": 5e-8,
+      "actual": 5.000000000000001e-8,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[drp]",
+      "target": "m3",
+      "expected": 0.0000061725,
+      "actual": 0.0000061725000000000015,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[lne]",
+      "target": "m",
+      "expected": 0.002116666666666667,
+      "actual": 0.002116666666666667,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[lne]",
+      "target": "m",
+      "expected": 0.26130250000000005,
+      "actual": 0.26130250000000005,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[m_e]",
+      "target": "g",
+      "expected": 9.1093897e-28,
+      "actual": 9.1093837139e-28,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[m_e]",
+      "target": "g",
+      "expected": 1.124554158465e-25,
+      "actual": 1.124553419480955e-25,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[m_p]",
+      "target": "g",
+      "expected": 1.6726231e-24,
+      "actual": 1.67262192595e-24,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[m_p]",
+      "target": "g",
+      "expected": 2.0648532169499998e-22,
+      "actual": 2.064851767585275e-22,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pca]",
+      "target": "m",
+      "expected": 0.004233333333333334,
+      "actual": 0.004233333333333334,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pca]",
+      "target": "m",
+      "expected": 0.5226050000000001,
+      "actual": 0.5226050000000001,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pnt]",
+      "target": "m",
+      "expected": 0.0003527777777777778,
+      "actual": 0.0003527777777777778,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pnt]",
+      "target": "m",
+      "expected": 0.043550416666666675,
+      "actual": 0.043550416666666675,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[ppb]",
+      "target": "1",
+      "expected": 1e-9,
+      "actual": 1e-9,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[ppb]",
+      "target": "1",
+      "expected": 1.2345e-7,
+      "actual": 1.2345e-7,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[ppm]",
+      "target": "1",
+      "expected": 0.000001,
+      "actual": 0.000001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[ppm]",
+      "target": "1",
+      "expected": 0.00012345,
+      "actual": 0.00012345,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[psi]",
+      "target": "m-1.s-2.g",
+      "expected": 6894757.293168359,
+      "actual": 6894757.293168359,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[psi]",
+      "target": "m-1.s-2.g",
+      "expected": 851157787.841634,
+      "actual": 851157787.841634,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[sct]",
+      "target": "m2",
+      "expected": 2589998.470319521,
+      "actual": 2589998.470319521,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[sct]",
+      "target": "m2",
+      "expected": 319735311.1609449,
+      "actual": 319735311.1609449,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[twp]",
+      "target": "m2",
+      "expected": 93239944.93150276,
+      "actual": 93239944.93150276,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[twp]",
+      "target": "m2",
+      "expected": 11510471201.794016,
+      "actual": 11510471201.794016,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "cal_m",
+      "target": "m2.s-2.g",
+      "expected": 4190.0199999999995,
+      "actual": 4190.0199999999995,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "cal_m",
+      "target": "m2.s-2.g",
+      "expected": 517257.9689999999,
+      "actual": 517257.9689999999,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "m[Hg]",
+      "target": "m-1.s-2.g",
+      "expected": 133322000,
+      "actual": 133322000,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "m[Hg]",
+      "target": "m-1.s-2.g",
+      "expected": 16458600900,
+      "actual": 16458600900,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[bf_i]",
+      "target": "m3",
+      "expected": 0.0023597372160000006,
+      "actual": 0.002359737216,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[bf_i]",
+      "target": "m3",
+      "expected": 0.2913095593152001,
+      "actual": 0.29130955931520003,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[cr_i]",
+      "target": "m3",
+      "expected": 3.6245563637760005,
+      "actual": 3.6245563637760005,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[cr_i]",
+      "target": "m3",
+      "expected": 447.4514831081473,
+      "actual": 447.4514831081473,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[degF]",
+      "target": "K",
+      "expected": 255.9277777777778,
+      "actual": 255.92777777777775,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[degF]",
+      "target": "K",
+      "expected": 323.9555555555556,
+      "actual": 323.9555555555555,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[degR]",
+      "target": "K",
+      "expected": 0.5555555555555556,
+      "actual": 0.5555555555555556,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[degR]",
+      "target": "K",
+      "expected": 68.58333333333334,
+      "actual": 68.58333333333334,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[diop]",
+      "target": "m-1",
+      "expected": null,
+      "actual": 1,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: [diop] = /m"
+    },
+    {
+      "value": 123.45,
+      "source": "[diop]",
+      "target": "m-1",
+      "expected": null,
+      "actual": 123.45,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 18: [diop] = /m"
+    },
+    {
+      "value": 1,
+      "source": "[ft_i]",
+      "target": "m",
+      "expected": 0.3048,
+      "actual": 0.3048,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[ft_i]",
+      "target": "m",
+      "expected": 37.62756,
+      "actual": 37.62756,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[hd_i]",
+      "target": "m",
+      "expected": 0.10160000000000001,
+      "actual": 0.10160000000000001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[hd_i]",
+      "target": "m",
+      "expected": 12.542520000000001,
+      "actual": 12.542520000000001,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[in_i]",
+      "target": "m",
+      "expected": 0.025400000000000002,
+      "actual": 0.025400000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[in_i]",
+      "target": "m",
+      "expected": 3.1356300000000004,
+      "actual": 3.1356300000000004,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[kn_i]",
+      "target": "m.s-1",
+      "expected": 0.5144444444444445,
+      "actual": 0.5144444444444445,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[kn_i]",
+      "target": "m.s-1",
+      "expected": 63.508166666666675,
+      "actual": 63.508166666666675,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[mi_i]",
+      "target": "m",
+      "expected": 1609.344,
+      "actual": 1609.344,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[mi_i]",
+      "target": "m",
+      "expected": 198673.5168,
+      "actual": 198673.5168,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[mu_0]",
+      "target": "m.g.C-2",
+      "expected": 0.0012566370614359172,
+      "actual": 0.0012566370614359172,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[mu_0]",
+      "target": "m.g.C-2",
+      "expected": 0.155131845234264,
+      "actual": 0.155131845234264,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[oz_m]",
+      "target": "g",
+      "expected": 28,
+      "actual": 28,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[oz_m]",
+      "target": "g",
+      "expected": 3456.6,
+      "actual": 3456.6,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pied]",
+      "target": "m",
+      "expected": 0.3248,
+      "actual": 0.3248,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pied]",
+      "target": "m",
+      "expected": 40.09656,
+      "actual": 40.09656,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[ppth]",
+      "target": "1",
+      "expected": 0.001,
+      "actual": 0.001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[ppth]",
+      "target": "1",
+      "expected": 0.12345,
+      "actual": 0.12345,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pptr]",
+      "target": "1",
+      "expected": 1e-12,
+      "actual": 1e-12,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pptr]",
+      "target": "1",
+      "expected": 1.2345e-10,
+      "actual": 1.2345e-10,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[yd_i]",
+      "target": "m",
+      "expected": 0.9144000000000001,
+      "actual": 0.9144000000000001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[yd_i]",
+      "target": "m",
+      "expected": 112.88268000000002,
+      "actual": 112.88268000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "cal_IT",
+      "target": "m2.s-2.g",
+      "expected": 4186.8,
+      "actual": 4186.8,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "cal_IT",
+      "target": "m2.s-2.g",
+      "expected": 516860.46,
+      "actual": 516860.46,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "cal_th",
+      "target": "m2.s-2.g",
+      "expected": 4184,
+      "actual": 4184,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "cal_th",
+      "target": "m2.s-2.g",
+      "expected": 516514.8,
+      "actual": 516514.8,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "m[H2O]",
+      "target": "m-1.s-2.g",
+      "expected": 9806650,
+      "actual": 9806650,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "m[H2O]",
+      "target": "m-1.s-2.g",
+      "expected": 1210630942.5,
+      "actual": 1210630942.5,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[Btu_m]",
+      "target": "m2.s-2.g",
+      "expected": 1055870,
+      "actual": 1055870,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[Btu_m]",
+      "target": "m2.s-2.g",
+      "expected": 130347151.5,
+      "actual": 130347151.5,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[bu_br]",
+      "target": "m3",
+      "expected": 0.03636872000000001,
+      "actual": 0.036368720000000014,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[bu_br]",
+      "target": "m3",
+      "expected": 4.489718484000001,
+      "actual": 4.489718484000002,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[bu_us]",
+      "target": "m3",
+      "expected": 0.035239070166880014,
+      "actual": 0.03523907016688001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[bu_us]",
+      "target": "m3",
+      "expected": 4.350263212101338,
+      "actual": 4.350263212101337,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[car_m]",
+      "target": "g",
+      "expected": 0.2,
+      "actual": 0.2,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[car_m]",
+      "target": "g",
+      "expected": 24.69,
+      "actual": 24.69,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[cft_i]",
+      "target": "m3",
+      "expected": 0.028316846592000004,
+      "actual": 0.028316846592000004,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[cft_i]",
+      "target": "m3",
+      "expected": 3.4957147117824006,
+      "actual": 3.4957147117824006,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[ch_br]",
+      "target": "m",
+      "expected": 20.11678416,
+      "actual": 20.11678416,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[ch_br]",
+      "target": "m",
+      "expected": 2483.4170045520004,
+      "actual": 2483.4170045520004,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[ch_us]",
+      "target": "m",
+      "expected": 20.116840233680467,
+      "actual": 20.116840233680467,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[ch_us]",
+      "target": "m",
+      "expected": 2483.4239268478536,
+      "actual": 2483.4239268478536,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[cin_i]",
+      "target": "m3",
+      "expected": 0.000016387064000000006,
+      "actual": 0.000016387064000000003,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[cin_i]",
+      "target": "m3",
+      "expected": 0.002022983050800001,
+      "actual": 0.0020229830508000004,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[cml_i]",
+      "target": "m2",
+      "expected": 5.067074790974979e-10,
+      "actual": 5.067074790974979e-10,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[cml_i]",
+      "target": "m2",
+      "expected": 6.255303829458612e-8,
+      "actual": 6.255303829458612e-8,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[cup_m]",
+      "target": "m3",
+      "expected": 0.00023999999999999998,
+      "actual": 0.00024000000000000003,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[cup_m]",
+      "target": "m3",
+      "expected": 0.029627999999999998,
+      "actual": 0.029628000000000005,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[cyd_i]",
+      "target": "m3",
+      "expected": 0.7645548579840002,
+      "actual": 0.7645548579840002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[cyd_i]",
+      "target": "m3",
+      "expected": 94.38429721812483,
+      "actual": 94.38429721812483,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 342.6875,
+      "actual": 274.4,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    },
+    {
+      "value": 123.45,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 495.74999999999994,
+      "actual": 427.4625,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    },
+    {
+      "value": 1,
+      "source": "[didot]",
+      "target": "m",
+      "expected": 0.0003759259259259259,
+      "actual": 0.0003759259259259259,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[didot]",
+      "target": "m",
+      "expected": 0.04640805555555555,
+      "actual": 0.04640805555555555,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[dr_ap]",
+      "target": "g",
+      "expected": 3.8879346,
+      "actual": 3.8879346,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[dr_ap]",
+      "target": "g",
+      "expected": 479.96552637,
+      "actual": 479.96552637,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[dr_av]",
+      "target": "g",
+      "expected": 1.7718451953125,
+      "actual": 1.7718451953125,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[dr_av]",
+      "target": "g",
+      "expected": 218.73428936132814,
+      "actual": 218.73428936132814,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[eps_0]",
+      "target": "m-3.s2.g-1.C2",
+      "expected": 8.854187817000001e-15,
+      "actual": 8.854187817000001e-15,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[eps_0]",
+      "target": "m-3.s2.g-1.C2",
+      "expected": 1.0930494860086503e-12,
+      "actual": 1.0930494860086503e-12,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[foz_m]",
+      "target": "m3",
+      "expected": 0.000029999999999999997,
+      "actual": 0.000030000000000000004,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[foz_m]",
+      "target": "m3",
+      "expected": 0.0037034999999999998,
+      "actual": 0.0037035000000000006,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[ft_br]",
+      "target": "m",
+      "expected": 0.30479976000000003,
+      "actual": 0.30479976000000003,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[ft_br]",
+      "target": "m",
+      "expected": 37.627530372,
+      "actual": 37.627530372,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[ft_us]",
+      "target": "m",
+      "expected": 0.3048006096012192,
+      "actual": 0.3048006096012192,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[ft_us]",
+      "target": "m",
+      "expected": 37.62763525527051,
+      "actual": 37.62763525527051,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[fth_i]",
+      "target": "m",
+      "expected": 1.8288000000000002,
+      "actual": 1.8288000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[fth_i]",
+      "target": "m",
+      "expected": 225.76536000000004,
+      "actual": 225.76536000000004,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[in_br]",
+      "target": "m",
+      "expected": 0.025399980000000003,
+      "actual": 0.025399980000000003,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[in_br]",
+      "target": "m",
+      "expected": 3.1356275310000004,
+      "actual": 3.1356275310000004,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[in_us]",
+      "target": "m",
+      "expected": 0.0254000508001016,
+      "actual": 0.0254000508001016,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[in_us]",
+      "target": "m",
+      "expected": 3.1356362712725425,
+      "actual": 3.1356362712725425,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[kn_br]",
+      "target": "m.s-1",
+      "expected": 0.5147729280000001,
+      "actual": 0.5147729280000001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[kn_br]",
+      "target": "m.s-1",
+      "expected": 63.54871796160001,
+      "actual": 63.54871796160001,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[lb_ap]",
+      "target": "g",
+      "expected": 373.2417216,
+      "actual": 373.2417216,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[lb_ap]",
+      "target": "g",
+      "expected": 46076.69053152,
+      "actual": 46076.69053152,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[lb_av]",
+      "target": "g",
+      "expected": 453.59237,
+      "actual": 453.59237,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[lb_av]",
+      "target": "g",
+      "expected": 55995.9780765,
+      "actual": 55995.9780765,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[lb_tr]",
+      "target": "g",
+      "expected": 373.2417216,
+      "actual": 373.2417216,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[lb_tr]",
+      "target": "g",
+      "expected": 46076.69053152,
+      "actual": 46076.69053152,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[ligne]",
+      "target": "m",
+      "expected": 0.0022555555555555554,
+      "actual": 0.0022555555555555554,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[ligne]",
+      "target": "m",
+      "expected": 0.2784483333333333,
+      "actual": 0.2784483333333333,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[lk_br]",
+      "target": "m",
+      "expected": 0.2011678416,
+      "actual": 0.2011678416,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[lk_br]",
+      "target": "m",
+      "expected": 24.83417004552,
+      "actual": 24.83417004552,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[lk_us]",
+      "target": "m",
+      "expected": 0.20116840233680466,
+      "actual": 0.20116840233680466,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[lk_us]",
+      "target": "m",
+      "expected": 24.834239268478537,
+      "actual": 24.834239268478537,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[mi_br]",
+      "target": "m",
+      "expected": 1609.3427328000002,
+      "actual": 1609.3427328000002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[mi_br]",
+      "target": "m",
+      "expected": 198673.36036416003,
+      "actual": 198673.36036416003,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[mi_us]",
+      "target": "m",
+      "expected": 1609.3472186944373,
+      "actual": 1609.3472186944373,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[mi_us]",
+      "target": "m",
+      "expected": 198673.9141478283,
+      "actual": 198673.9141478283,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[mil_i]",
+      "target": "m",
+      "expected": 0.000025400000000000004,
+      "actual": 0.000025400000000000004,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[mil_i]",
+      "target": "m",
+      "expected": 0.003135630000000001,
+      "actual": 0.003135630000000001,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[nmi_i]",
+      "target": "m",
+      "expected": 1852,
+      "actual": 1852,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[nmi_i]",
+      "target": "m",
+      "expected": 228629.4,
+      "actual": 228629.4,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[oz_ap]",
+      "target": "g",
+      "expected": 31.1034768,
+      "actual": 31.1034768,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[oz_ap]",
+      "target": "g",
+      "expected": 3839.72421096,
+      "actual": 3839.72421096,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[oz_av]",
+      "target": "g",
+      "expected": 28.349523125,
+      "actual": 28.349523125,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[oz_av]",
+      "target": "g",
+      "expected": 3499.74862978125,
+      "actual": 3499.74862978125,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[oz_tr]",
+      "target": "g",
+      "expected": 31.103476800000003,
+      "actual": 31.103476800000003,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[oz_tr]",
+      "target": "g",
+      "expected": 3839.7242109600006,
+      "actual": 3839.7242109600006,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pc_br]",
+      "target": "m",
+      "expected": 0.7619994000000001,
+      "actual": 0.7619994000000001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pc_br]",
+      "target": "m",
+      "expected": 94.06882593000002,
+      "actual": 94.06882593000002,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pk_br]",
+      "target": "m3",
+      "expected": 0.009092180000000002,
+      "actual": 0.009092180000000004,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pk_br]",
+      "target": "m3",
+      "expected": 1.1224296210000002,
+      "actual": 1.1224296210000004,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pk_us]",
+      "target": "m3",
+      "expected": 0.008809767541720004,
+      "actual": 0.008809767541720002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pk_us]",
+      "target": "m3",
+      "expected": 1.0875658030253346,
+      "actual": 1.0875658030253343,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pouce]",
+      "target": "m",
+      "expected": 0.027066666666666666,
+      "actual": 0.027066666666666666,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pouce]",
+      "target": "m",
+      "expected": 3.34138,
+      "actual": 3.34138,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pt_br]",
+      "target": "m3",
+      "expected": 0.0005682612500000001,
+      "actual": 0.0005682612500000002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pt_br]",
+      "target": "m3",
+      "expected": 0.07015185131250001,
+      "actual": 0.07015185131250003,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pt_us]",
+      "target": "m3",
+      "expected": 0.0004731764730000002,
+      "actual": 0.00047317647300000007,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pt_us]",
+      "target": "m3",
+      "expected": 0.058413635591850026,
+      "actual": 0.05841363559185001,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[qt_br]",
+      "target": "m3",
+      "expected": 0.0011365225000000002,
+      "actual": 0.0011365225000000004,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[qt_br]",
+      "target": "m3",
+      "expected": 0.14030370262500003,
+      "actual": 0.14030370262500005,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[qt_us]",
+      "target": "m3",
+      "expected": 0.0009463529460000004,
+      "actual": 0.0009463529460000001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[qt_us]",
+      "target": "m3",
+      "expected": 0.11682727118370005,
+      "actual": 0.11682727118370002,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[rd_br]",
+      "target": "m",
+      "expected": 5.02919604,
+      "actual": 5.02919604,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[rd_br]",
+      "target": "m",
+      "expected": 620.8542511380001,
+      "actual": 620.8542511380001,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[rd_us]",
+      "target": "m",
+      "expected": 5.029210058420117,
+      "actual": 5.029210058420117,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[rd_us]",
+      "target": "m",
+      "expected": 620.8559817119634,
+      "actual": 620.8559817119634,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[sc_ap]",
+      "target": "g",
+      "expected": 1.2959782,
+      "actual": 1.2959782,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[sc_ap]",
+      "target": "g",
+      "expected": 159.98850879,
+      "actual": 159.98850879,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[sft_i]",
+      "target": "m2",
+      "expected": 0.09290304,
+      "actual": 0.09290304,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[sft_i]",
+      "target": "m2",
+      "expected": 11.468880288000001,
+      "actual": 11.468880288000001,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[sin_i]",
+      "target": "m2",
+      "expected": 0.0006451600000000001,
+      "actual": 0.0006451600000000001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[sin_i]",
+      "target": "m2",
+      "expected": 0.079645002,
+      "actual": 0.079645002,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[smoot]",
+      "target": "m",
+      "expected": 1.7018000000000002,
+      "actual": 1.7018000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[smoot]",
+      "target": "m",
+      "expected": 210.08721000000003,
+      "actual": 210.08721000000003,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[syd_i]",
+      "target": "m2",
+      "expected": 0.8361273600000002,
+      "actual": 0.8361273600000002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[syd_i]",
+      "target": "m2",
+      "expected": 103.21992259200003,
+      "actual": 103.21992259200003,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[tbs_m]",
+      "target": "m3",
+      "expected": 0.000014999999999999999,
+      "actual": 0.000015000000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[tbs_m]",
+      "target": "m3",
+      "expected": 0.0018517499999999999,
+      "actual": 0.0018517500000000003,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[tsp_m]",
+      "target": "m3",
+      "expected": 0.0000049999999999999996,
+      "actual": 0.000005000000000000001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[tsp_m]",
+      "target": "m3",
+      "expected": 0.00061725,
+      "actual": 0.0006172500000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[yd_br]",
+      "target": "m",
+      "expected": 0.91439928,
+      "actual": 0.91439928,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[yd_br]",
+      "target": "m",
+      "expected": 112.882591116,
+      "actual": 112.882591116,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[yd_us]",
+      "target": "m",
+      "expected": 0.9144018288036575,
+      "actual": 0.9144018288036575,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[yd_us]",
+      "target": "m",
+      "expected": 112.88290576581151,
+      "actual": 112.88290576581151,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[Btu_39]",
+      "target": "m2.s-2.g",
+      "expected": 1059670,
+      "actual": 1059670,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[Btu_39]",
+      "target": "m2.s-2.g",
+      "expected": 130816261.5,
+      "actual": 130816261.5,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[Btu_59]",
+      "target": "m2.s-2.g",
+      "expected": 1054800,
+      "actual": 1054800,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[Btu_59]",
+      "target": "m2.s-2.g",
+      "expected": 130215060,
+      "actual": 130215060,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[Btu_60]",
+      "target": "m2.s-2.g",
+      "expected": 1054680,
+      "actual": 1054680,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[Btu_60]",
+      "target": "m2.s-2.g",
+      "expected": 130200246,
+      "actual": 130200246,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[Btu_IT]",
+      "target": "m2.s-2.g",
+      "expected": 1055055.85262,
+      "actual": 1055055.85262,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[Btu_IT]",
+      "target": "m2.s-2.g",
+      "expected": 130246645.005939,
+      "actual": 130246645.005939,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[Btu_th]",
+      "target": "m2.s-2.g",
+      "expected": 1054350,
+      "actual": 1054350,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[Btu_th]",
+      "target": "m2.s-2.g",
+      "expected": 130159507.5,
+      "actual": 130159507.5,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[acr_br]",
+      "target": "m2",
+      "expected": 4046.850049400269,
+      "actual": 4046.850049400269,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[acr_br]",
+      "target": "m2",
+      "expected": 499583.63859846327,
+      "actual": 499583.63859846327,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[acr_us]",
+      "target": "m2",
+      "expected": 4046.872609874252,
+      "actual": 4046.872609874252,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[acr_us]",
+      "target": "m2",
+      "expected": 499586.4236889764,
+      "actual": 499586.4236889764,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[bbl_us]",
+      "target": "m3",
+      "expected": 0.15898729492800007,
+      "actual": 0.158987294928,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[bbl_us]",
+      "target": "m3",
+      "expected": 19.62698155886161,
+      "actual": 19.6269815588616,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[car_Au]",
+      "target": "1",
+      "expected": 0.041666666666666664,
+      "actual": 0.041666666666666664,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[car_Au]",
+      "target": "1",
+      "expected": 5.14375,
+      "actual": 5.14375,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[cicero]",
+      "target": "m",
+      "expected": 0.004511111111111111,
+      "actual": 0.004511111111111111,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[cicero]",
+      "target": "m",
+      "expected": 0.5568966666666666,
+      "actual": 0.5568966666666666,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[crd_us]",
+      "target": "m3",
+      "expected": 3.6245563637760005,
+      "actual": 3.6245563637760005,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[crd_us]",
+      "target": "m3",
+      "expected": 447.4514831081473,
+      "actual": 447.4514831081473,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[cup_us]",
+      "target": "m3",
+      "expected": 0.0002365882365000001,
+      "actual": 0.00023658823650000004,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[cup_us]",
+      "target": "m3",
+      "expected": 0.029206817795925013,
+      "actual": 0.029206817795925006,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[dpt_us]",
+      "target": "m3",
+      "expected": 0.0005506104713575002,
+      "actual": 0.0005506104713575001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[dpt_us]",
+      "target": "m3",
+      "expected": 0.06797286268908341,
+      "actual": 0.0679728626890834,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[dqt_us]",
+      "target": "m3",
+      "expected": 0.0011012209427150004,
+      "actual": 0.0011012209427150002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[dqt_us]",
+      "target": "m3",
+      "expected": 0.13594572537816682,
+      "actual": 0.1359457253781668,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[fdr_br]",
+      "target": "m3",
+      "expected": 0.0000035516328125000006,
+      "actual": 0.0000035516328125000015,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[fdr_br]",
+      "target": "m3",
+      "expected": 0.0004384490707031251,
+      "actual": 0.0004384490707031252,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[fdr_us]",
+      "target": "m3",
+      "expected": 0.0000036966911953125014,
+      "actual": 0.0000036966911953125006,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[fdr_us]",
+      "target": "m3",
+      "expected": 0.0004563565280613283,
+      "actual": 0.0004563565280613282,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[foz_br]",
+      "target": "m3",
+      "expected": 0.000028413062500000005,
+      "actual": 0.00002841306250000001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[foz_br]",
+      "target": "m3",
+      "expected": 0.0035075925656250007,
+      "actual": 0.0035075925656250016,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[foz_us]",
+      "target": "m3",
+      "expected": 0.00002957352956250001,
+      "actual": 0.000029573529562500005,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[foz_us]",
+      "target": "m3",
+      "expected": 0.0036508522244906266,
+      "actual": 0.0036508522244906257,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[fth_br]",
+      "target": "m",
+      "expected": 1.82879856,
+      "actual": 1.82879856,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[fth_br]",
+      "target": "m",
+      "expected": 225.765182232,
+      "actual": 225.765182232,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[fth_us]",
+      "target": "m",
+      "expected": 1.828803657607315,
+      "actual": 1.828803657607315,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[fth_us]",
+      "target": "m",
+      "expected": 225.76581153162303,
+      "actual": 225.76581153162303,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[fur_us]",
+      "target": "m",
+      "expected": 201.16840233680466,
+      "actual": 201.16840233680466,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[fur_us]",
+      "target": "m",
+      "expected": 24834.239268478537,
+      "actual": 24834.239268478537,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[gal_br]",
+      "target": "m3",
+      "expected": 0.004546090000000001,
+      "actual": 0.004546090000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[gal_br]",
+      "target": "m3",
+      "expected": 0.5612148105000001,
+      "actual": 0.5612148105000002,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[gal_us]",
+      "target": "m3",
+      "expected": 0.0037854117840000014,
+      "actual": 0.0037854117840000006,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[gal_us]",
+      "target": "m3",
+      "expected": 0.4673090847348002,
+      "actual": 0.4673090847348001,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[gal_wi]",
+      "target": "m3",
+      "expected": 0.004404883770860002,
+      "actual": 0.004404883770860001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[gal_wi]",
+      "target": "m3",
+      "expected": 0.5437829015126673,
+      "actual": 0.5437829015126672,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[gil_br]",
+      "target": "m3",
+      "expected": 0.00014206531250000003,
+      "actual": 0.00014206531250000006,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[gil_br]",
+      "target": "m3",
+      "expected": 0.017537962828125003,
+      "actual": 0.017537962828125007,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[gil_us]",
+      "target": "m3",
+      "expected": 0.00011829411825000005,
+      "actual": 0.00011829411825000002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[gil_us]",
+      "target": "m3",
+      "expected": 0.014603408897962506,
+      "actual": 0.014603408897962503,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[hnsf'U]",
+      "target": "1",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[hnsf'U]",
+      "target": "1",
+      "expected": 123.45,
+      "actual": 123.45,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[lbf_av]",
+      "target": "m.s-2.g",
+      "expected": 4448.2216152605,
+      "actual": 4448.2216152605,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[lbf_av]",
+      "target": "m.s-2.g",
+      "expected": 549132.9584039086,
+      "actual": 549132.9584039086,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[mesh_i]",
+      "target": "m-1",
+      "expected": null,
+      "actual": 39.370078740157474,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 21: [mesh_i] = /[in_i]"
+    },
+    {
+      "value": 123.45,
+      "source": "[mesh_i]",
+      "target": "m-1",
+      "expected": null,
+      "actual": 4860.23622047244,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM table 21: [mesh_i] = /[in_i]"
+    },
+    {
+      "value": 1,
+      "source": "[mil_us]",
+      "target": "m",
+      "expected": 0.0000254000508001016,
+      "actual": 0.0000254000508001016,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[mil_us]",
+      "target": "m",
+      "expected": 0.0031356362712725424,
+      "actual": 0.0031356362712725424,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[min_br]",
+      "target": "m3",
+      "expected": 5.919388020833334e-8,
+      "actual": 5.919388020833336e-8,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[min_br]",
+      "target": "m3",
+      "expected": 0.000007307484511718751,
+      "actual": 0.000007307484511718753,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[min_us]",
+      "target": "m3",
+      "expected": 6.161151992187503e-8,
+      "actual": 6.1611519921875e-8,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[min_us]",
+      "target": "m3",
+      "expected": 0.000007605942134355473,
+      "actual": 0.000007605942134355469,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[nmi_br]",
+      "target": "m",
+      "expected": 1853.1825408000002,
+      "actual": 1853.1825408000002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[nmi_br]",
+      "target": "m",
+      "expected": 228775.38466176004,
+      "actual": 228775.38466176004,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pca_pr]",
+      "target": "m",
+      "expected": 0.004217517600000001,
+      "actual": 0.004217517600000001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pca_pr]",
+      "target": "m",
+      "expected": 0.5206525477200001,
+      "actual": 0.5206525477200001,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pnt_pr]",
+      "target": "m",
+      "expected": 0.00035145980000000004,
+      "actual": 0.00035145980000000004,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pnt_pr]",
+      "target": "m",
+      "expected": 0.04338771231000001,
+      "actual": 0.04338771231000001,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[pwt_tr]",
+      "target": "g",
+      "expected": 1.5551738400000001,
+      "actual": 1.5551738400000001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[pwt_tr]",
+      "target": "g",
+      "expected": 191.98621054800003,
+      "actual": 191.98621054800003,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[rch_us]",
+      "target": "m",
+      "expected": 30.480060960121918,
+      "actual": 30.480060960121918,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[rch_us]",
+      "target": "m",
+      "expected": 3762.7635255270507,
+      "actual": 3762.7635255270507,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[rlk_us]",
+      "target": "m",
+      "expected": 0.3048006096012192,
+      "actual": 0.3048006096012192,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[rlk_us]",
+      "target": "m",
+      "expected": 37.62763525527051,
+      "actual": 37.62763525527051,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[smi_us]",
+      "target": "m2",
+      "expected": 2589998.470319521,
+      "actual": 2589998.470319521,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[smi_us]",
+      "target": "m2",
+      "expected": 319735311.1609449,
+      "actual": 319735311.1609449,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[srd_us]",
+      "target": "m2",
+      "expected": 25.292953811714074,
+      "actual": 25.292953811714074,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[srd_us]",
+      "target": "m2",
+      "expected": 3122.4151480561027,
+      "actual": 3122.4151480561027,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[tbs_us]",
+      "target": "m3",
+      "expected": 0.000014786764781250006,
+      "actual": 0.000014786764781250002,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[tbs_us]",
+      "target": "m3",
+      "expected": 0.0018254261122453133,
+      "actual": 0.0018254261122453129,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[tsp_us]",
+      "target": "m3",
+      "expected": 0.000004928921593750002,
+      "actual": 0.0000049289215937500005,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[tsp_us]",
+      "target": "m3",
+      "expected": 0.0006084753707484377,
+      "actual": 0.0006084753707484376,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[wood'U]",
+      "target": "m-4.s-1.g",
+      "expected": 7999320000,
+      "actual": 7999319999.999998,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[wood'U]",
+      "target": "m-4.s-1.g",
+      "expected": 987516054000,
+      "actual": 987516053999.9998,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "cal_[15]",
+      "target": "m2.s-2.g",
+      "expected": 4185.8,
+      "actual": 4185.8,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "cal_[15]",
+      "target": "m2.s-2.g",
+      "expected": 516737.01,
+      "actual": 516737.01,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "cal_[20]",
+      "target": "m2.s-2.g",
+      "expected": 4181.9,
+      "actual": 4181.9,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "cal_[20]",
+      "target": "m2.s-2.g",
+      "expected": 516255.555,
+      "actual": 516255.555,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[in_i'Hg]",
+      "target": "m-1.s-2.g",
+      "expected": 3386378.8000000003,
+      "actual": 3386378.8000000003,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[in_i'Hg]",
+      "target": "m-1.s-2.g",
+      "expected": 418048462.8600001,
+      "actual": 418048462.8600001,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[lcwt_av]",
+      "target": "g",
+      "expected": 50802.345440000005,
+      "actual": 50802.345440000005,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[lcwt_av]",
+      "target": "g",
+      "expected": 6271549.544568,
+      "actual": 6271549.544568,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[lton_av]",
+      "target": "g",
+      "expected": 1016046.9088000001,
+      "actual": 1016046.9088000001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[lton_av]",
+      "target": "g",
+      "expected": 125430990.89136001,
+      "actual": 125430990.89136001,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[scwt_av]",
+      "target": "g",
+      "expected": 45359.237,
+      "actual": 45359.237,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[scwt_av]",
+      "target": "g",
+      "expected": 5599597.80765,
+      "actual": 5599597.80765,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[ston_av]",
+      "target": "g",
+      "expected": 907184.74,
+      "actual": 907184.74,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[ston_av]",
+      "target": "g",
+      "expected": 111991956.153,
+      "actual": 111991956.153,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[in_i'H2O]",
+      "target": "m-1.s-2.g",
+      "expected": 249088.91000000003,
+      "actual": 249088.91000000003,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[in_i'H2O]",
+      "target": "m-1.s-2.g",
+      "expected": 30750025.939500004,
+      "actual": 30750025.939500004,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[stone_av]",
+      "target": "g",
+      "expected": 6350.293180000001,
+      "actual": 6350.293180000001,
+      "classification": "matched"
+    },
+    {
+      "value": 123.45,
+      "source": "[stone_av]",
+      "target": "g",
+      "expected": 783943.693071,
+      "actual": 783943.693071,
+      "classification": "matched"
+    },
+    {
+      "value": -40,
+      "source": "mg/dL",
+      "target": "g/L",
+      "expected": -0.4,
+      "actual": -0.39999999999999997,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "mg/dL",
+      "target": "g/L",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "mg/dL",
+      "target": "g/L",
+      "expected": 0.01,
+      "actual": 0.009999999999999998,
+      "classification": "matched"
+    },
+    {
+      "value": 12.5,
+      "source": "mg/dL",
+      "target": "g/L",
+      "expected": 0.125,
+      "actual": 0.12499999999999999,
+      "classification": "matched"
+    },
+    {
+      "value": 1000,
+      "source": "mg/dL",
+      "target": "g/L",
+      "expected": 10,
+      "actual": 9.999999999999998,
+      "classification": "matched"
+    },
+    {
+      "value": -40,
+      "source": "ug/(kg.min)",
+      "target": "mg/(kg.h)",
+      "expected": -2.4,
+      "actual": -2.4,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "ug/(kg.min)",
+      "target": "mg/(kg.h)",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "ug/(kg.min)",
+      "target": "mg/(kg.h)",
+      "expected": 0.060000000000000005,
+      "actual": 0.060000000000000005,
+      "classification": "matched"
+    },
+    {
+      "value": 12.5,
+      "source": "ug/(kg.min)",
+      "target": "mg/(kg.h)",
+      "expected": 0.75,
+      "actual": 0.75,
+      "classification": "matched"
+    },
+    {
+      "value": 1000,
+      "source": "ug/(kg.min)",
+      "target": "mg/(kg.h)",
+      "expected": 60.00000000000001,
+      "actual": 60.00000000000001,
+      "classification": "matched"
+    },
+    {
+      "value": -40,
+      "source": "mm[Hg]",
+      "target": "kPa",
+      "expected": -5.33288,
+      "actual": -5.33288,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "mm[Hg]",
+      "target": "kPa",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "mm[Hg]",
+      "target": "kPa",
+      "expected": 0.133322,
+      "actual": 0.133322,
+      "classification": "matched"
+    },
+    {
+      "value": 12.5,
+      "source": "mm[Hg]",
+      "target": "kPa",
+      "expected": 1.666525,
+      "actual": 1.666525,
+      "classification": "matched"
+    },
+    {
+      "value": 1000,
+      "source": "mm[Hg]",
+      "target": "kPa",
+      "expected": 133.322,
+      "actual": 133.322,
+      "classification": "matched"
+    },
+    {
+      "value": -40,
+      "source": "Cel",
+      "target": "[degF]",
+      "expected": -40.00000000000006,
+      "actual": -40.00000000000001,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "Cel",
+      "target": "[degF]",
+      "expected": 31.999999999999943,
+      "actual": 31.999999999999986,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "Cel",
+      "target": "[degF]",
+      "expected": 33.7999999999999,
+      "actual": 33.79999999999999,
+      "classification": "matched"
+    },
+    {
+      "value": 12.5,
+      "source": "Cel",
+      "target": "[degF]",
+      "expected": 54.49999999999994,
+      "actual": 54.499999999999986,
+      "classification": "matched"
+    },
+    {
+      "value": 1000,
+      "source": "Cel",
+      "target": "[degF]",
+      "expected": 1832,
+      "actual": 1832,
+      "classification": "matched"
+    },
+    {
+      "value": -40,
+      "source": "mCel",
+      "target": "K",
+      "expected": 273.10999999999996,
+      "actual": 273.10999999999996,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "mCel",
+      "target": "K",
+      "expected": 273.15,
+      "actual": 273.15,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "mCel",
+      "target": "K",
+      "expected": 273.15099999999995,
+      "actual": 273.15099999999995,
+      "classification": "matched"
+    },
+    {
+      "value": 12.5,
+      "source": "mCel",
+      "target": "K",
+      "expected": 273.16249999999997,
+      "actual": 273.16249999999997,
+      "classification": "matched"
+    },
+    {
+      "value": 1000,
+      "source": "mCel",
+      "target": "K",
+      "expected": 274.15,
+      "actual": 274.15,
+      "classification": "matched"
+    },
+    {
+      "value": -40,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 291.4375,
+      "actual": 223.14999999999998,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    },
+    {
+      "value": 0,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 341.4375,
+      "actual": 273.15,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    },
+    {
+      "value": 1,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 342.6875,
+      "actual": 274.4,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    },
+    {
+      "value": 12.5,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 357.0625,
+      "actual": 288.775,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    },
+    {
+      "value": 1000,
+      "source": "[degRe]",
+      "target": "K",
+      "expected": 1591.4375,
+      "actual": 1523.15,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §43: K = 5/4 * (Re + 218.52)"
+    },
+    {
+      "value": -40,
+      "source": "2.Cel",
+      "target": "K",
+      "expected": 193.14999999999998,
+      "actual": 193.14999999999998,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "2.Cel",
+      "target": "K",
+      "expected": 273.15,
+      "actual": 273.15,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "2.Cel",
+      "target": "K",
+      "expected": 275.15,
+      "actual": 275.15,
+      "classification": "matched"
+    },
+    {
+      "value": 12.5,
+      "source": "2.Cel",
+      "target": "K",
+      "expected": 298.15,
+      "actual": 298.15,
+      "classification": "matched"
+    },
+    {
+      "value": 1000,
+      "source": "2.Cel",
+      "target": "K",
+      "expected": 2273.15,
+      "actual": 2273.15,
+      "classification": "matched"
+    },
+    {
+      "value": -40,
+      "source": "km/h",
+      "target": "m/s",
+      "expected": -11.11111111111111,
+      "actual": -11.11111111111111,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "km/h",
+      "target": "m/s",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "km/h",
+      "target": "m/s",
+      "expected": 0.2777777777777778,
+      "actual": 0.2777777777777778,
+      "classification": "matched"
+    },
+    {
+      "value": 12.5,
+      "source": "km/h",
+      "target": "m/s",
+      "expected": 3.4722222222222223,
+      "actual": 3.4722222222222223,
+      "classification": "matched"
+    },
+    {
+      "value": 1000,
+      "source": "km/h",
+      "target": "m/s",
+      "expected": 277.77777777777777,
+      "actual": 277.77777777777777,
+      "classification": "matched"
+    },
+    {
+      "value": -40,
+      "source": "KiBy",
+      "target": "By",
+      "expected": -40960,
+      "actual": -40960,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "KiBy",
+      "target": "By",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "KiBy",
+      "target": "By",
+      "expected": 1024,
+      "actual": 1024,
+      "classification": "matched"
+    },
+    {
+      "value": 12.5,
+      "source": "KiBy",
+      "target": "By",
+      "expected": 12800,
+      "actual": 12800,
+      "classification": "matched"
+    },
+    {
+      "value": 1000,
+      "source": "KiBy",
+      "target": "By",
+      "expected": 1024000,
+      "actual": 1024000,
+      "classification": "matched"
+    },
+    {
+      "value": -40,
+      "source": "s/m.g",
+      "target": "g.s/m",
+      "expected": -40,
+      "actual": -40,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "s/m.g",
+      "target": "g.s/m",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "s/m.g",
+      "target": "g.s/m",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 12.5,
+      "source": "s/m.g",
+      "target": "g.s/m",
+      "expected": 12.5,
+      "actual": 12.5,
+      "classification": "matched"
+    },
+    {
+      "value": 1000,
+      "source": "s/m.g",
+      "target": "g.s/m",
+      "expected": 1000,
+      "actual": 1000,
+      "classification": "matched"
+    },
+    {
+      "value": -40,
+      "source": "s/m/g",
+      "target": "s/(m.g)",
+      "expected": -40,
+      "actual": -40,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "s/m/g",
+      "target": "s/(m.g)",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "s/m/g",
+      "target": "s/(m.g)",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 12.5,
+      "source": "s/m/g",
+      "target": "s/(m.g)",
+      "expected": 12.5,
+      "actual": 12.5,
+      "classification": "matched"
+    },
+    {
+      "value": 1000,
+      "source": "s/m/g",
+      "target": "s/(m.g)",
+      "expected": 1000,
+      "actual": 1000,
+      "classification": "matched"
+    }
+  ]
+}
