@@ -12,12 +12,16 @@ pub suberror UcumError {
 ///|
 pub fn UcumError::message(self : UcumError) -> String {
   match self {
-    Syntax(offset, reason) => "Syntax error at position " + offset.to_string() + ": " + reason
-    UnknownUnit(offset, code) => "Unknown UCUM code at position " + offset.to_string() + ": " + code
+    Syntax(offset, reason) =>
+      "Syntax error at position " + offset.to_string() + ": " + reason
+    UnknownUnit(offset, code) =>
+      "Unknown UCUM code at position " + offset.to_string() + ": " + code
     Unsupported(reason) => reason
-    Incompatible(source, target) => "Incompatible units: " + source + " and " + target
+    Incompatible(source, target) =>
+      "Incompatible units: " + source + " and " + target
     Limit(reason) => "Resource limit: " + reason
-    NonFinite => "Input or result is outside the supported finite numeric range."
+    NonFinite =>
+      "Input or result is outside the supported finite numeric range."
   }
 }
 
@@ -71,12 +75,16 @@ pub fn NormalForm::basis(self : NormalForm) -> String {
       terms.push(if n == 1 { names[i] } else { names[i] + n.to_string() })
     }
   }
-  if terms.is_empty() { "1" } else { terms.join(".") }
+  if terms.is_empty() {
+    "1"
+  } else {
+    terms.join(".")
+  }
 }
 
 ///|
 fn unity() -> NormalForm {
-  { scale: 1.0, offset: 0.0, dimensions: Array::make(7, 0), affine: false }
+  { scale: 1.0, offset: 0.0, dimensions: Array::make(7, 0), affine: false, }
 }
 
 ///|

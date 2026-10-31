@@ -10,6 +10,7 @@ tests = ET.parse(ROOT / "standards/UcumFunctionalTests.xml").getroot()
 lines = [
     "// Generated from unchanged FHIR UCUM test cases. See standards/sources.json.",
     "// Upstream BSD license: standards/FHIR-LICENSE.txt.",
+    "",
     "///|",
     'test "FHIR upstream UCUM validation corpus" {',
     "  let engine = @ucum.Engine::new()",
@@ -23,7 +24,12 @@ for index, case in enumerate(tests.find("validation")):
 lines += [
     "  ]",
     "  for (unit, expected, id) in cases {",
-    "    let actual = try { engine.validate(unit); true } catch { _ => false }",
+    "    let actual = try {",
+    "      engine.validate(unit)",
+    "      true",
+    "    } catch {",
+    "      _ => false",
+    "    }",
     '    assert_true(actual == expected, msg=id + " unit=" + unit)',
     "  }",
     "}",

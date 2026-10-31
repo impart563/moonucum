@@ -64,7 +64,15 @@ pub fn Engine::new() -> Engine {
   let bases = ["m", "s", "g", "rad", "K", "C", "cd"]
   for i in 0..<bases.length() {
     let code = bases[i]
-    atoms[code] = { code, metric: true, base: i, definition: "", multiplier: 1.0, special: false, arbitrary: false }
+    atoms[code] = {
+      code,
+      metric: true,
+      base: i,
+      definition: "",
+      multiplier: 1.0,
+      special: false,
+      arbitrary: false,
+    }
   }
   for block in catalog_blocks("unit") {
     let header = block.split(">").to_array()[0].to_owned()
@@ -88,10 +96,12 @@ pub fn Engine::new() -> Engine {
   for block in catalog_blocks("prefix") {
     prefixes.push({
       code: attribute(block, "Code").unwrap(),
-      multiplier: try! @string.parse_double(attribute(definition_value(block), "value").unwrap()[:]),
+      multiplier: try! @string.parse_double(
+        attribute(definition_value(block), "value").unwrap()[:],
+      ),
     })
   }
-  { atoms, prefixes, cache: Map([]) }
+  { atoms, prefixes, cache: Map([]), }
 }
 
 ///|
@@ -113,8 +123,14 @@ pub fn Engine::codes(self : Engine) -> Array[String] {
 }
 
 ///|
-fn Engine::resolve(self : Engine, code : String, position : Int) -> (Atom, Double) raise UcumError {
-  if self.atoms.get(code) is Some(atom) { return (atom, 1.0) }
+fn Engine::resolve(
+  self : Engine,
+  code : String,
+  position : Int,
+) -> (Atom, Double) raise UcumError {
+  if self.atoms.get(code) is Some(atom) {
+    return (atom, 1.0)
+  }
   let mut best : (Atom, Double)? = None
   let mut length = 0
   for prefix in self.prefixes {
@@ -135,11 +151,17 @@ fn Engine::resolve(self : Engine, code : String, position : Int) -> (Atom, Doubl
 }
 
 ///|
-fn Engine::validate_tree(self : Engine, expression : Expr) -> Unit raise UcumError {
+fn Engine::validate_tree(
+  self : Engine,
+  expression : Expr,
+) -> Unit raise UcumError {
   match expression {
     Number(_) => ()
     Symbol(code, pos) => ignore(self.resolve(code, pos))
-    Product(a, b) | Quotient(a, b) => { self.validate_tree(a); self.validate_tree(b) }
+    Product(a, b) | Quotient(a, b) => {
+      self.validate_tree(a)
+      self.validate_tree(b)
+    }
     Power(a, _) | Annotation(a, _) => self.validate_tree(a)
   }
 }
