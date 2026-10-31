@@ -2,10 +2,10 @@
 
 The differential suite compares all 253 linearly normalizable atom codes with
 `@lhncbc/ucum-lhc@8.0.1` at two values, then adds 55 composite and temperature
-cases, plus 108 logarithmic and pH cases. The unchanged UCUM 2.2 catalog and
+cases, plus 108 logarithmic/pH cases and 72 tangent, spectral and retired-code cases. The unchanged UCUM 2.2 catalog and
 specification determine MoonUCUM's expected behavior. The NLM implementation provides an independent comparison.
 
-The current 669 cases contain 612 numerical matches and 57 reviewed differences.
+The current 741 cases contain 676 numerical matches and 65 reviewed differences.
 The test records both values and checks a specific policy for every reviewed
 difference. Any other mismatch fails the command. Reviewed differences are
 reported separately from matches.
@@ -26,6 +26,7 @@ cases, retained below with their unchanged observations.
 | `u`, `eV`, `[G]`, `[e]`, `[h]`, `[k]`, `[m_e]`, `[m_p]` | 16 | NLM uses older physical constants | Pinned UCUM 2.2 table 5 values; both old reference factors and current factors are checked explicitly |
 | `[pH]` to/from `mol/L` | 8 | NLM rejects commensurability | UCUM §45 explicitly defines the paired `10^(-x)` and `-log10(x)` transformations |
 | `B/2` | 4 | NLM reports an unknown unit | UCUM §22 permits scaling a special unit by a dimensionless quantity; here the inverse is `10^(x/2)` |
+| `[p'diop]/2`, `[m/s2/Hz^(1/2)]/2` | 8 | NLM rejects factor denominators | UCUM §22 scalar scaling: `atan(x/200)` and `(x/2)^2` |
 
 Clinical consumers identify the measured substance and measurement procedure
 before comparing values. Dimensional compatibility describes the unit

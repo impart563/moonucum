@@ -3,9 +3,9 @@
   "command": "npm ci && npm test",
   "relative_tolerance": 1e-10,
   "absolute_tolerance_at_zero": 1e-10,
-  "cases": 669,
-  "matched": 612,
-  "reviewed_standard_differences": 57,
+  "cases": 741,
+  "matched": 676,
+  "reviewed_standard_differences": 65,
   "failures": [],
   "differences": [
     {
@@ -520,6 +520,78 @@
       "actual": 1000000000000005.9,
       "classification": "reviewed_standard_difference",
       "reason": "UCUM §22: dimensionless scalar scaling of a special unit; NLM rejects B/2"
+    },
+    {
+      "value": 0,
+      "source": "[p'diop]/2",
+      "target": "rad",
+      "expected": null,
+      "actual": 0,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division of a special unit; NLM rejects the factor denominator"
+    },
+    {
+      "value": 1,
+      "source": "[p'diop]/2",
+      "target": "rad",
+      "expected": null,
+      "actual": 0.0049999583339583225,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division of a special unit; NLM rejects the factor denominator"
+    },
+    {
+      "value": 10,
+      "source": "[p'diop]/2",
+      "target": "rad",
+      "expected": null,
+      "actual": 0.049958395721942765,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division of a special unit; NLM rejects the factor denominator"
+    },
+    {
+      "value": 30,
+      "source": "[p'diop]/2",
+      "target": "rad",
+      "expected": null,
+      "actual": 0.14888994760949725,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division of a special unit; NLM rejects the factor denominator"
+    },
+    {
+      "value": 0,
+      "source": "[m/s2/Hz^(1/2)]/2",
+      "target": "m2/s3",
+      "expected": null,
+      "actual": 0,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division before the square function; NLM rejects the factor denominator"
+    },
+    {
+      "value": 1,
+      "source": "[m/s2/Hz^(1/2)]/2",
+      "target": "m2/s3",
+      "expected": null,
+      "actual": 0.25,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division before the square function; NLM rejects the factor denominator"
+    },
+    {
+      "value": 10,
+      "source": "[m/s2/Hz^(1/2)]/2",
+      "target": "m2/s3",
+      "expected": null,
+      "actual": 25.000000000000007,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division before the square function; NLM rejects the factor denominator"
+    },
+    {
+      "value": 30,
+      "source": "[m/s2/Hz^(1/2)]/2",
+      "target": "m2/s3",
+      "expected": null,
+      "actual": 225,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division before the square function; NLM rejects the factor denominator"
     }
   ],
   "results": [
@@ -5931,6 +6003,590 @@
       "actual": 1000000000000005.9,
       "classification": "reviewed_standard_difference",
       "reason": "UCUM §22: dimensionless scalar scaling of a special unit; NLM rejects B/2"
+    },
+    {
+      "value": -100,
+      "source": "[p'diop]",
+      "target": "rad",
+      "expected": -0.7853981633974483,
+      "actual": -0.7853981633974483,
+      "classification": "matched"
+    },
+    {
+      "value": -10,
+      "source": "[p'diop]",
+      "target": "rad",
+      "expected": -0.09966865249116204,
+      "actual": -0.09966865249116204,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "[p'diop]",
+      "target": "rad",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 10,
+      "source": "[p'diop]",
+      "target": "rad",
+      "expected": 0.09966865249116204,
+      "actual": 0.09966865249116204,
+      "classification": "matched"
+    },
+    {
+      "value": 100,
+      "source": "[p'diop]",
+      "target": "rad",
+      "expected": 0.7853981633974483,
+      "actual": 0.7853981633974483,
+      "classification": "matched"
+    },
+    {
+      "value": -0.5,
+      "source": "rad",
+      "target": "[p'diop]",
+      "expected": -54.63024898437905,
+      "actual": -54.63024898437905,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "rad",
+      "target": "[p'diop]",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 0.5,
+      "source": "rad",
+      "target": "[p'diop]",
+      "expected": 54.63024898437905,
+      "actual": 54.63024898437905,
+      "classification": "matched"
+    },
+    {
+      "value": -100,
+      "source": "%[slope]",
+      "target": "rad",
+      "expected": -0.7853981633974483,
+      "actual": -0.7853981633974483,
+      "classification": "matched"
+    },
+    {
+      "value": -10,
+      "source": "%[slope]",
+      "target": "rad",
+      "expected": -0.09966865249116204,
+      "actual": -0.09966865249116204,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "%[slope]",
+      "target": "rad",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 10,
+      "source": "%[slope]",
+      "target": "rad",
+      "expected": 0.09966865249116204,
+      "actual": 0.09966865249116204,
+      "classification": "matched"
+    },
+    {
+      "value": 100,
+      "source": "%[slope]",
+      "target": "rad",
+      "expected": 0.7853981633974483,
+      "actual": 0.7853981633974483,
+      "classification": "matched"
+    },
+    {
+      "value": -0.5,
+      "source": "rad",
+      "target": "%[slope]",
+      "expected": -54.63024898437905,
+      "actual": -54.63024898437905,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "rad",
+      "target": "%[slope]",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 0.5,
+      "source": "rad",
+      "target": "%[slope]",
+      "expected": 54.63024898437905,
+      "actual": 54.63024898437905,
+      "classification": "matched"
+    },
+    {
+      "value": -1,
+      "source": "[hp'_X]",
+      "target": "1",
+      "expected": 10,
+      "actual": 10.000000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "[hp'_X]",
+      "target": "1",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[hp'_X]",
+      "target": "1",
+      "expected": 0.1,
+      "actual": 0.09999999999999998,
+      "classification": "matched"
+    },
+    {
+      "value": 2,
+      "source": "[hp'_X]",
+      "target": "1",
+      "expected": 0.01,
+      "actual": 0.009999999999999995,
+      "classification": "matched"
+    },
+    {
+      "value": 4,
+      "source": "[hp'_X]",
+      "target": "1",
+      "expected": 0.0001,
+      "actual": 0.00009999999999999991,
+      "classification": "matched"
+    },
+    {
+      "value": 0.01,
+      "source": "1",
+      "target": "[hp'_X]",
+      "expected": 1.9999999999999996,
+      "actual": 1.9999999999999996,
+      "classification": "matched"
+    },
+    {
+      "value": 0.1,
+      "source": "1",
+      "target": "[hp'_X]",
+      "expected": 0.9999999999999998,
+      "actual": 0.9999999999999998,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "1",
+      "target": "[hp'_X]",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": -1,
+      "source": "[hp'_C]",
+      "target": "1",
+      "expected": 100,
+      "actual": 100.00000000000004,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "[hp'_C]",
+      "target": "1",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[hp'_C]",
+      "target": "1",
+      "expected": 0.01,
+      "actual": 0.009999999999999995,
+      "classification": "matched"
+    },
+    {
+      "value": 2,
+      "source": "[hp'_C]",
+      "target": "1",
+      "expected": 0.0001,
+      "actual": 0.00009999999999999991,
+      "classification": "matched"
+    },
+    {
+      "value": 4,
+      "source": "[hp'_C]",
+      "target": "1",
+      "expected": 1e-8,
+      "actual": 9.999999999999982e-9,
+      "classification": "matched"
+    },
+    {
+      "value": 0.01,
+      "source": "1",
+      "target": "[hp'_C]",
+      "expected": 0.9999999999999998,
+      "actual": 0.9999999999999998,
+      "classification": "matched"
+    },
+    {
+      "value": 0.1,
+      "source": "1",
+      "target": "[hp'_C]",
+      "expected": 0.4999999999999999,
+      "actual": 0.4999999999999999,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "1",
+      "target": "[hp'_C]",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": -1,
+      "source": "[hp'_M]",
+      "target": "1",
+      "expected": 1000,
+      "actual": 999.9999999999998,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "[hp'_M]",
+      "target": "1",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[hp'_M]",
+      "target": "1",
+      "expected": 0.001,
+      "actual": 0.0010000000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 2,
+      "source": "[hp'_M]",
+      "target": "1",
+      "expected": 0.000001,
+      "actual": 0.0000010000000000000004,
+      "classification": "matched"
+    },
+    {
+      "value": 4,
+      "source": "[hp'_M]",
+      "target": "1",
+      "expected": 1e-12,
+      "actual": 1.000000000000001e-12,
+      "classification": "matched"
+    },
+    {
+      "value": 0.01,
+      "source": "1",
+      "target": "[hp'_M]",
+      "expected": 0.6666666666666666,
+      "actual": 0.6666666666666666,
+      "classification": "matched"
+    },
+    {
+      "value": 0.1,
+      "source": "1",
+      "target": "[hp'_M]",
+      "expected": 0.3333333333333333,
+      "actual": 0.3333333333333333,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "1",
+      "target": "[hp'_M]",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": -1,
+      "source": "[hp'_Q]",
+      "target": "1",
+      "expected": 50000,
+      "actual": 50000.00000000001,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "[hp'_Q]",
+      "target": "1",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[hp'_Q]",
+      "target": "1",
+      "expected": 0.00002,
+      "actual": 0.000019999999999999998,
+      "classification": "matched"
+    },
+    {
+      "value": 2,
+      "source": "[hp'_Q]",
+      "target": "1",
+      "expected": 4e-10,
+      "actual": 3.999999999999999e-10,
+      "classification": "matched"
+    },
+    {
+      "value": 4,
+      "source": "[hp'_Q]",
+      "target": "1",
+      "expected": 1.6e-19,
+      "actual": 1.5999999999999992e-19,
+      "classification": "matched"
+    },
+    {
+      "value": 0.01,
+      "source": "1",
+      "target": "[hp'_Q]",
+      "expected": 0.42562518980850716,
+      "actual": 0.42562518980850716,
+      "classification": "matched"
+    },
+    {
+      "value": 0.1,
+      "source": "1",
+      "target": "[hp'_Q]",
+      "expected": 0.21281259490425358,
+      "actual": 0.21281259490425358,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "1",
+      "target": "[hp'_Q]",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "[m/s2/Hz^(1/2)]",
+      "target": "m2/s3",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 0.1,
+      "source": "[m/s2/Hz^(1/2)]",
+      "target": "m2/s3",
+      "expected": 0.010000000000000002,
+      "actual": 0.010000000000000005,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "[m/s2/Hz^(1/2)]",
+      "target": "m2/s3",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 2,
+      "source": "[m/s2/Hz^(1/2)]",
+      "target": "m2/s3",
+      "expected": 4,
+      "actual": 4,
+      "classification": "matched"
+    },
+    {
+      "value": 10,
+      "source": "[m/s2/Hz^(1/2)]",
+      "target": "m2/s3",
+      "expected": 100,
+      "actual": 100.00000000000004,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "m2/s3",
+      "target": "[m/s2/Hz^(1/2)]",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "m2/s3",
+      "target": "[m/s2/Hz^(1/2)]",
+      "expected": 1,
+      "actual": 1,
+      "classification": "matched"
+    },
+    {
+      "value": 100,
+      "source": "m2/s3",
+      "target": "[m/s2/Hz^(1/2)]",
+      "expected": 10,
+      "actual": 10.000000000000002,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "2.%[slope]",
+      "target": "rad",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "2.%[slope]",
+      "target": "rad",
+      "expected": 0.019997333973150535,
+      "actual": 0.019997333973150535,
+      "classification": "matched"
+    },
+    {
+      "value": 10,
+      "source": "2.%[slope]",
+      "target": "rad",
+      "expected": 0.19739555984988078,
+      "actual": 0.19739555984988078,
+      "classification": "matched"
+    },
+    {
+      "value": 30,
+      "source": "2.%[slope]",
+      "target": "rad",
+      "expected": 0.5404195002705842,
+      "actual": 0.5404195002705842,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "[p'diop]/2",
+      "target": "rad",
+      "expected": null,
+      "actual": 0,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division of a special unit; NLM rejects the factor denominator"
+    },
+    {
+      "value": 1,
+      "source": "[p'diop]/2",
+      "target": "rad",
+      "expected": null,
+      "actual": 0.0049999583339583225,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division of a special unit; NLM rejects the factor denominator"
+    },
+    {
+      "value": 10,
+      "source": "[p'diop]/2",
+      "target": "rad",
+      "expected": null,
+      "actual": 0.049958395721942765,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division of a special unit; NLM rejects the factor denominator"
+    },
+    {
+      "value": 30,
+      "source": "[p'diop]/2",
+      "target": "rad",
+      "expected": null,
+      "actual": 0.14888994760949725,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division of a special unit; NLM rejects the factor denominator"
+    },
+    {
+      "value": 0,
+      "source": "3.[m/s2/Hz^(1/2)]",
+      "target": "m2/s3",
+      "expected": 0,
+      "actual": 0,
+      "classification": "matched"
+    },
+    {
+      "value": 1,
+      "source": "3.[m/s2/Hz^(1/2)]",
+      "target": "m2/s3",
+      "expected": 9,
+      "actual": 8.999999999999998,
+      "classification": "matched"
+    },
+    {
+      "value": 10,
+      "source": "3.[m/s2/Hz^(1/2)]",
+      "target": "m2/s3",
+      "expected": 900,
+      "actual": 900.0000000000001,
+      "classification": "matched"
+    },
+    {
+      "value": 30,
+      "source": "3.[m/s2/Hz^(1/2)]",
+      "target": "m2/s3",
+      "expected": 8100,
+      "actual": 8099.999999999999,
+      "classification": "matched"
+    },
+    {
+      "value": 0,
+      "source": "[m/s2/Hz^(1/2)]/2",
+      "target": "m2/s3",
+      "expected": null,
+      "actual": 0,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division before the square function; NLM rejects the factor denominator"
+    },
+    {
+      "value": 1,
+      "source": "[m/s2/Hz^(1/2)]/2",
+      "target": "m2/s3",
+      "expected": null,
+      "actual": 0.25,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division before the square function; NLM rejects the factor denominator"
+    },
+    {
+      "value": 10,
+      "source": "[m/s2/Hz^(1/2)]/2",
+      "target": "m2/s3",
+      "expected": null,
+      "actual": 25.000000000000007,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division before the square function; NLM rejects the factor denominator"
+    },
+    {
+      "value": 30,
+      "source": "[m/s2/Hz^(1/2)]/2",
+      "target": "m2/s3",
+      "expected": null,
+      "actual": 225,
+      "classification": "reviewed_standard_difference",
+      "reason": "UCUM §22: scalar division before the square function; NLM rejects the factor denominator"
     }
   ]
 }

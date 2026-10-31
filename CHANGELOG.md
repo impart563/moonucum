@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0
+
+- Implement tangent mappings for prism diopter and percent slope, with an
+  explicit invertible principal branch.
+- Implement the spectral square/square-root mapping and the four retired-code
+  dilution functions, retaining the current arbitrary-unit restrictions.
+- Extend scalar rescaling and numerical-range checks for finite extreme values.
+- Cover every special function in the pinned UCUM 2.2 catalog; numeric semantics
+  now include 271 atom codes, with 41 arbitrary codes kept separate.
+- Expand independent numerical comparisons to 741 cases.
+
 ## 0.2.0
 
 - Add conversion for 11 logarithmic and pH atom codes, including metric prefixes

@@ -45,6 +45,21 @@ for (const [source, target] of [['dB[W]', 'W'], ['dB[V]', 'V'], ['dB[SPL]', 'Pa'
   for (const value of [0, 1, 10, 30]) cases.push({ value, source, target });
 }
 
+for (const [source, target] of [["[p'diop]", 'rad'], ['%[slope]', 'rad']]) {
+  for (const value of [-100, -10, 0, 10, 100]) cases.push({ value, source, target });
+  for (const value of [-0.5, 0, 0.5]) cases.push({ value, source: target, target: source });
+}
+for (const source of ["[hp'_X]", "[hp'_C]", "[hp'_M]", "[hp'_Q]"]) {
+  for (const value of [-1, 0, 1, 2, 4]) cases.push({ value, source, target: '1' });
+  for (const value of [0.01, 0.1, 1]) cases.push({ value, source: '1', target: source });
+}
+const spectral = '[m/s2/Hz^(1/2)]';
+for (const value of [0, 0.1, 1, 2, 10]) cases.push({ value, source: spectral, target: 'm2/s3' });
+for (const value of [0, 1, 100]) cases.push({ value, source: 'm2/s3', target: spectral });
+for (const [source, target] of [['2.%[slope]', 'rad'], ["[p'diop]/2", 'rad'], ['3.' + spectral, 'm2/s3'], [spectral + '/2', 'm2/s3']]) {
+  for (const value of [0, 1, 10, 30]) cases.push({ value, source, target });
+}
+
 const failures = [];
 const differences = [];
 const results = [];
@@ -69,6 +84,14 @@ function close(a, b) {
     && Math.abs(a - b) <= (b === 0 ? 1e-10 : Math.max(Number.MIN_VALUE, Math.abs(b) * 1e-10));
 }
 function reviewedDifference(item, output, expected) {
+  if (output.ok && expected.status === 'failed' && expected.code === 'unknown-unit') {
+    if (item.source === "[p'diop]/2" && item.target === 'rad' && close(output.value, Math.atan(item.value / 200))) {
+      return 'UCUM §22: scalar division of a special unit; NLM rejects the factor denominator';
+    }
+    if (item.source === '[m/s2/Hz^(1/2)]/2' && item.target === 'm2/s3' && close(output.value, (item.value / 2) ** 2)) {
+      return 'UCUM §22: scalar division before the square function; NLM rejects the factor denominator';
+    }
+  }
   const constants = new Map([
     ['u', ['g', 1.6605390666e-24, 1.6605402e-24]],
     ['eV', ['m2.s-2.g', 1.602176634e-16, 1.60217733e-16]],

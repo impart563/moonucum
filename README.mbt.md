@@ -87,20 +87,21 @@ test "logarithmic targets require positive quantities" {
 
 ## 标准支持范围
 
-| 能力 | 0.2.0 状态 |
+| 能力 | 0.3.0 状态 |
 |---|---|
 | UCUM 2.2 大小写敏感代码 | 312 个单位原子、24 个前缀全部载入 |
 | 语法解析 | 乘除、括号、整数指数、前导除号、方括号原子、注释和十进制因子 |
 | 比例单位归一化 | 250 个基础或比例单位原子及其支持的组合 |
 | 温标转换 | `Cel`、`[degF]`、`[degRe]`，包含允许的前缀和标量缩放 |
-| 对数与 pH 转换 | 11 个单位原子的正反转换，包含分贝、奈培、声压级和功率级 |
+| 对数与 pH 转换 | 11 个现行单位及 4 个退休编码的历史对数函数 |
+| 正切与平方根转换 | 棱镜度、坡度百分比和幅度谱密度，包含定义域检查 |
 | 批量转换 | `Engine::converter` 预解析表达式，`Converter::apply` 重复处理数值 |
 | 关系判断 | 区分语义等价与量纲兼容，支持对数单位 |
 | 任意单位 | 41 个代码可识别，数值语义返回 `Unsupported` |
-| 其他特殊单位 | 7 个代码可识别，特殊转换函数尚未实现 |
+| 特殊函数覆盖 | 单位表中的 21 个特殊单位原子均有转换路径；任意单位保持独立 |
 | 大小写不敏感代码模式 | 后续版本 |
 
-`parse_expression` 返回保留注释及符号位置的语法树。`Engine::validate` 检查语法和标准代码；`normalize` 返回比例与温标的线性表示；`compatible`、`equivalent` 和 `convert` 同时支持已实现的对数单位。对数单位没有线性 `NormalForm`，应通过转换器或 `convert` 处理。特殊单位参与维度乘除时返回明确错误。
+`parse_expression` 返回保留注释及符号位置的语法树。`Engine::validate` 检查语法和标准代码；`normalize` 返回比例与温标的线性表示；`compatible`、`equivalent` 和 `convert` 同时支持已实现的对数单位。对数、正切和平方根单位没有线性 `NormalForm`，应通过转换器或 `convert` 处理。特殊单位参与维度乘除时返回明确错误。正切、平方根和退休编码的公式与边界见[特殊转换说明](docs/special-conversion.md)。
 
 计算采用 binary64；`equivalent` 对系数和原点使用 `1e-12` 相对容差。归一化基底为 UCUM 的 `m, s, g, rad, K, C, cd`，摩尔按标准定义展开为计数。量纲兼容表示单位关系，具体测量项目能否比较由调用方的数据语义决定。
 
@@ -110,7 +111,7 @@ test "logarithmic targets require positive quantities" {
 
 - FHIR 上游 529 条校验用例保留原始期望，生成黑盒测试。
 - 独立测试覆盖比例转换、温标、前缀、连续除法、任意单位、错误位置及资源限制。
-- NLM 实现的 669 个数值对照案例分别记录一致项和已核对的标准差异，见[差异说明](docs/reference-differences.md)和[结果数据](validation/differential-results.json)。
+- NLM 实现的 741 个数值对照案例分别记录一致项和已核对的标准差异，见[差异说明](docs/reference-differences.md)和[结果数据](validation/differential-results.json)。
 - 验收脚本复制发布所需文件到临时目录，再以独立模块消费该副本，验证公开 API。
 
 完整流程：

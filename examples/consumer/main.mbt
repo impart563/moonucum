@@ -27,4 +27,8 @@ fn main {
   if !domain { abort("Consumer logarithmic domain check failed") }
   println("Independent consumer passed: clinical and sensor quantities")
   println("Logarithmic batch passed: reusable converter and domain error")
+  let angle = e.convert(100.0, "%[slope]", "deg") catch { error => abort(error.message()) }
+  let spectral = e.convert(3.0, "[m/s2/Hz^(1/2)]", "m2/s3") catch { error => abort(error.message()) }
+  if !angle.is_close(45.0) || !spectral.is_close(9.0) { abort("Consumer special conversion failed") }
+  println("Special functions passed: principal angle and spectral density")
 }

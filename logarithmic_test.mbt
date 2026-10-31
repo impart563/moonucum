@@ -167,7 +167,7 @@ test "logarithmic constructions and linear normalization boundaries" {
     }
     assert_true(unsupported, msg=input)
   }
-  for input in ["[IU]", "[p'diop]", "[hp'_X]", "[m/s2/Hz^(1/2)]"] {
+  for input in ["[IU]", "[hp_X]", "[arb'U]"] {
     let unsupported = try {
       ignore(e.converter(input, input))
       false

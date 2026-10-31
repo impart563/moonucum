@@ -7,6 +7,8 @@ fn main {
     ("air-pressure", 1013.25, "hPa", "kPa"),
     ("payload-size", 64.0, "KiBy", "By"),
     ("power-level", 30.0, "dB[W]", "W"),
+    ("surface-slope", 100.0, "%[slope]", "deg"),
+    ("vibration-density", 3.0, "[m/s2/Hz^(1/2)]", "m2/s3"),
   ]
   for (sensor, value, source, target) in readings {
     try {

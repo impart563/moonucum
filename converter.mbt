@@ -3,12 +3,17 @@ priv enum Mapping {
   Linear(NormalForm)
   // Base quantity = reference.scale * exp(coefficient * measurement).
   Logarithmic(NormalForm, Double)
+  Tangent(NormalForm, Double)
+  SquareRoot(NormalForm, Double)
 }
 
 ///|
 fn Mapping::reference(self : Mapping) -> NormalForm {
   match self {
-    Linear(form) | Logarithmic(form, _) => form
+    Linear(form)
+    | Logarithmic(form, _)
+    | Tangent(form, _)
+    | SquareRoot(form, _) => form
   }
 }
 
@@ -20,25 +25,30 @@ pub struct Converter {
 }
 
 ///|
-fn logarithmic_definition(definition : String) -> (Double, Double, String)? {
+fn special_definition(definition : String) -> (String, Double, String) {
   let opening = definition.find("(").unwrap()
   let name = definition.view(end_offset=opening).to_owned()
-  let coefficient = match name {
-    "ln" => 1.0
-    "lg" => @math.ln(10.0)
-    "2lg" => @math.ln(10.0) / 2.0
-    "ld" => @math.ln(2.0)
-    "pH" => -@math.ln(10.0)
-    _ => return None
-  }
   let payload = definition
     .view(start_offset=opening + 1, end_offset=definition.length() - 1)
     .to_owned()
   let separator = payload.find(" ").unwrap()
   let factor = try! @string.parse_double(payload.view(end_offset=separator))
-  Some(
-    (coefficient, factor, payload.view(start_offset=separator + 1).to_owned()),
-  )
+  (name, factor, payload.view(start_offset=separator + 1).to_owned())
+}
+
+///|
+fn logarithmic_coefficient(name : String) -> Double? {
+  match name {
+    "ln" => Some(1.0)
+    "lg" => Some(@math.ln(10.0))
+    "2lg" => Some(@math.ln(10.0) / 2.0)
+    "ld" => Some(@math.ln(2.0))
+    "pH" | "hpX" => Some(-@math.ln(10.0))
+    "hpC" => Some(-@math.ln(100.0))
+    "hpM" => Some(-@math.ln(1000.0))
+    "hpQ" => Some(-@math.ln(50000.0))
+    _ => None
+  }
 }
 
 ///|
@@ -52,6 +62,16 @@ fn Mapping::scaled(self : Mapping, factor : Double) -> Mapping raise UcumError {
       }
       Logarithmic(reference, scaled)
     }
+    Tangent(reference, scalar) | SquareRoot(reference, scalar) => {
+      let scaled = scalar * factor
+      if !finite(scaled) || scaled <= 0.0 {
+        raise NonFinite
+      }
+      match self {
+        Tangent(_, _) => Tangent(reference, scaled)
+        _ => SquareRoot(reference, scaled)
+      }
+    }
   }
 }
 
@@ -63,13 +83,13 @@ fn combine_mappings(
 ) -> Mapping raise UcumError {
   match (a, b) {
     (Linear(first), Linear(second)) => Linear(multiply(first, second, divide))
-    (Logarithmic(_, _), Linear(second)) if dimensionless(second) =>
+    (_, Linear(second)) if dimensionless(second) =>
       a.scaled(if divide { 1.0 / second.scale } else { second.scale })
-    (Linear(first), Logarithmic(_, _)) if !divide && dimensionless(first) =>
+    (Linear(first), _) if !divide && dimensionless(first) =>
       b.scaled(first.scale)
     _ =>
       raise Unsupported(
-        "logarithmic units allow scalar scaling, not dimensional products or reciprocals",
+        "special units allow scalar scaling, not dimensional products or reciprocals",
       )
   }
 }
@@ -88,8 +108,8 @@ fn Engine::map_expression(
     Symbol(code, position) => {
       let (atom, prefix) = self.resolve(code, position)
       if atom.special {
-        if logarithmic_definition(atom.definition)
-          is Some((coefficient, factor, proper)) {
+        let (name, factor, proper) = special_definition(atom.definition)
+        if logarithmic_coefficient(name) is Some(coefficient) {
           let reference = self.evaluate(parse_expression(proper), depth + 1)
           let reference = multiply(
             reference,
@@ -97,6 +117,18 @@ fn Engine::map_expression(
             false,
           )
           return Logarithmic(reference, coefficient).scaled(prefix)
+        }
+        if name == "100tan" || name == "sqrt" {
+          let reference = multiply(
+            self.evaluate(parse_expression(proper), depth + 1),
+            { ..unity(), scale: factor, },
+            false,
+          )
+          return (if name == "100tan" {
+            Tangent(reference, 1.0)
+          } else {
+            SquareRoot(reference, 1.0)
+          }).scaled(prefix)
         }
       }
       Linear(self.atom_form(atom, depth)).scaled(prefix)
@@ -117,8 +149,8 @@ fn Engine::map_expression(
       let mapping = self.map_expression(a, depth)
       match mapping {
         Linear(form) => Linear(power(form, n))
-        Logarithmic(_, _) if n == 1 => mapping
-        _ => raise Unsupported("exponentiation of a logarithmic unit")
+        _ if n == 1 => mapping
+        _ => raise Unsupported("exponentiation of a special unit")
       }
     }
     Annotation(a, _) => self.map_expression(a, depth)
@@ -199,6 +231,36 @@ pub fn Converter::apply(
       }
     (Logarithmic(a, first), Logarithmic(b, second)) =>
       (@math.ln(a.scale) - @math.ln(b.scale)) / second + first / second * value
+    (Tangent(a, first), Tangent(b, second)) if forms_equivalent(a, b) =>
+      rescale_positive(value, first, second)
+    (SquareRoot(a, first), SquareRoot(b, second)) if forms_equivalent(a, b) => {
+      require_nonnegative(value)
+      rescale_positive(value, first, second)
+    }
+    (SquareRoot(a, scalar), Linear(b)) if b.offset == 0.0 => {
+      require_nonnegative(value)
+      if value == 0.0 {
+        0.0
+      } else {
+        checked_exponential(
+          @math.ln(a.scale) -
+          @math.ln(b.scale) +
+          2.0 * (@math.ln(value) + @math.ln(scalar)),
+        )
+      }
+    }
+    (Linear(a), SquareRoot(b, scalar)) if a.offset == 0.0 => {
+      require_nonnegative(value)
+      if value == 0.0 {
+        0.0
+      } else {
+        checked_exponential(
+          0.5 * (@math.ln(value) + @math.ln(a.scale) - @math.ln(b.scale)) -
+          @math.ln(scalar),
+        )
+      }
+    }
+    _ => self.target.from_proper(self.source.to_proper(value))
   }
   if !finite(result) {
     raise NonFinite

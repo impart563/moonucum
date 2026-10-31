@@ -8,7 +8,7 @@ syntax acceptance and numeric semantics are tested separately.
 | §§3–6 lexical rules | ASCII codes, metric prefixes, bracketed atoms, annotations | Upstream validation corpus and local boundary cases |
 | §§7–10 syntax | Left-associative `.` and `/`, integer exponents, parentheses | AST and numeric equivalence tests |
 | §§16–20 proper units | Definition expansion, seven-coordinate normalization | 250 proper atom codes; NLM comparison |
-| §§21–23 special units | Affine temperatures and 11 logarithmic/pH codes with scalar scaling | Temperature cases and independent formula assertions |
+| §§21–23 special units | All 21 catalog special atoms: affine, logarithmic, tangent and square-root mappings | Temperature cases and independent formula assertions |
 | §§24–26 arbitrary units | Recognized but rejected by numeric operations | All 41 arbitrary atom codes checked during acceptance |
 | Tables 1–22 | Unmodified UCUM 2.2 essence document | 312 atom codes, 24 prefixes and recorded SHA-256 |
 
@@ -18,15 +18,11 @@ Explicit exponents on pure numeric factors, such as `2+10`, are not supported;
 this follows the corpus and BNF factor production, while the prose in §9 gives
 such a numeric example. This remains an explicit compatibility boundary.
 
-The following seven special atom codes have recognized syntax but no implemented
-conversion function:
-
-`[p'diop]`, `%[slope]`, `[hp'_X]`, `[hp'_C]`, `[hp'_M]`, `[hp'_Q]`,
-`[m/s2/Hz^(1/2)]`.
-
-The 11 logarithmic and pH codes are numerically convertible but have no linear
-`NormalForm`. They are counted separately from the 253 linearly normalizable
-atom codes. See [logarithmic-conversion.md](logarithmic-conversion.md).
+All special functions in the pinned catalog now have conversion paths. The 18
+nonlinear atom codes (15 logarithmic including retired codes, two tangent and
+one square-root) have no linear `NormalForm`. They are separate from the 253
+linearly normalizable atoms. See [logarithmic-conversion.md](logarithmic-conversion.md)
+and [special-conversion.md](special-conversion.md) for definitions and domains.
 
 Other expressions involving recognized special codes can also be unsupported.
 For example, `Cel/s` passes grammar and code lookup but has no supported numeric

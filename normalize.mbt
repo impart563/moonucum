@@ -144,9 +144,9 @@ fn Engine::evaluate(
 ) -> NormalForm raise UcumError {
   match self.map_expression(expression, depth) {
     Linear(form) => form
-    Logarithmic(_, _) =>
+    _ =>
       raise Unsupported(
-        "Logarithmic units have no linear NormalForm; use converter or convert.",
+        "Nonlinear units have no linear NormalForm; use converter or convert.",
       )
   }
 }
@@ -182,7 +182,9 @@ pub fn Engine::equivalent(
 ) -> Bool raise UcumError {
   match (self.mapping(first), self.mapping(second)) {
     (Linear(a), Linear(b)) => forms_equivalent(a, b)
-    (Logarithmic(a, first), Logarithmic(b, second)) =>
+    (Logarithmic(a, first), Logarithmic(b, second))
+    | (Tangent(a, first), Tangent(b, second))
+    | (SquareRoot(a, first), SquareRoot(b, second)) =>
       forms_equivalent(a, b) &&
       first.is_close(second, relative_tolerance=1.0e-12, absolute_tolerance=0.0)
     _ => false

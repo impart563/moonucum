@@ -173,7 +173,7 @@ fn main {
     }
     _ => {
       println(
-        "MoonUCUM 0.2.0 — UCUM 2.2\nvalidate UNIT\nnormalize UNIT\nconvert VALUE SOURCE TARGET\nequivalent SOURCE TARGET\ncatalog\nbatch JSON_REQUEST ...\nResults are JSON; inspect the ok field for each operation.",
+        "MoonUCUM 0.3.0 — UCUM 2.2\nvalidate UNIT\nnormalize UNIT\nconvert VALUE SOURCE TARGET\nequivalent SOURCE TARGET\ncatalog\nbatch JSON_REQUEST ...\nResults are JSON; inspect the ok field for each operation.",
       )
       return
     }
