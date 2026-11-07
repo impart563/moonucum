@@ -47,13 +47,20 @@ pub fn Engine::compare_quantities(
   let (right_value, right_unit) = right
   let a = self.convert(left_value, left_unit, unit)
   let b = self.convert(right_value, right_unit, unit)
-  if a == b || (a - b).abs() <= absolute_tolerance {
+  let distance = (a - b).abs()
+  if a == b || distance <= absolute_tolerance {
     return Same
   }
   if relative_tolerance > 0.0 {
     let scale = if a.abs() > b.abs() { a.abs() } else { b.abs() }
-    // Normalize before subtracting so opposite finite extremes cannot overflow.
-    if (a / scale - b / scale).abs() <= relative_tolerance {
+    // Subtract first near equality to retain the spacing of adjacent doubles.
+    // Opposite finite extremes need normalization before their subtraction.
+    let relative_distance = if finite(distance) {
+      distance / scale
+    } else {
+      (a / scale - b / scale).abs()
+    }
+    if relative_distance <= relative_tolerance {
       return Same
     }
   }

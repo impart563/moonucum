@@ -45,6 +45,24 @@ test "comparison handles finite extremes and nonlinear coordinate direction" {
   let e = @ucum.Engine::new()
   assert_eq(
     e.compare_quantities(
+      (1.2, "1"),
+      (1.2000000000000002, "1"),
+      "1",
+      relative_tolerance=2.0e-16,
+    ),
+    @ucum.Same,
+  )
+  assert_eq(
+    e.compare_quantities(
+      (1.2, "1"),
+      (1.2000000000000002, "1"),
+      "1",
+      relative_tolerance=1.8e-16,
+    ),
+    @ucum.Lower,
+  )
+  assert_eq(
+    e.compare_quantities(
       (1.0e308, "m"),
       (-1.0e308, "m"),
       "m",
