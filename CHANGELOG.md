@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.6.0
+
+- Expose comparison, interval membership and structured FHIR operations in the
+  portable JSON CLI; exercise them through a synthetic example and independent
+  package consumer.
 
 - Convert FHIR R4 Ratio components independently with proportional-unit checks,
   nonzero denominator handling and preserved component metadata.

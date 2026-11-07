@@ -53,6 +53,10 @@ from the extracted release archive on all four backends.
 Catalog discovery, code-system translation, row-preserving batch conversion
 and finite intervals are root APIs. The `fhir` package owns Quantity JSON
 adaptation and separates structural input failures from core unit errors.
+Quantity ordering explicitly selects a comparison coordinate and optional
+tolerances. Range adaptation preserves unknown bounds and moves endpoint
+metadata with decreasing mappings. Ratio adaptation preserves both component
+quantities and only accepts proportional point units.
 
 ## Consumers
 

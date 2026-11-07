@@ -7,8 +7,8 @@
   },
   "toolchain": "moon 0.1.20260920 (914d7da 2026-09-20)\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg",
   "source": {
-    "sha256": "65b72d99cee9d554fce1b0ffd437a72ce3a21e314f0ac43a83937c2f61b55202",
-    "files": 85,
+    "sha256": "55c68dd7c8196462c33d5cc9fb1748fec6b874686d5ae58f1bf3788d5f71d88b",
+    "files": 96,
     "excludes": [
       ".git",
       ".mooncakes",
@@ -38,68 +38,72 @@
   },
   "backends": {
     "wasm": {
-      "tests": 58,
-      "passed": 58,
+      "tests": 73,
+      "passed": 73,
       "upstream_validation_cases": 529,
       "code_column_pairs": 312,
       "case_insensitive_prefix_cases": 24,
       "case_insensitive_special_cases": 21,
-      "cli_checks": 37,
+      "cli_checks": 53,
       "seeded_corpus": {
         "seed": 563,
         "proportional_expressions": 5000,
         "malformed_expressions": 1000
       },
       "fhir_rows": 5,
-      "sensor_rows": 7
+      "sensor_rows": 7,
+      "structured_rows": 3
     },
     "wasm-gc": {
-      "tests": 58,
-      "passed": 58,
+      "tests": 73,
+      "passed": 73,
       "upstream_validation_cases": 529,
       "code_column_pairs": 312,
       "case_insensitive_prefix_cases": 24,
       "case_insensitive_special_cases": 21,
-      "cli_checks": 37,
+      "cli_checks": 53,
       "seeded_corpus": {
         "seed": 563,
         "proportional_expressions": 5000,
         "malformed_expressions": 1000
       },
       "fhir_rows": 5,
-      "sensor_rows": 7
+      "sensor_rows": 7,
+      "structured_rows": 3
     },
     "js": {
-      "tests": 58,
-      "passed": 58,
+      "tests": 73,
+      "passed": 73,
       "upstream_validation_cases": 529,
       "code_column_pairs": 312,
       "case_insensitive_prefix_cases": 24,
       "case_insensitive_special_cases": 21,
-      "cli_checks": 37,
+      "cli_checks": 53,
       "seeded_corpus": {
         "seed": 563,
         "proportional_expressions": 5000,
         "malformed_expressions": 1000
       },
       "fhir_rows": 5,
-      "sensor_rows": 7
+      "sensor_rows": 7,
+      "structured_rows": 3
     },
     "native": {
-      "tests": 58,
-      "passed": 58,
+      "tests": 73,
+      "passed": 73,
       "upstream_validation_cases": 529,
       "code_column_pairs": 312,
       "case_insensitive_prefix_cases": 24,
       "case_insensitive_special_cases": 21,
-      "cli_checks": 37,
+      "cli_checks": 53,
       "seeded_corpus": {
         "seed": 563,
         "proportional_expressions": 5000,
         "malformed_expressions": 1000
       },
       "fhir_rows": 5,
-      "sensor_rows": 7
+      "sensor_rows": 7,
+      "structured_rows": 3
     }
   },
   "packaged_consumer": {
@@ -111,7 +115,7 @@
       "native"
     ],
     "registry_install": "not performed",
-    "archive_sha256": "f215c04da31cdc69269bd0e89560c92f467e2579d8c40d75c1804d8ddcadcb32",
+    "archive_sha256": "04b1f33ddbe14d4f1824793cea1e135d84bb3a1a92c92d96bd830ae345d1b04b",
     "lunarunits": {
       "executed": true,
       "dependency": "FrozenLemonTee/LunarUnits@0.1.9",
@@ -355,6 +359,35 @@
         "run",
         "--target",
         "wasm",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 100, \"unit\": \"cm\"}, \"unit\": \"m\"}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 100.05, \"unit\": \"cm\"}, \"unit\": \"cm\", \"absolute_tolerance\": 0.1}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 6, \"unit\": \"[pH]\"}, \"right\": {\"value\": 8, \"unit\": \"[pH]\"}, \"unit\": \"mol/L\"}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 1, \"unit\": \"m\"}, \"unit\": \"m\", \"relative_tolerance\": \"bad\"}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 1, \"unit\": \"m\"}, \"unit\": \"m\", \"absolute_tolerance\": -1}",
+        "{\"op\": \"classify\", \"value\": 100, \"source\": \"cm\", \"target\": \"m\", \"lower\": 1, \"upper\": 2, \"lower_closed\": false}",
+        "{\"op\": \"classify\", \"value\": 150, \"source\": \"cm\", \"target\": \"m\", \"lower\": 1, \"upper\": 2}",
+        "{\"op\": \"classify\", \"value\": 150, \"source\": \"cm\", \"target\": \"m\", \"lower\": 1, \"upper\": 2, \"upper_closed\": \"bad\"}",
+        "{\"op\": \"fhir-range\", \"range\": {\"low\": {\"id\": \"six\", \"value\": 6, \"code\": \"[pH]\", \"system\": \"http://unitsofmeasure.org\"}, \"high\": {\"id\": \"eight\", \"value\": 8, \"code\": \"[pH]\", \"system\": \"http://unitsofmeasure.org\"}}, \"target\": \"mol/L\"}",
+        "{\"op\": \"fhir-range\", \"range\": {\"low\": {\"value\": 6, \"code\": \"[pH]\", \"system\": \"http://unitsofmeasure.org\"}}, \"target\": \"mol/L\"}",
+        "{\"op\": \"fhir-range\", \"range\": {\"low\": {\"unit\": \"metre\", \"value\": 1, \"code\": \"m\", \"system\": \"http://unitsofmeasure.org\"}, \"high\": {\"unit\": \"meter\", \"value\": 2, \"code\": \"m\", \"system\": \"http://unitsofmeasure.org\"}}, \"target\": \"m\"}",
+        "{\"op\": \"fhir-ratio\", \"ratio\": {\"numerator\": {\"value\": 5, \"code\": \"mg\", \"system\": \"http://unitsofmeasure.org\"}, \"denominator\": {\"value\": 10, \"code\": \"mL\", \"system\": \"http://unitsofmeasure.org\"}}, \"numerator_target\": \"g\", \"denominator_target\": \"L\"}",
+        "{\"op\": \"fhir-ratio\", \"ratio\": {\"numerator\": {\"value\": 5, \"code\": \"mg\", \"system\": \"http://unitsofmeasure.org\"}, \"denominator\": {\"value\": 0, \"code\": \"mL\", \"system\": \"http://unitsofmeasure.org\"}}, \"numerator_target\": \"g\", \"denominator_target\": \"L\"}",
+        "{\"op\": \"fhir-quantity\", \"quantity\": {\"value\": 12, \"code\": \"mg/dL\", \"system\": \"http://unitsofmeasure.org\"}, \"target\": \"g/L\"}",
+        "{\"op\": \"classify\", \"value\": 0, \"source\": \"W\", \"target\": \"dB[W]\", \"lower\": 0, \"upper\": 20}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 1, \"unit\": \"s\"}, \"unit\": \"m\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm",
         "examples/fhir"
       ],
       "directory": "project",
@@ -374,6 +407,17 @@
     {
       "command": [
         "moon.EXE",
+        "run",
+        "--target",
+        "wasm",
+        "examples/structured-data"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
         "test",
         "--target",
         "wasm-gc",
@@ -504,6 +548,35 @@
         "run",
         "--target",
         "wasm-gc",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 100, \"unit\": \"cm\"}, \"unit\": \"m\"}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 100.05, \"unit\": \"cm\"}, \"unit\": \"cm\", \"absolute_tolerance\": 0.1}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 6, \"unit\": \"[pH]\"}, \"right\": {\"value\": 8, \"unit\": \"[pH]\"}, \"unit\": \"mol/L\"}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 1, \"unit\": \"m\"}, \"unit\": \"m\", \"relative_tolerance\": \"bad\"}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 1, \"unit\": \"m\"}, \"unit\": \"m\", \"absolute_tolerance\": -1}",
+        "{\"op\": \"classify\", \"value\": 100, \"source\": \"cm\", \"target\": \"m\", \"lower\": 1, \"upper\": 2, \"lower_closed\": false}",
+        "{\"op\": \"classify\", \"value\": 150, \"source\": \"cm\", \"target\": \"m\", \"lower\": 1, \"upper\": 2}",
+        "{\"op\": \"classify\", \"value\": 150, \"source\": \"cm\", \"target\": \"m\", \"lower\": 1, \"upper\": 2, \"upper_closed\": \"bad\"}",
+        "{\"op\": \"fhir-range\", \"range\": {\"low\": {\"id\": \"six\", \"value\": 6, \"code\": \"[pH]\", \"system\": \"http://unitsofmeasure.org\"}, \"high\": {\"id\": \"eight\", \"value\": 8, \"code\": \"[pH]\", \"system\": \"http://unitsofmeasure.org\"}}, \"target\": \"mol/L\"}",
+        "{\"op\": \"fhir-range\", \"range\": {\"low\": {\"value\": 6, \"code\": \"[pH]\", \"system\": \"http://unitsofmeasure.org\"}}, \"target\": \"mol/L\"}",
+        "{\"op\": \"fhir-range\", \"range\": {\"low\": {\"unit\": \"metre\", \"value\": 1, \"code\": \"m\", \"system\": \"http://unitsofmeasure.org\"}, \"high\": {\"unit\": \"meter\", \"value\": 2, \"code\": \"m\", \"system\": \"http://unitsofmeasure.org\"}}, \"target\": \"m\"}",
+        "{\"op\": \"fhir-ratio\", \"ratio\": {\"numerator\": {\"value\": 5, \"code\": \"mg\", \"system\": \"http://unitsofmeasure.org\"}, \"denominator\": {\"value\": 10, \"code\": \"mL\", \"system\": \"http://unitsofmeasure.org\"}}, \"numerator_target\": \"g\", \"denominator_target\": \"L\"}",
+        "{\"op\": \"fhir-ratio\", \"ratio\": {\"numerator\": {\"value\": 5, \"code\": \"mg\", \"system\": \"http://unitsofmeasure.org\"}, \"denominator\": {\"value\": 0, \"code\": \"mL\", \"system\": \"http://unitsofmeasure.org\"}}, \"numerator_target\": \"g\", \"denominator_target\": \"L\"}",
+        "{\"op\": \"fhir-quantity\", \"quantity\": {\"value\": 12, \"code\": \"mg/dL\", \"system\": \"http://unitsofmeasure.org\"}, \"target\": \"g/L\"}",
+        "{\"op\": \"classify\", \"value\": 0, \"source\": \"W\", \"target\": \"dB[W]\", \"lower\": 0, \"upper\": 20}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 1, \"unit\": \"s\"}, \"unit\": \"m\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "wasm-gc",
         "examples/fhir"
       ],
       "directory": "project",
@@ -523,6 +596,17 @@
     {
       "command": [
         "moon.EXE",
+        "run",
+        "--target",
+        "wasm-gc",
+        "examples/structured-data"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
         "test",
         "--target",
         "js",
@@ -653,6 +737,35 @@
         "run",
         "--target",
         "js",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 100, \"unit\": \"cm\"}, \"unit\": \"m\"}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 100.05, \"unit\": \"cm\"}, \"unit\": \"cm\", \"absolute_tolerance\": 0.1}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 6, \"unit\": \"[pH]\"}, \"right\": {\"value\": 8, \"unit\": \"[pH]\"}, \"unit\": \"mol/L\"}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 1, \"unit\": \"m\"}, \"unit\": \"m\", \"relative_tolerance\": \"bad\"}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 1, \"unit\": \"m\"}, \"unit\": \"m\", \"absolute_tolerance\": -1}",
+        "{\"op\": \"classify\", \"value\": 100, \"source\": \"cm\", \"target\": \"m\", \"lower\": 1, \"upper\": 2, \"lower_closed\": false}",
+        "{\"op\": \"classify\", \"value\": 150, \"source\": \"cm\", \"target\": \"m\", \"lower\": 1, \"upper\": 2}",
+        "{\"op\": \"classify\", \"value\": 150, \"source\": \"cm\", \"target\": \"m\", \"lower\": 1, \"upper\": 2, \"upper_closed\": \"bad\"}",
+        "{\"op\": \"fhir-range\", \"range\": {\"low\": {\"id\": \"six\", \"value\": 6, \"code\": \"[pH]\", \"system\": \"http://unitsofmeasure.org\"}, \"high\": {\"id\": \"eight\", \"value\": 8, \"code\": \"[pH]\", \"system\": \"http://unitsofmeasure.org\"}}, \"target\": \"mol/L\"}",
+        "{\"op\": \"fhir-range\", \"range\": {\"low\": {\"value\": 6, \"code\": \"[pH]\", \"system\": \"http://unitsofmeasure.org\"}}, \"target\": \"mol/L\"}",
+        "{\"op\": \"fhir-range\", \"range\": {\"low\": {\"unit\": \"metre\", \"value\": 1, \"code\": \"m\", \"system\": \"http://unitsofmeasure.org\"}, \"high\": {\"unit\": \"meter\", \"value\": 2, \"code\": \"m\", \"system\": \"http://unitsofmeasure.org\"}}, \"target\": \"m\"}",
+        "{\"op\": \"fhir-ratio\", \"ratio\": {\"numerator\": {\"value\": 5, \"code\": \"mg\", \"system\": \"http://unitsofmeasure.org\"}, \"denominator\": {\"value\": 10, \"code\": \"mL\", \"system\": \"http://unitsofmeasure.org\"}}, \"numerator_target\": \"g\", \"denominator_target\": \"L\"}",
+        "{\"op\": \"fhir-ratio\", \"ratio\": {\"numerator\": {\"value\": 5, \"code\": \"mg\", \"system\": \"http://unitsofmeasure.org\"}, \"denominator\": {\"value\": 0, \"code\": \"mL\", \"system\": \"http://unitsofmeasure.org\"}}, \"numerator_target\": \"g\", \"denominator_target\": \"L\"}",
+        "{\"op\": \"fhir-quantity\", \"quantity\": {\"value\": 12, \"code\": \"mg/dL\", \"system\": \"http://unitsofmeasure.org\"}, \"target\": \"g/L\"}",
+        "{\"op\": \"classify\", \"value\": 0, \"source\": \"W\", \"target\": \"dB[W]\", \"lower\": 0, \"upper\": 20}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 1, \"unit\": \"s\"}, \"unit\": \"m\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "js",
         "examples/fhir"
       ],
       "directory": "project",
@@ -665,6 +778,17 @@
         "--target",
         "js",
         "examples/sensor"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "js",
+        "examples/structured-data"
       ],
       "directory": "project",
       "exit_code": 0
@@ -802,6 +926,35 @@
         "run",
         "--target",
         "native",
+        "cmd/ucum",
+        "--",
+        "batch",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 100, \"unit\": \"cm\"}, \"unit\": \"m\"}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 100.05, \"unit\": \"cm\"}, \"unit\": \"cm\", \"absolute_tolerance\": 0.1}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 6, \"unit\": \"[pH]\"}, \"right\": {\"value\": 8, \"unit\": \"[pH]\"}, \"unit\": \"mol/L\"}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 1, \"unit\": \"m\"}, \"unit\": \"m\", \"relative_tolerance\": \"bad\"}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 1, \"unit\": \"m\"}, \"unit\": \"m\", \"absolute_tolerance\": -1}",
+        "{\"op\": \"classify\", \"value\": 100, \"source\": \"cm\", \"target\": \"m\", \"lower\": 1, \"upper\": 2, \"lower_closed\": false}",
+        "{\"op\": \"classify\", \"value\": 150, \"source\": \"cm\", \"target\": \"m\", \"lower\": 1, \"upper\": 2}",
+        "{\"op\": \"classify\", \"value\": 150, \"source\": \"cm\", \"target\": \"m\", \"lower\": 1, \"upper\": 2, \"upper_closed\": \"bad\"}",
+        "{\"op\": \"fhir-range\", \"range\": {\"low\": {\"id\": \"six\", \"value\": 6, \"code\": \"[pH]\", \"system\": \"http://unitsofmeasure.org\"}, \"high\": {\"id\": \"eight\", \"value\": 8, \"code\": \"[pH]\", \"system\": \"http://unitsofmeasure.org\"}}, \"target\": \"mol/L\"}",
+        "{\"op\": \"fhir-range\", \"range\": {\"low\": {\"value\": 6, \"code\": \"[pH]\", \"system\": \"http://unitsofmeasure.org\"}}, \"target\": \"mol/L\"}",
+        "{\"op\": \"fhir-range\", \"range\": {\"low\": {\"unit\": \"metre\", \"value\": 1, \"code\": \"m\", \"system\": \"http://unitsofmeasure.org\"}, \"high\": {\"unit\": \"meter\", \"value\": 2, \"code\": \"m\", \"system\": \"http://unitsofmeasure.org\"}}, \"target\": \"m\"}",
+        "{\"op\": \"fhir-ratio\", \"ratio\": {\"numerator\": {\"value\": 5, \"code\": \"mg\", \"system\": \"http://unitsofmeasure.org\"}, \"denominator\": {\"value\": 10, \"code\": \"mL\", \"system\": \"http://unitsofmeasure.org\"}}, \"numerator_target\": \"g\", \"denominator_target\": \"L\"}",
+        "{\"op\": \"fhir-ratio\", \"ratio\": {\"numerator\": {\"value\": 5, \"code\": \"mg\", \"system\": \"http://unitsofmeasure.org\"}, \"denominator\": {\"value\": 0, \"code\": \"mL\", \"system\": \"http://unitsofmeasure.org\"}}, \"numerator_target\": \"g\", \"denominator_target\": \"L\"}",
+        "{\"op\": \"fhir-quantity\", \"quantity\": {\"value\": 12, \"code\": \"mg/dL\", \"system\": \"http://unitsofmeasure.org\"}, \"target\": \"g/L\"}",
+        "{\"op\": \"classify\", \"value\": 0, \"source\": \"W\", \"target\": \"dB[W]\", \"lower\": 0, \"upper\": 20}",
+        "{\"op\": \"compare\", \"left\": {\"value\": 1, \"unit\": \"m\"}, \"right\": {\"value\": 1, \"unit\": \"s\"}, \"unit\": \"m\"}"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "native",
         "examples/fhir"
       ],
       "directory": "project",
@@ -814,6 +967,17 @@
         "--target",
         "native",
         "examples/sensor"
+      ],
+      "directory": "project",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "moon.EXE",
+        "run",
+        "--target",
+        "native",
+        "examples/structured-data"
       ],
       "directory": "project",
       "exit_code": 0

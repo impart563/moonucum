@@ -205,12 +205,45 @@ def verify_target(target):
     values = integrated[5]["results"]
     require([row["ok"] for row in values] == [True, False, True, False] and values[1]["error"] == "domain" and math.isclose(values[2]["value"], 20, rel_tol=1e-12) and values[3]["error"] == "request", "bulk CLI failed")
     require(integrated[6].get("error") == "unknown_unit" and integrated[6]["offset"] == 2 and integrated[7].get("error") == "unknown_unit" and integrated[8].get("error") == "domain", "integration error contract failed")
+    def quantity(value, code, **metadata):
+        return dict(metadata, value=value, code=code, system="http://unitsofmeasure.org")
+    structured_requests = [
+        {"op": "compare", "left": {"value": 1, "unit": "m"}, "right": {"value": 100, "unit": "cm"}, "unit": "m"},
+        {"op": "compare", "left": {"value": 1, "unit": "m"}, "right": {"value": 100.05, "unit": "cm"}, "unit": "cm", "absolute_tolerance": 0.1},
+        {"op": "compare", "left": {"value": 6, "unit": "[pH]"}, "right": {"value": 8, "unit": "[pH]"}, "unit": "mol/L"},
+        {"op": "compare", "left": {"value": 1, "unit": "m"}, "right": {"value": 1, "unit": "m"}, "unit": "m", "relative_tolerance": "bad"},
+        {"op": "compare", "left": {"value": 1, "unit": "m"}, "right": {"value": 1, "unit": "m"}, "unit": "m", "absolute_tolerance": -1},
+        {"op": "classify", "value": 100, "source": "cm", "target": "m", "lower": 1, "upper": 2, "lower_closed": False},
+        {"op": "classify", "value": 150, "source": "cm", "target": "m", "lower": 1, "upper": 2},
+        {"op": "classify", "value": 150, "source": "cm", "target": "m", "lower": 1, "upper": 2, "upper_closed": "bad"},
+        {"op": "fhir-range", "range": {"low": quantity(6, "[pH]", id="six"), "high": quantity(8, "[pH]", id="eight")}, "target": "mol/L"},
+        {"op": "fhir-range", "range": {"low": quantity(6, "[pH]")}, "target": "mol/L"},
+        {"op": "fhir-range", "range": {"low": quantity(1, "m", unit="metre"), "high": quantity(2, "m", unit="meter")}, "target": "m"},
+        {"op": "fhir-ratio", "ratio": {"numerator": quantity(5, "mg"), "denominator": quantity(10, "mL")}, "numerator_target": "g", "denominator_target": "L"},
+        {"op": "fhir-ratio", "ratio": {"numerator": quantity(5, "mg"), "denominator": quantity(0, "mL")}, "numerator_target": "g", "denominator_target": "L"},
+        {"op": "fhir-quantity", "quantity": quantity(12, "mg/dL"), "target": "g/L"},
+        {"op": "classify", "value": 0, "source": "W", "target": "dB[W]", "lower": 0, "upper": 20},
+        {"op": "compare", "left": {"value": 1, "unit": "m"}, "right": {"value": 1, "unit": "s"}, "unit": "m"},
+    ]
+    structured = cli(target, "batch", *[json.dumps(item) for item in structured_requests])
+    require(len(structured) == len(structured_requests), "missing structured request results")
+    require([row.get("order") for row in structured[:3]] == ["same", "same", "higher"], "quantity ordering CLI failed")
+    require(structured[3].get("error") == "request" and structured[4].get("error") == "domain", "comparison tolerance contract failed")
+    require(structured[5].get("position") == "below" and structured[6].get("position") == "within" and structured[7].get("error") == "request", "interval membership CLI failed")
+    bounds = structured[8]["range"]
+    require(bounds["low"]["id"] == "eight" and bounds["high"]["id"] == "six" and math.isclose(bounds["low"]["value"], 1e-8, rel_tol=1e-12), "FHIR Range CLI failed")
+    require("low" not in structured[9]["range"] and "high" in structured[9]["range"] and structured[10].get("error") == "input", "unknown Range boundary contract failed")
+    ratio = structured[11]["ratio"]
+    require(math.isclose(ratio["numerator"]["value"], 0.005, rel_tol=1e-12) and math.isclose(ratio["denominator"]["value"], 0.01, rel_tol=1e-12) and structured[12].get("error") == "input", "FHIR Ratio CLI failed")
+    require(math.isclose(structured[13]["quantity"]["value"], 0.12, rel_tol=1e-12) and structured[14].get("error") == "domain" and structured[15].get("error") == "incompatible", "structured error contract failed")
     fhir = [json.loads(line) for line in run([MOON, "run", "--target", target, "examples/fhir"]).splitlines()]
     require([item["result"]["status"] for item in fhir] == ["converted", "converted", "rejected", "converted", "rejected"], "FHIR example failed")
     require(abs(fhir[3]["result"]["value"] - 1e-7) < 1e-18, "FHIR acidity conversion failed")
     sensors = [json.loads(line) for line in run([MOON, "run", "--target", target, "examples/sensor"]).splitlines()]
     require([item["value"] for item in sensors[:4]] == [20, 20, 101.325, 65536] and len(sensors) == 7 and abs(sensors[4]["value"] - 1000) < 1e-8 and abs(sensors[5]["value"] - 45) < 1e-10 and abs(sensors[6]["value"] - 9) < 1e-10, "sensor example failed")
-    return {"tests": int(match[1]), "passed": int(match[2]), "upstream_validation_cases": 529, "code_column_pairs": 312, "case_insensitive_prefix_cases": 24, "case_insensitive_special_cases": 21, "cli_checks": 28 + len(integration_requests), "seeded_corpus": {"seed": 563, "proportional_expressions": 5000, "malformed_expressions": 1000}, "fhir_rows": 5, "sensor_rows": 7}
+    examples = [json.loads(line) for line in run([MOON, "run", "--target", target, "examples/structured-data"]).splitlines()]
+    require(len(examples) == 3 and examples[0]["result"]["low"]["id"] == "pH-eight" and math.isclose(examples[1]["result"]["denominator"]["value"], 0.01, rel_tol=1e-12) and examples[2]["within"], "structured example failed")
+    return {"tests": int(match[1]), "passed": int(match[2]), "upstream_validation_cases": 529, "code_column_pairs": 312, "case_insensitive_prefix_cases": 24, "case_insensitive_special_cases": 21, "cli_checks": 28 + len(integration_requests) + len(structured_requests), "seeded_corpus": {"seed": 563, "proportional_expressions": 5000, "malformed_expressions": 1000}, "fhir_rows": 5, "sensor_rows": 7, "structured_rows": 3}
 
 
 def verify_packaged_consumer(with_integrations=False):
@@ -242,6 +275,7 @@ def verify_packaged_consumer(with_integrations=False):
             require("Special functions passed" in output, "independent special consumer failed")
             require("Code modes passed" in output, "independent code mode consumer failed")
             require("Data integration passed" in output, "independent data integration consumer failed")
+            require("Structured quantities passed" in output, "independent structured quantity consumer failed")
         integration = {"executed": False}
         if with_integrations:
             workspace.write_text('members = [\n  "module",\n  "consumer",\n  "module/integrations/lunarunits",\n]\n', encoding="utf-8")

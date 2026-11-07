@@ -122,4 +122,77 @@ fn main {
   println(
     "Data integration passed: catalog, translation, batches, intervals and FHIR adapter",
   )
+  let order = e.compare_quantities(
+    (12.0, "mg/dL"),
+    (0.12, "g/L"),
+    "g/L",
+    relative_tolerance=1.0e-12,
+  ) catch {
+    error => abort(error.message())
+  }
+  if order != @ucum.Same {
+    abort("Consumer quantity comparison failed")
+  }
+  let position = e
+    .converter("cm", "m")
+    .classify(100.0, @ucum.Interval::new(1.0, 2.0, lower_closed=false)) catch {
+      error => abort(error.message())
+    }
+  if position != @ucum.Below {
+    abort("Consumer interval membership failed")
+  }
+  let range = @fhir.convert_range(
+    e,
+    {
+      "low": {
+        "value": 6,
+        "code": "[pH]",
+        "system": "http://unitsofmeasure.org",
+        "id": "pH-six",
+      },
+      "high": {
+        "value": 8,
+        "code": "[pH]",
+        "system": "http://unitsofmeasure.org",
+        "id": "pH-eight",
+      },
+    },
+    "mol/L",
+  ) catch {
+    error => abort(error.message())
+  }
+  if !(range
+    is { "low": { "id": "pH-eight", .. }, "high": { "id": "pH-six", .. }, .. }) {
+    abort("Consumer FHIR Range failed")
+  }
+  let ratio = @fhir.convert_ratio(
+    e,
+    {
+      "numerator": {
+        "value": 5,
+        "code": "mg",
+        "system": "http://unitsofmeasure.org",
+      },
+      "denominator": {
+        "value": 10,
+        "code": "mL",
+        "system": "http://unitsofmeasure.org",
+      },
+    },
+    "g",
+    "L",
+  ) catch {
+    error => abort(error.message())
+  }
+  match ratio {
+    {
+      "numerator": { "value": Number(numerator, ..), "code": "g", .. },
+      "denominator": { "value": Number(denominator, ..), "code": "L", .. },
+      ..
+    } if numerator.is_close(0.005) && denominator.is_close(0.01) => ()
+    _ => abort("Consumer FHIR Ratio failed")
+  }
+  println(
+    "Structured quantities passed: comparison, membership, FHIR Range and Ratio",
+  )
 }

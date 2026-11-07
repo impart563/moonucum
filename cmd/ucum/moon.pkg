@@ -1,5 +1,6 @@
 import {
   "impart563/moonucum" @lib,
+  "impart563/moonucum/fhir",
   "moonbitlang/core/env",
   "moonbitlang/core/json",
   "moonbitlang/core/string",

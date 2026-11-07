@@ -18,6 +18,7 @@ moon run cmd/ucum -- search pressure
 moon run cmd/ucum -- translate MPa case-insensitive
 moon run examples/fhir
 moon run examples/sensor
+moon run examples/structured-data
 python scripts/acceptance.py
 ```
 
@@ -140,9 +141,43 @@ test "convert a decreasing interval with endpoint flags" {
 
 [LunarUnits 适配模块](integrations/lunarunits/README.md) 可将 UCUM 比例单位接入现有物理量运算，明确映射质量、电荷、角度和计数。它作为独立模块引用 LunarUnits 0.1.9，核心库保持标准库依赖。所有输入示例使用合成数据。
 
+## 数量比较与结构化数据
+
+```mbt check
+///|
+test "compare quantities in a chosen coordinate" {
+  let engine = @ucum.Engine::new()
+  assert_eq(
+    engine.compare_quantities(
+      (12.0, "mg/dL"),
+      (0.12, "g/L"),
+      "g/L",
+      relative_tolerance=1.0e-12,
+    ),
+    @ucum.Same,
+  )
+  assert_eq(
+    engine.compare_quantities((6.0, "[pH]"), (8.0, "[pH]"), "mol/L"),
+    @ucum.Higher,
+  )
+}
+```
+
+```mbt check
+///|
+test "locate a quantity in a target-unit interval" {
+  let converter = @ucum.Engine::new().converter("cm", "m")
+  let interval = @ucum.Interval::new(1.0, 2.0, lower_closed=false)
+  assert_eq(converter.classify(100.0, interval), @ucum.Below)
+  assert_eq(converter.classify(150.0, interval), @ucum.Within)
+}
+```
+
+比较接口要求明确目标坐标和容差，区间判断遵守开闭端点。FHIR 包进一步支持 `convert_range` 与 `convert_ratio`：Range 保留未知边界，递减映射交换端点及其元数据；Ratio 分别换算分子和分母，保留两个数量的意义。示例可用 `moon run examples/structured-data` 运行，JSON 请求格式见 [CLI 说明](docs/cli.md)，语义与适配边界见[数据接入说明](docs/data-integration.md)。
+
 ## 标准支持范围
 
-| 能力 | 0.5.0 状态 |
+| 能力 | 0.6.0 状态 |
 |---|---|
 | UCUM 2.2 大小写敏感代码 | 312 个单位原子、24 个前缀全部载入 |
 | 语法解析 | 乘除、括号、整数指数、前导除号、方括号原子、注释和十进制因子 |
@@ -153,6 +188,7 @@ test "convert a decreasing interval with endpoint flags" {
 | 批量转换 | 预解析转换器、同构数值数组和异构数量行，保留逐行结果及错误 |
 | 目录与代码转换 | 按代码、名称、属性检索；在两种标准代码表之间转换表达式 |
 | 区间与数据适配 | 单调有限区间转换、FHIR R4 Quantity、独立 LunarUnits 适配模块 |
+| 数量运算与结构化输入 | 显式坐标比较、有限区间定位、FHIR R4 Range 与 Ratio 适配 |
 | 关系判断 | 区分语义等价与量纲兼容，支持对数单位 |
 | 任意单位 | 41 个代码可识别，数值语义返回 `Unsupported` |
 | 特殊函数覆盖 | 单位表中的 21 个特殊单位原子均有转换路径；任意单位保持独立 |

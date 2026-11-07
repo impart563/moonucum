@@ -47,9 +47,152 @@ fn unit_json(info : @lib.UnitInfo) -> Json {
 }
 
 ///|
+fn quantity_diagnostic(error : @fhir.QuantityError) -> Json {
+  match error {
+    @fhir.Input(message) =>
+      { "ok": false, "error": "input", "message": message }
+    @fhir.UnitConversion(error) => diagnostic(error)
+  }
+}
+
+///|
+fn optional_number(input : Json, key : String) -> Double? {
+  match input {
+    Object(fields) =>
+      match fields.get(key) {
+        None => Some(0.0)
+        Some(Number(value, ..)) => Some(value)
+        _ => None
+      }
+    _ => None
+  }
+}
+
+///|
+fn optional_flag(input : Json, key : String) -> Bool? {
+  match input {
+    Object(fields) =>
+      match fields.get(key) {
+        None | Some(True) => Some(true)
+        Some(False) => Some(false)
+        _ => None
+      }
+    _ => None
+  }
+}
+
+///|
 fn execute(engine : @lib.Engine, input : Json) -> Json {
   try {
     match input {
+      {
+        "op": "compare",
+        "left": { "value": Number(left, ..), "unit": String(left_unit), .. },
+        "right": { "value": Number(right, ..), "unit": String(right_unit), .. },
+        "unit": String(unit),
+        ..
+      } => {
+        let (absolute, relative) = match
+          (
+            optional_number(input, "absolute_tolerance"),
+            optional_number(input, "relative_tolerance"),
+          ) {
+          (Some(absolute), Some(relative)) => (absolute, relative)
+          _ =>
+            return {
+              "ok": false,
+              "error": "request",
+              "message": "Comparison tolerances must be numeric.",
+            }
+        }
+        let order = engine.compare_quantities(
+          (left, left_unit),
+          (right, right_unit),
+          unit,
+          absolute_tolerance=absolute,
+          relative_tolerance=relative,
+        )
+        {
+          "ok": true,
+          "unit": unit,
+          "order": match order {
+            @lib.Lower => "lower"
+            @lib.Same => "same"
+            @lib.Higher => "higher"
+          },
+        }
+      }
+      {
+        "op": "classify",
+        "value": Number(value, ..),
+        "source": String(source),
+        "target": String(target),
+        "lower": Number(lower, ..),
+        "upper": Number(upper, ..),
+        ..
+      } => {
+        let (lower_closed, upper_closed) = match
+          (
+            optional_flag(input, "lower_closed"),
+            optional_flag(input, "upper_closed"),
+          ) {
+          (Some(lower_closed), Some(upper_closed)) =>
+            (lower_closed, upper_closed)
+          _ =>
+            return {
+              "ok": false,
+              "error": "request",
+              "message": "Endpoint flags must be boolean.",
+            }
+        }
+        let interval = @lib.Interval::new(
+          lower,
+          upper,
+          lower_closed~,
+          upper_closed~,
+        )
+        let position = engine
+          .converter(source, target)
+          .classify(value, interval)
+        {
+          "ok": true,
+          "unit": target,
+          "position": match position {
+            @lib.Below => "below"
+            @lib.Within => "within"
+            @lib.Above => "above"
+          },
+        }
+      }
+      {
+        "op": "fhir-quantity",
+        "quantity": quantity,
+        "target": String(target),
+        ..
+      } => {
+        let result = @fhir.convert_quantity(engine, quantity, target) catch {
+          error => return quantity_diagnostic(error)
+        }
+        { "ok": true, "quantity": result }
+      }
+      { "op": "fhir-range", "range": range, "target": String(target), .. } => {
+        let result = @fhir.convert_range(engine, range, target) catch {
+          error => return quantity_diagnostic(error)
+        }
+        { "ok": true, "range": result }
+      }
+      {
+        "op": "fhir-ratio",
+        "ratio": ratio,
+        "numerator_target": String(numerator),
+        "denominator_target": String(denominator),
+        ..
+      } => {
+        let result = @fhir.convert_ratio(engine, ratio, numerator, denominator) catch {
+          error => return quantity_diagnostic(error)
+        }
+        { "ok": true, "ratio": result }
+      }
       { "op": "validate", "unit": String(unit), .. } => {
         engine.validate(unit)
         { "ok": true, "unit": unit }
@@ -140,7 +283,7 @@ fn execute(engine : @lib.Engine, input : Json) -> Json {
         {
           "ok": false,
           "error": "request",
-          "message": "Expected validate, normalize, info, search, translate, convert, values, interval or equivalent with the corresponding fields.",
+          "message": "Expected a supported operation with its required fields; see docs/cli.md.",
         }
     }
   } catch {
@@ -263,7 +406,7 @@ fn main {
     }
     _ => {
       println(
-        "MoonUCUM 0.5.0 — UCUM 2.2\nOptional leading flag: --case-insensitive\nvalidate UNIT\nnormalize UNIT\nconvert VALUE SOURCE TARGET\nequivalent SOURCE TARGET\ninfo UNIT\nsearch QUERY\ntranslate UNIT case-sensitive|case-insensitive\ncatalog\nbatch JSON_REQUEST ...\nResults are JSON; inspect the ok field for each operation.",
+        "MoonUCUM 0.6.0 — UCUM 2.2\nOptional leading flag: --case-insensitive\nvalidate UNIT\nnormalize UNIT\nconvert VALUE SOURCE TARGET\nequivalent SOURCE TARGET\ninfo UNIT\nsearch QUERY\ntranslate UNIT case-sensitive|case-insensitive\ncatalog\nbatch JSON_REQUEST ...\nBatch also supports compare, classify and fhir-quantity/range/ratio; see docs/cli.md. Results are JSON; inspect the ok field for each operation.",
       )
       return
     }
