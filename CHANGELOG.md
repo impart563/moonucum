@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Convert FHIR R4 Ratio components independently with proportional-unit checks,
+  nonzero denominator handling and preserved component metadata.
+
 - Convert populated FHIR R4 Range bounds, preserve unknown endpoints and carry
   endpoint metadata through decreasing mappings; validate matching input coding.
 

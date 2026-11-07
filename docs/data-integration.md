@@ -24,6 +24,14 @@
 
 依据：[FHIR R4 Range](https://hl7.org/fhir/R4/datatypes.html#Range)。适配范围为有数值边界的 Range，数值精度与核心 binary64 相同。
 
+## FHIR Ratio
+
+`fhir.convert_ratio(engine, ratio_json, numerator_target, denominator_target)` 分别换算有数值的分子和分母，保持 Ratio 结构与两个 Quantity 的元数据。例如 `5 mg / 10 mL` 可换算为 `0.005 g / 0.01 L`；不会约分、把分母重设为 1 或自动计算商值。分母的原始数量在部分业务中具有独立意义。
+
+源单位和目标单位均须是比例单位，两侧不允许比较符。仿射温标点、非线性单位和任意单位不进入这一运算；调用方应先明确相应数量的解释。分母必须非零，换算后的分母在 binary64 精度下也须保持非零。分子可以为零；数值符号保持原值，不附加具体业务约束。缺少分子或分母以及仅含扩展的未知 Ratio 无法进行数值换算，返回 `Input`。
+
+依据：[FHIR R4 Ratio](https://hl7.org/fhir/R4/datatypes.html#Ratio) 对双数量结构及分母意义的规定。接口处理编码数量的单位变化，不将 Ratio 视为两个任意字段组成的普通除法。
+
 ## 有限区间
 
 `Interval::new(lower, upper, lower_closed?, upper_closed?)` 建立非空、端点有限的区间，默认包含两端。`Converter::apply_interval(interval)` 转换两端，并通过映射方向安排结果。例如 pH `[6, 8]` 转为 `mol/L` 后是约 `[10^-8, 10^-6]`，端点的开闭属性随对应端点交换。
