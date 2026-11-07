@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Convert populated FHIR R4 Range bounds, preserve unknown endpoints and carry
+  endpoint metadata through decreasing mappings; validate matching input coding.
+
 - Compare quantities in an explicit unit with caller-selected tolerances and
   classify values against finite intervals with open or closed endpoints.
 

@@ -9,6 +9,8 @@ import {
 // Values
 pub fn convert_quantity(@moonucum.Engine, Json, String) -> Json raise QuantityError
 
+pub fn convert_range(@moonucum.Engine, Json, String) -> Json raise QuantityError
+
 // Errors
 pub suberror QuantityError {
   Input(String)

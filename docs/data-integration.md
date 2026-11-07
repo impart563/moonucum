@@ -16,6 +16,14 @@
 
 依据：[FHIR R4 Quantity](https://hl7.org/fhir/R4/datatypes.html#Quantity) 对编码、显示文本、比较符及隐含精度的定义。示例数据全部为合成值。
 
+## FHIR Range
+
+`fhir.convert_range(engine, range_json, target)` 换算具有一个或两个数值端点的 FHIR R4 Range。双端点的 `system`、`code` 和显示用 `unit` 必须相同，源数值满足 `low <= high`；端点不允许比较符。两个边界均为闭端点。
+
+比例和温标映射保留端点方向；pH 等递减映射交换完整的 `low`、`high` Quantity，因此端点 `id`、扩展等元数据跟随原端点移动。仅有一个边界时，缺少的边界保持未知；递减映射会将已知下界移到上界，或将已知上界移到下界，不填充无穷值。无数值边界、空值边界、编码或显示文本不一致均返回 `Input`；单位和定义域问题保持 `UnitConversion`。换算字段上的原始扩展沿用 Quantity 接口的显式处理要求。
+
+依据：[FHIR R4 Range](https://hl7.org/fhir/R4/datatypes.html#Range)。适配范围为有数值边界的 Range，数值精度与核心 binary64 相同。
+
 ## 有限区间
 
 `Interval::new(lower, upper, lower_closed?, upper_closed?)` 建立非空、端点有限的区间，默认包含两端。`Converter::apply_interval(interval)` 转换两端，并通过映射方向安排结果。例如 pH `[6, 8]` 转为 `mol/L` 后是约 `[10^-8, 10^-6]`，端点的开闭属性随对应端点交换。

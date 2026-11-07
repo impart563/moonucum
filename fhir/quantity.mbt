@@ -26,25 +26,7 @@ pub fn convert_quantity(
   quantity : Json,
   target : String,
 ) -> Json raise QuantityError {
-  if engine.code_mode() != @ucum.CaseSensitive {
-    raise Input("FHIR UCUM quantities require case-sensitive codes.")
-  }
-  let (fields, value, code) = match quantity {
-    Object(fields) =>
-      match quantity {
-        {
-          "system": "http://unitsofmeasure.org",
-          "code": String(code),
-          "value": Number(value, ..),
-          ..
-        } if !code.is_empty() => (fields, value, code)
-        _ =>
-          raise Input(
-            "A numeric value and an explicit UCUM system/code are required.",
-          )
-      }
-    _ => raise Input("Expected a FHIR Quantity object.")
-  }
+  let (fields, value, code) = read_quantity(engine, quantity)
   if target.is_empty() {
     raise Input("A nonempty target code is required; use 1 for unity.")
   }
