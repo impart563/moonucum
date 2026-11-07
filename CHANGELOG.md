@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Compare quantities in an explicit unit with caller-selected tolerances and
+  classify values against finite intervals with open or closed endpoints.
+
 ## 0.5.0
 
 - Extend the portable CLI and extracted-package consumer to the new data APIs.

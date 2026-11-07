@@ -1,5 +1,13 @@
 # 数据接入接口
 
+## 数量比较与区间判断
+
+`Engine::compare_quantities(left, right, unit, absolute_tolerance?, relative_tolerance?)` 接受两个 `(数值, 单位代码)`，将两者换算到调用方指定的比较单位，返回 `Lower`、`Same` 或 `Higher`。默认按 binary64 数值精确比较；绝对容差使用比较单位，相对容差按两值绝对值的较大者计算。容差必须有限且非负。带容差的 `Same` 不满足传递性，不能作为排序等价关系。
+
+比较单位也决定坐标方向：pH 6 与 pH 8 在 `[pH]` 坐标中前者更小，在 `mol/L` 坐标中前者更大。两个输入都执行实际转换，定义域、非有限值和任意单位错误不会被相同代码绕过。
+
+`Converter::classify(value, interval)` 把源单位数值转换到目标单位，再与以目标单位表示的区间比较，返回 `Below`、`Within` 或 `Above`，遵守两端开闭属性。该接口执行调用方给定的数值规则，不附加测量项目或医学判断。
+
 ## FHIR Quantity
 
 导入 `impart563/moonucum/fhir` 后，`convert_quantity(engine, quantity_json, target)` 可换算带数值及显式 UCUM system/code 的 FHIR R4 Quantity。输入使用大小写敏感编码，`unit` 只作为显示文本。成功后更新 `value`、`code`、`unit`，保留 `id`、一般 `extension` 等无关成员，原对象保持不变。
